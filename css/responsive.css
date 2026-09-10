@@ -1,0 +1,111 @@
+/* ===================================================================
+   RESPONSIVE DESIGN ADAPTATIONS - SHARKS GROUP SUITE
+   =================================================================== */
+
+/* Mobile Hamburger Toggle */
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--gold-300);
+    cursor: pointer;
+    padding: 6px;
+}
+
+@media (max-width: 1200px) {
+    .kanban-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-grid-2col {
+        grid-template-columns: 1fr;
+    }
+
+    .it-overview-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(100%);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .main-wrapper {
+        margin-right: 0;
+        max-width: 100%;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .global-search-bar {
+        width: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-header {
+        padding: 12px 16px;
+    }
+
+    .page-content {
+        padding: 16px;
+    }
+
+    .global-search-bar {
+        display: none; /* Can be toggled or moved into mobile drawer */
+    }
+
+    .header-meta-pill {
+        display: none;
+    }
+
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+
+    .employee-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .section-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .top-header {
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}

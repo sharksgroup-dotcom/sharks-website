@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="خدمات شاركس جروب للمقاولات العامة والتطوير العقاري - حلول هندسية وإنشائية متكاملة من التخطيط حتى التسليم">
+    <title>الخدمات | شاركس جروب للمقاولات العامة والتطوير العقاري</title>
+
+    <!-- Stylesheet (With Cache-Busting Version) -->
+    <link rel="stylesheet" href="css/style.css?v=20260910_v17">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+</head>
+<body dir="rtl">
+
+    <!-- ===================================================================
+         UNIFIED TOP NAVIGATION BAR
+         =================================================================== -->
+    <header class="unified-navbar">
+        <!-- Right: Logo & Brand -->
+        <a href="index.html" class="nav-brand-area">
+            <div class="nav-brand-logo animated-logo-frame">
+                <img src="assets/logo.jpg" alt="شعار شاركس جروب">
+            </div>
+            <div class="nav-brand-text">
+                <h1>شاركس جروب</h1>
+                <span>للمقاولات العامة والتطوير العقاري</span>
+            </div>
+        </a>
+
+        <!-- Center: Main Navigation Tabs -->
+        <nav class="nav-capsule-wrapper">
+            <ul class="unified-nav-links">
+                <!-- 1. الرئيسية -->
+                <li class="unified-nav-item">
+                    <a href="index.html" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+
+                <!-- 2. خدماتنا (Active Tab) -->
+                <li class="unified-nav-item">
+                    <a href="services.html" class="unified-nav-btn active">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>خدماتنا</span>
+                    </a>
+                </li>
+
+                <!-- 3. لوحة التحكم -->
+                <li class="unified-nav-item">
+                    <a href="index.html#dashboard" onclick="localStorage.setItem('sharks_active_view', 'dashboard')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+                        <span>لوحة التحكم</span>
+                    </a>
+                </li>
+
+                <!-- 4. المشاريع -->
+                <li class="unified-nav-item">
+                    <a href="index.html#projects" onclick="localStorage.setItem('sharks_active_view', 'projects')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>المشاريع</span>
+                    </a>
+                </li>
+
+                <!-- 5. المهام -->
+                <li class="unified-nav-item">
+                    <a href="index.html#tasks" onclick="localStorage.setItem('sharks_active_view', 'tasks')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        <span>المهام</span>
+                    </a>
+                </li>
+
+                <!-- 6. الموظفين -->
+                <li class="unified-nav-item">
+                    <a href="index.html#employees" onclick="localStorage.setItem('sharks_active_view', 'employees')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>الموظفين</span>
+                    </a>
+                </li>
+
+                <!-- 7. المؤسسين (Founders & Leadership) -->
+                <li class="unified-nav-item">
+                    <a href="index.html#founders" onclick="localStorage.setItem('sharks_active_view', 'founders')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>المؤسسين</span>
+                    </a>
+                </li>
+
+                <!-- 8. فرص العمل (Careers) -->
+                <li class="unified-nav-item">
+                    <a href="index.html#careers" onclick="localStorage.setItem('sharks_active_view', 'careers')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>فرص العمل</span>
+                    </a>
+                </li>
+
+                <!-- 9. اتصل بنا -->
+                <li class="unified-nav-item">
+                    <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="unified-nav-btn">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span>اتصل بنا</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Left Area: CTA Button + Theme Toggle -->
+        <div class="nav-left-area">
+            <!-- CTA Button -->
+            <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="btn-nav-cta">
+                <span>تواصل معنا</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+
+            <!-- Light / Dark Mode Toggle -->
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري">
+                <span class="theme-toggle-icon theme-icon-sun">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </span>
+                <span class="theme-toggle-icon theme-icon-moon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===================================================================
+             SECTION 1: HERO & CORE PILLARS (IMAGE 3)
+             =================================================================== -->
+        <section class="services-hero-section">
+            <!-- Services Rotating Background Slider (Uses User's Real Project Photos) -->
+            <div class="services-slider-track" id="servicesSliderTrackPage">
+                <div class="services-slide active" style="background-image: url('assets/project_nile_foundation.jpg');"></div>
+                <div class="services-slide" style="background-image: url('assets/project_infrastructure_pipes.jpg');"></div>
+                <div class="services-slide" style="background-image: url('assets/project_engineers_site.jpg');"></div>
+                <div class="services-slide" style="background-image: url('assets/project_road_earthwork.jpg');"></div>
+                <div class="services-slide" style="background-image: url('assets/project_excavator_breaker.jpg');"></div>
+            </div>
+            <div class="services-overlay-gradient"></div>
+
+            <div class="services-hero-content scroll-reveal">
+                <span class="services-hero-tag">شاركس جروب</span>
+                <h1 class="services-hero-title">
+                    حلول هندسية وإنشائية متكاملة<br>من التخطيط حتى التسليم
+                </h1>
+                <p class="services-hero-desc">
+                    تقدم شاركس جروب للمقاولات العامة والتطوير العقاري مجموعة متكاملة من الخدمات في المقاولات العامة، البنية التحتية، الطرق، التطوير العقاري، والتشطيبات، مع التزام كامل بالجودة والسلامة ودقة التنفيذ.
+                </p>
+
+                <div class="services-hero-actions">
+                    <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="btn-hero-primary">
+                        <span>تواصل معنا</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </a>
+                    <a href="#services-list" class="btn-hero-secondary">
+                        <span>استعراض قطاعات الخدمات</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4 Quality Badges Bar (Directly Matching Image 3) -->
+            <div class="services-badges-bar">
+                <!-- Badge 1: إلتزام تام بالمواعيد -->
+                <div class="services-badge-item hover-navy scroll-reveal scroll-reveal-delay-1">
+                    <div class="services-badge-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    </div>
+                    <div class="services-badge-text">إلتزام تام<br>بالمواعيد</div>
+                </div>
+
+                <!-- Badge 2: إدارة دقيقة لكل مرحلة -->
+                <div class="services-badge-item hover-gold scroll-reveal scroll-reveal-delay-2">
+                    <div class="services-badge-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </div>
+                    <div class="services-badge-text">إدارة دقيقة<br>لكل مرحلة</div>
+                </div>
+
+                <!-- Badge 3: فريق متخصص ذو خبرة -->
+                <div class="services-badge-item hover-navy scroll-reveal scroll-reveal-delay-3">
+                    <div class="services-badge-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <div class="services-badge-text">فريق متخصص<br>ذو خبرة</div>
+                </div>
+
+                <!-- Badge 4: جودة عالية في التنفيذ -->
+                <div class="services-badge-item hover-gold scroll-reveal scroll-reveal-delay-4">
+                    <div class="services-badge-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                    </div>
+                    <div class="services-badge-text">جودة عالية<br>في التنفيذ</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 2: THE 5 SERVICES SHOWCASE (IMAGES 1 & 2)
+             =================================================================== -->
+        <section id="services-list" class="services-showcase-section">
+            <div class="services-showcase-list">
+
+                <!-- Service Card 1: أعمال البنية التحتية والشبكات -->
+                <div class="service-showcase-card scroll-reveal">
+                    <div class="service-card-info">
+                        <div class="service-card-tag-row">
+                            <span class="service-category-badge">أعمال البنية التحتية والشبكات ⬅</span>
+                            <span class="service-card-number">01</span>
+                        </div>
+                        <h2 class="service-card-title">بنية تحتية متكاملة للمشروعات العمرانية</h2>
+                        <p class="service-card-desc">
+                            نقدم حلولاً متكاملة لتنفيذ شبكات المياه والصرف الصحي والكهرباء والاتصالات، مع تجهيز بنية تحتية قوية تدعم استدامة تشغيل المشروع وفقاً للمواصفات القياسية.
+                        </p>
+                        <ul class="service-points-list">
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>شبكات مياه وصرف صحي وخطوط الانحدار والربط</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>خطوط طرد وشبكات ومحطات رفع ومعالجة مياه</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تمديدات الكهرباء، الإنارة، والاتصالات وشبكات الفايبر</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>شبكات تصريف مياه الأمطار ودرء السيول</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تجهيز وتهيئة البنية التحتية بالمواصفات الفنية المعتمدة</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card-visual">
+                        <img src="assets/service_infrastructure.jpg" alt="أعمال البنية التحتية والشبكات - شاركس جروب" class="service-main-image">
+                        <div class="service-image-overlay"></div>
+                    </div>
+                </div>
+
+                <!-- Service Card 2: أعمال الطرق والتمهيد والتسوية (Reversed) -->
+                <div class="service-showcase-card card-reversed scroll-reveal">
+                    <div class="service-card-info">
+                        <div class="service-card-tag-row">
+                            <span class="service-category-badge">أعمال الطرق والتمهيد ⬅</span>
+                            <span class="service-card-number">02</span>
+                        </div>
+                        <h2 class="service-card-title">تمهيد ورصف الطرق بدقة تنفيذ عالية</h2>
+                        <p class="service-card-desc">
+                            ننفذ أعمال الطرق والتمهيد والتسوية لضمان ثبات واستقرار مسطح الطريق وتحقيق أعلى درجات الجودة والمتانة، بما يخدم المشروعات والمحاور الحيوية بكفاءة استثنائية.
+                        </p>
+                        <ul class="service-points-list">
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>أعمال الحفر والردم والتسويات الترابية وضبط المناسيب</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>أعمال التسوية والدمك وتوفير طبقات الأساس والأسفلت</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تمهيد ورصف الطرق الداخلية للمشروعات والمحاور الخارجية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تركيب الإنترلوك، البلدورات، والأرصفة الخرسانية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>اللوحات الإرشادية والمرورية، الدهانات، وتخطيط وإنارة الطرق</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تقليل الهبوطات ومعالجة التربة وتحسين قدرة التحمل الإنشائي</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card-visual">
+                        <img src="assets/service_roads.jpg" alt="أعمال الطرق والتمهيد والرصف - شاركس جروب" class="service-main-image">
+                        <div class="service-image-overlay"></div>
+                    </div>
+                </div>
+
+                <!-- Service Card 3: المقاولات العامة والإنشاءات (مقاولات تنفيذ المشاريع) -->
+                <div class="service-showcase-card scroll-reveal">
+                    <div class="service-card-info">
+                        <div class="service-card-tag-row">
+                            <span class="service-category-badge">المقاولات العامة والإنشاءات ⬅</span>
+                            <span class="service-card-number">03</span>
+                        </div>
+                        <h2 class="service-card-title">تنفيذ إنشائي متكامل من البداية حتى التسليم</h2>
+                        <p class="service-card-desc">
+                            ننفذ مشاريع المقاولات وفق أعلى معايير الجودة من خلال فريق هندسي وإشراف ميداني دقيق، مع الالتزام بالمخططات والمواصفات والجداول الزمنية المعتمدة لضمان جاهزية المنشآت.
+                        </p>
+                        <ul class="service-points-list">
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تنفيذ الأعمال الخرسانية والحديد والبيارات والمنشآت الثقيلة</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تنفيذ المباني والمنشآت السكنية، الإدارية، التجارية، والصناعية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تجهيز وتنفيذ خطط العمل للمراحل المختلفة بدقة متناهية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>أعمال الحوائط والأسقف والتسليح والربط الإنشائي المتين</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>إدارة الموقع والموارد وضبط الجودة لضمان سير العمل بكفاءة</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>التنسيق الكامل مع الجهات المعنية والاستشاريين حتى التسليم النهائي</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card-visual">
+                        <img src="assets/service_construction.jpg" alt="المقاولات العامة والإنشاءات - شاركس جروب" class="service-main-image">
+                        <div class="service-image-overlay"></div>
+                    </div>
+                </div>
+
+                <!-- Service Card 4: التطوير والاستثمار العقاري (Reversed) -->
+                <div class="service-showcase-card card-reversed scroll-reveal">
+                    <div class="service-card-info">
+                        <div class="service-card-tag-row">
+                            <span class="service-category-badge">التطوير والاستثمار العقاري ⬅</span>
+                            <span class="service-card-number">04</span>
+                        </div>
+                        <h2 class="service-card-title">مشروعات عقارية برؤية استثمارية مستدامة</h2>
+                        <p class="service-card-desc">
+                            نقدم خدمات التطوير العقاري التي تجمع بين التخطيط الاستراتيجي السليم وجودة التنفيذ والقيمة الاستثمارية طويلة المدى، لتطوير أصول عقارية تحقق أعلى عوائد مستدامة.
+                        </p>
+                        <ul class="service-points-list">
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>دراسة الفرص الاستثمارية وتحليلات الجدوى الفنية والاقتصادية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تخطيط وتطوير المشروعات والمجتمعات العمرانية المتكاملة</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>إدارة شاملة لكافة مراحل التطوير من الفكرة والتراخيص حتى التسليم</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تطوير الأراضي وتجهيزها وتهيئتها وفق الاستخدام الاستثماري الأمثل</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>حلول عمرانية متكاملة وبيئات سكنية واستثمارية ذات قيمة مستدامة</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card-visual">
+                        <img src="assets/service_realestate.jpg" alt="التطوير والاستثمار العقاري - شاركس جروب" class="service-main-image">
+                        <div class="service-image-overlay"></div>
+                    </div>
+                </div>
+
+                <!-- Service Card 5: التشطيبات واللاندسكيب -->
+                <div class="service-showcase-card scroll-reveal">
+                    <div class="service-card-info">
+                        <div class="service-card-tag-row">
+                            <span class="service-category-badge">التشطيبات واللاندسكيب ⬅</span>
+                            <span class="service-card-number">05</span>
+                        </div>
+                        <h2 class="service-card-title">تشطيبات ولاندسكيب بمستوى نهائي احترافي</h2>
+                        <p class="service-card-desc">
+                            ننفذ أعمال التشطيبات الداخلية والخارجية واللاندسكيب والهاردسكيب لإخراج المشروعات بصورة متكاملة تجمع بين الفخامة المعمارية والقيمة الجمالية والوظيفية.
+                        </p>
+                        <ul class="service-points-list">
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تشطيبات معمارية داخلية فاخرة للقاعات والمباني والمكاتب</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تشطيبات واجهات خارجية عصرية بمواد مقاومة للعوامل الجوية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تصميم وتنفيذ أعمال اللاندسكيب والمساحات الخضراء والحدائق</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تنفيذ الهاردسكيب، الممرات، البرجولات، والمسارات الديكورية</span>
+                            </li>
+                            <li class="service-point-item">
+                                <span class="service-point-icon">✓</span>
+                                <span>تجهيز وفرش المساحات الإدارية والقاعات والتسليم الاحترافي الكامل</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service-card-visual">
+                        <img src="assets/service_finishing.jpg" alt="التشطيبات واللاندسكيب - شاركس جروب" class="service-main-image">
+                        <div class="service-image-overlay"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 3: QUALITY POLICY IN SERVICES (IMAGE 4)
+             =================================================================== -->
+        <section class="quality-policy-section">
+            <div class="quality-header-wrap scroll-reveal">
+                <span class="quality-tag">الجودة</span>
+                <h2 class="quality-title">سياسة الجودة في تنفيذ خدماتنا</h2>
+                <p class="quality-lead-text">
+                    تلتزم شاركس جروب بتقديم أعلى معايير الجودة في كافة أعمال المقاولات والبنية التحتية والطرق، من خلال تطبيق المواصفات القياسية، اختيار المواد بعناية، والتعامل مع موردين ومصانع معتمدين لضمان جودة التنفيذ في كل مرحلة.
+                </p>
+            </div>
+
+            <div class="quality-cards-grid">
+                <!-- Quality Card 1 -->
+                <div class="quality-card-item hover-navy scroll-reveal scroll-reveal-delay-1">
+                    <div class="quality-card-number">01</div>
+                    <h3 class="quality-card-title">المواصفات القياسية</h3>
+                    <p class="quality-card-text">
+                        الالتزام بالكود الهندسي والمواصفات المعتمدة في تنفيذ الأعمال واختيار مواد البناء بما يضمن أقصى درجات الأمان والمتانة.
+                    </p>
+                </div>
+
+                <!-- Quality Card 2 -->
+                <div class="quality-card-item hover-gold scroll-reveal scroll-reveal-delay-2">
+                    <div class="quality-card-number">02</div>
+                    <h3 class="quality-card-title">الموردون المعتمدون</h3>
+                    <p class="quality-card-text">
+                        التعامل مع موردين ومصانع مؤهلين لضمان جودة الخامات الموردة لمواقع العمل ومطابقتها التامة للعينات المعتمدة.
+                    </p>
+                </div>
+
+                <!-- Quality Card 3 -->
+                <div class="quality-card-item hover-navy scroll-reveal scroll-reveal-delay-3">
+                    <div class="quality-card-number">03</div>
+                    <h3 class="quality-card-title">الرقابة والفحص الدوري</h3>
+                    <p class="quality-card-text">
+                        تطبيق نظام فحص واستلام للمواد والأعمال وفق المستندات الفنية والمواصفات المطلوبة عبر مهندسي ضبط الجودة بالموقع.
+                    </p>
+                </div>
+
+                <!-- Quality Card 4 -->
+                <div class="quality-card-item hover-gold scroll-reveal scroll-reveal-delay-4">
+                    <div class="quality-card-number">04</div>
+                    <h3 class="quality-card-title">التحسين المستمر</h3>
+                    <p class="quality-card-text">
+                        تطوير مهارات فريق العمل وتحديث آليات التنفيذ لمواكبة أحدث النظم الهندسية العالمية والمعدات الإنشائية المتطورة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 4: WORKFLOW STAGES (IMAGE 4)
+             =================================================================== -->
+        <section class="workflow-stages-section">
+            <div class="workflow-header-wrap scroll-reveal">
+                <h2 class="workflow-watermark-title">آلية العمل</h2>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">
+                    خطوات هندسية مدروسة نتبعها لتحويل رؤى عملائنا إلى مشروعات كبرى على أرض الواقع
+                </p>
+            </div>
+
+            <div class="workflow-steps-grid">
+                <!-- Step 1 -->
+                <div class="workflow-step-card hover-navy scroll-reveal scroll-reveal-delay-1">
+                    <div class="workflow-step-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    </div>
+                    <div class="workflow-step-num">01</div>
+                    <h3 class="workflow-step-title">تحليل متطلبات المشروع</h3>
+                    <p class="workflow-step-desc">
+                        نبدأ بفهم طبيعة المشروع، نطاق الأعمال، الموقع، المتطلبات الفنية، والجدول الزمني المطلوب لإعداد الرؤية الشاملة.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="workflow-step-card hover-gold scroll-reveal scroll-reveal-delay-2">
+                    <div class="workflow-step-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                    </div>
+                    <div class="workflow-step-num">02</div>
+                    <h3 class="workflow-step-title">التخطيط والدراسة الفنية</h3>
+                    <p class="workflow-step-desc">
+                        نضع خطة تنفيذ واضحة تشمل الموارد، مراحل العمل، التوريدات، المقايسات المعتمدة، ومعايير الجودة والسلامة المهنية.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="workflow-step-card hover-navy scroll-reveal scroll-reveal-delay-3">
+                    <div class="workflow-step-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="workflow-step-num">03</div>
+                    <h3 class="workflow-step-title">التنفيذ والمتابعة والتسليم</h3>
+                    <p class="workflow-step-desc">
+                        ننفذ الأعمال وفق المواصفات بدقة هندسية عالية، مع متابعة مستمرة وإشراف دوري حتى التسليم النهائي بكفاءة وجودة فائقة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             SECTION 5: CONSULTATION & CTA BANNER
+             =================================================================== -->
+        <section class="services-cta-section">
+            <div class="services-cta-content scroll-reveal">
+                <h2 class="services-cta-title">هل لديك مشروع ترغب في تنفيذه بأعلى معايير الجودة؟</h2>
+                <p class="services-cta-subtitle">
+                    تواصل الآن مع الخبراء والمهندسين في شاركس جروب لمناقشة تفاصيل مشروعك واستلام المقايسات والدراسات الفنية المعتمدة.
+                </p>
+                <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="btn-hero-primary" style="padding: 15px 36px; font-size: 1.05rem;">
+                    <span>تواصل معنا الآن للبدء</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================================================================
+         FOOTER (CORPORATE NAVY - HIGH CONTRAST & READABLE)
+         =================================================================== -->
+    <footer class="home-footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand-title">شاركس جروب</div>
+                <p class="footer-brand-desc">
+                    شاركس جروب للمقاولات العامة والتطوير العقاري. كيان هندسي واستثماري تأسس عام 2016. يقدم حلولاً متكاملة في المقاولات العامة، البنية التحتية، الطرق، التطوير العقاري، وإدارة المشروعات.
+                </p>
+                <!-- Footer Social Icons (Authentic Real App Squircles with Audio) -->
+                <div class="footer-social-row">
+                    <a href="https://www.facebook.com/share/1EuuiUDaiS/" target="_blank" rel="noopener noreferrer"
+                       class="real-app-btn footer-app-btn app-facebook"
+                       onpointerdown="if(window.AppSounds) AppSounds.playFacebook()"
+                       onclick="if(window.AppSounds) AppSounds.playFacebook()"
+                       data-tooltip="فيسبوك" title="فيسبوك - Sharks Group">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                       class="real-app-btn footer-app-btn app-youtube"
+                       onpointerdown="if(window.AppSounds) AppSounds.playYouTube()"
+                       onclick="if(window.AppSounds) AppSounds.playYouTube()"
+                       data-tooltip="يوتيوب" title="يوتيوب - Sharks Group">
+                        <svg width="21" height="21" viewBox="0 0 24 24" fill="#ffffff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                       class="real-app-btn footer-app-btn app-linkedin"
+                       onpointerdown="if(window.AppSounds) AppSounds.playLinkedIn()"
+                       onclick="if(window.AppSounds) AppSounds.playLinkedIn()"
+                       data-tooltip="لينكد إن" title="لينكد إن - Sharks Group">
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                       class="real-app-btn footer-app-btn app-twitter"
+                       onpointerdown="if(window.AppSounds) AppSounds.playTwitter()"
+                       onclick="if(window.AppSounds) AppSounds.playTwitter()"
+                       data-tooltip="تويتر / X" title="تويتر / X - Sharks Group">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-links-title">روابط سريعة</div>
+                <ul class="footer-links-list">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="services.html">خدماتنا</a></li>
+                    <li><a href="index.html#projects" onclick="localStorage.setItem('sharks_active_view', 'projects')">المشاريع</a></li>
+                    <li><a href="index.html#tasks" onclick="localStorage.setItem('sharks_active_view', 'tasks')">المهام</a></li>
+                    <li><a href="index.html#dashboard" onclick="localStorage.setItem('sharks_active_view', 'dashboard')">لوحة التحكم</a></li>
+                    <li><a href="index.html#employees" onclick="localStorage.setItem('sharks_active_view', 'employees')">الموظفين</a></li>
+                    <li><a href="index.html#founders" onclick="localStorage.setItem('sharks_active_view', 'founders')">المؤسسين</a></li>
+                    <li><a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="footer-links-title">ابدأ مشروعك معنا</div>
+                <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.6; margin-bottom: 16px;">
+                    لديك مشروع أو استفسار؟ اترك بياناتك وسيتواصل معك فريق شاركس جروب في أقرب وقت.
+                </p>
+                <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="btn-gold" style="padding: 10px 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <span>تواصل معنا ⬅</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-copyright-bar">
+            جميع الحقوق محفوظة &copy; 2026 شركة شاركس جروب للمقاولات العامة والتطوير العقاري.
+        </div>
+    </footer>
+
+    <!-- ===================================================================
+         FLOATING ACTIONS DOCK (WHATSAPP + تابعنا STACKED ON BOTTOM-LEFT)
+         =================================================================== -->
+    <div class="floating-left-stack">
+        <!-- 1. WhatsApp Button (تواصل معنا) -->
+        <a href="https://wa.me/201038502003" target="_blank" class="whatsapp-floating-btn" title="تواصل عبر الواتساب">
+            <span class="whatsapp-notif-dot">1</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>تواصل معنا</span>
+        </a>
+
+        <!-- 2. Follow Us Widget (تابعنا) - Underneath WhatsApp -->
+        <div class="sticky-social-dock" id="stickySocialDock" title="تابعنا عبر منصات التواصل الاجتماعي">
+            <button class="social-dock-toggle-btn" onclick="toggleSocialDock(event)" type="button" aria-label="عرض حسابات التواصل الاجتماعي">
+                <svg class="social-dock-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>تابعنا</span>
+            </button>
+            
+            <div class="social-dock-apps">
+                <!-- Facebook App Icon -->
+                <a href="https://www.facebook.com/share/1EuuiUDaiS/" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-facebook" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playFacebook()"
+                   onclick="if(window.AppSounds) AppSounds.playFacebook()" 
+                   data-tooltip="فيسبوك" title="فيسبوك - Sharks Group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+
+                <!-- YouTube App Icon -->
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-youtube" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playYouTube()"
+                   onclick="if(window.AppSounds) AppSounds.playYouTube()" 
+                   data-tooltip="يوتيوب" title="يوتيوب - Sharks Group">
+                    <svg width="25" height="25" viewBox="0 0 24 24" fill="#ffffff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+
+                <!-- LinkedIn App Icon -->
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-linkedin" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playLinkedIn()"
+                   onclick="if(window.AppSounds) AppSounds.playLinkedIn()" 
+                   data-tooltip="لينكد إن" title="لينكد إن - Sharks Group">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+
+                <!-- X (Twitter) App Icon -->
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-twitter" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playTwitter()"
+                   onclick="if(window.AppSounds) AppSounds.playTwitter()" 
+                   data-tooltip="تويتر / X" title="تويتر / X - Sharks Group">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="#ffffff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound & Theme Engine -->
+    <script src="js/sounds.js?v=20260909_4"></script>
+    <script>
+        // Synchronized Theme Engine
+        function initTheme() {
+            const savedTheme = localStorage.getItem('sharks_theme') || 'dark';
+            applyTheme(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(nextTheme);
+            localStorage.setItem('sharks_theme', nextTheme);
+
+            // Dynamic shockwave pulse animation on button
+            const themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn) {
+                themeBtn.classList.remove('pulse-active');
+                void themeBtn.offsetWidth; // force reflow
+                themeBtn.classList.add('pulse-active');
+                setTimeout(() => themeBtn.classList.remove('pulse-active'), 750);
+            }
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        }
+
+        // Expandable Floating Social Dock Toggle
+        function toggleSocialDock(event) {
+            if (event) event.stopPropagation();
+            const dock = document.getElementById('stickySocialDock');
+            if (!dock) return;
+            dock.classList.toggle('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const dock = document.getElementById('stickySocialDock');
+            if (dock && dock.classList.contains('open') && !dock.contains(e.target)) {
+                dock.classList.remove('open');
+            }
+        });
+
+        // Scroll Reveal Animations with safe fallback
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => {
+                el.classList.add('revealed');
+                el.classList.add('visible');
+            });
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.05 });
+
+                elements.forEach(el => observer.observe(el));
+            }
+        }
+
+        // Rotating Background Slider for Services Page
+        function initServicesSliderPage() {
+            const track = document.getElementById('servicesSliderTrackPage');
+            if (!track) return;
+            const slides = track.querySelectorAll('.services-slide');
+            if (slides.length <= 1) return;
+
+            let cur = 0;
+            setInterval(() => {
+                slides[cur].classList.remove('active');
+                cur = (cur + 1) % slides.length;
+                slides[cur].classList.add('active');
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initScrollAnimations();
+            initServicesSliderPage();
+        });
+    </script>
+</body>
+</html>

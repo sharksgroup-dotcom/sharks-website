@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="شاركس جروب للمقاولات العامة والتطوير العقاري - كيان هندسي واستثماري تأسس عام 2016">
+    <title>شاركس جروب للمقاولات العامة والتطوير العقاري</title>
+
+    <!-- Google Fonts & Stylesheet (With Cache-Busting Version) -->
+    <link rel="stylesheet" href="css/style.css?v=20260910_v17">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+</head>
+<body dir="rtl">
+
+    <!-- ===================================================================
+         CINEMATIC 3-SECOND SPLASH SCREEN WITH 3D SWIMMING SHARK EMBLEM
+         (USER REQUEST 3)
+         =================================================================== -->
+    <div id="sharksSplashScreen" class="sharks-splash-screen" aria-label="شاشة الترحيب">
+        <!-- Ambient Ocean Deep Background Rays & Bubbles -->
+        <div class="splash-ocean-ambient">
+            <div class="splash-water-caustic"></div>
+            <div class="splash-water-ray ray-1"></div>
+            <div class="splash-water-ray ray-2"></div>
+            <div class="splash-water-ray ray-3"></div>
+            <div class="splash-bubbles">
+                <span class="bubble b1"></span>
+                <span class="bubble b2"></span>
+                <span class="bubble b3"></span>
+                <span class="bubble b4"></span>
+                <span class="bubble b5"></span>
+            </div>
+        </div>
+
+        <!-- Center Emblem Showcase with Layered Swimming Shark -->
+        <div class="splash-center-content">
+            <!-- Pulsing Water Ripple Rings Behind Shield -->
+            <div class="splash-ripple-ring ring-1"></div>
+            <div class="splash-ripple-ring ring-2"></div>
+
+            <!-- The Architectural Shield Stage (Stable 3D Foundation) -->
+            <div class="splash-emblem-stage">
+                <!-- 1. Majestic Gold Architectural Shield Base Frame -->
+                <img src="assets/sharks_shield_frame.jpg" alt="شاركس جروب درع الشعار" class="splash-shield-bg">
+
+                <!-- 2. Ambient Deep Water Portal Core inside the Shield Center -->
+                <div class="splash-portal-core">
+                    <div class="portal-vortex-glow"></div>
+                    <div class="portal-light-swirl"></div>
+                </div>
+
+                <!-- 3. The 3D Mechanical Cybernetic Shark Swimming INSIDE the Shield -->
+                <div class="splash-shark-cruiser">
+                    <div class="shark-body-animator">
+                        <img src="assets/sharks_shark_cropped.png" alt="قرش شاركس جروب الميكانيكي" class="splash-shark-img">
+                        
+                        <!-- Water Caustic & Metallic Specular Glint Across Shark -->
+                        <div class="shark-specular-sweep"></div>
+
+                        <!-- Shark Eye Power Core Glint (Cyan/Blue LED Glow) -->
+                        <div class="shark-eye-glow"></div>
+
+                        <!-- Shark Core Golden Mechanical Glow -->
+                        <div class="shark-core-glow"></div>
+
+                        <!-- Trailing Micro-bubbles from Shark -->
+                        <div class="shark-trail-bubbles">
+                            <span class="st-bubble b1"></span>
+                            <span class="st-bubble b2"></span>
+                            <span class="st-bubble b3"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Luxury Shield Glass / Gold Sheen Overlay -->
+                <div class="splash-shield-sheen"></div>
+            </div>
+
+            <!-- Brand Slogan Typography -->
+            <div class="splash-brand-group">
+                <div class="splash-brand-subtitle">ريادة المقاولات العامة والتطوير العقاري</div>
+                <div class="splash-brand-en">ENGINEERING EXCELLENCE & URBAN DEVELOPMENT • SINCE 2016</div>
+            </div>
+
+            <!-- Luxury Progress Loading Indicator (Exact 3-Second Progression) -->
+            <div class="splash-loader-wrap">
+                <div class="splash-loader-bar">
+                    <div class="splash-loader-fill" id="splashLoaderFill"></div>
+                </div>
+                <div class="splash-loader-status" id="splashStatusText">جاري تهيئة المنظومة الهندسية...</div>
+            </div>
+        </div>
+
+        <!-- Discreet Skip Button -->
+        <button type="button" class="splash-skip-btn" onclick="dismissSplashScreen()" title="تخطي شاشة البداية">
+            <span>تخطي ⇥</span>
+        </button>
+    </div>
+
+    <!-- ===================================================================
+         UNIFIED TOP NAVIGATION BAR (REQUESTS 1, 2, 3, 4)
+         =================================================================== -->
+    <header class="unified-navbar">
+        <!-- Right: Logo & Brand -->
+        <a href="javascript:void(0)" class="nav-brand-area" onclick="switchMainView('home')">
+            <div class="nav-brand-logo animated-logo-frame">
+                <img src="assets/logo.jpg" alt="شعار شاركس جروب">
+            </div>
+            <div class="nav-brand-text">
+                <h1>شاركس جروب</h1>
+                <span>للمقاولات العامة والتطوير العقاري</span>
+            </div>
+        </a>
+
+        <!-- Center: Main Navigation Tabs -->
+        <nav class="nav-capsule-wrapper">
+            <ul class="unified-nav-links">
+                <!-- 1. الرئيسية -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn active" id="tabNavHome" onclick="switchMainView('home')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        <span>الرئيسية</span>
+                    </button>
+                </li>
+
+                <!-- 2. الخدمات -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavServices" onclick="switchMainView('services')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17l10 5 10-5M2 12l10 5 10-5M2 7l10 5 10-5"></path></svg>
+                        <span>الخدمات</span>
+                    </button>
+                </li>
+
+                <!-- 3. لوحة التحكم (Request 4) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavDashboard" onclick="switchMainView('dashboard')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+                        <span>لوحة التحكم</span>
+                    </button>
+                </li>
+
+                <!-- 4. المشاريع (Request 4) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavProjects" onclick="switchMainView('projects')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>المشاريع</span>
+                    </button>
+                </li>
+
+                <!-- 5. المهام (Request 4) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavTasks" onclick="switchMainView('tasks')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        <span>المهام</span>
+                    </button>
+                </li>
+
+                <!-- 6. الموظفين (Request 3) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavEmployees" onclick="switchMainView('employees')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>الموظفين</span>
+                    </button>
+                </li>
+
+                <!-- 7. المؤسسين (New Tab: Founders & Leadership) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavFounders" onclick="switchMainView('founders')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                        <span>المؤسسين</span>
+                    </button>
+                </li>
+
+                <!-- 8. فرص العمل (Careers Tab) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavCareers" onclick="switchMainView('careers')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>فرص العمل</span>
+                    </button>
+                </li>
+
+                <!-- 9. اتصل بنا (Request 2) -->
+                <li class="unified-nav-item">
+                    <button class="unified-nav-btn" id="tabNavContact" onclick="switchMainView('contact')">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span>اتصل بنا</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Left: CTA Button & Theme Toggle -->
+        <div class="nav-left-area">
+            <button class="btn-nav-cta" onclick="switchMainView('contact')">
+                <span>تواصل معنا</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+
+            <!-- Light / Dark Mode Toggle (Request 5) -->
+            <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري">
+                <span class="theme-toggle-icon theme-icon-sun">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </span>
+                <span class="theme-toggle-icon theme-icon-moon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===================================================================
+         MAIN VIEWS CONTAINER
+         =================================================================== -->
+    <main class="platform-content-wrap">
+
+        <!-- ==========================================
+             VIEW 1: PUBLIC HOMEPAGE
+             ========================================== -->
+        <div id="view-home" class="platform-view active">
+            <!-- Hero Section with 2-Second Rotating Background Carousel (Request 2) -->
+            <section id="home-hero" class="hero-section">
+                <!-- Background Carousel Track -->
+                <div class="hero-slider-track" id="heroSliderTrack">
+                    <div class="hero-slide active" style="background-image: url('assets/project_nile_foundation.jpg');"></div>
+                    <div class="hero-slide" style="background-image: url('assets/project_infrastructure_pipes.jpg');"></div>
+                    <div class="hero-slide" style="background-image: url('assets/project_engineers_site.jpg');"></div>
+                    <div class="hero-slide" style="background-image: url('assets/project_road_earthwork.jpg');"></div>
+                    <div class="hero-slide" style="background-image: url('assets/project_excavator_breaker.jpg');"></div>
+                </div>
+                <div class="hero-overlay-gradient"></div>
+
+                <div class="hero-content scroll-reveal">
+                    <span class="hero-overline">شاركس جروب</span>
+                    <h1 class="hero-title">نبني المستقبل<br>بجودة واحترافية</h1>
+                    <p class="hero-description">
+                        حلول هندسية متكاملة في المقاولات العامة، والبنية التحتية، والطرق، والتطوير العقاري.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button onclick="switchMainView('services')" class="btn-hero-primary">
+                            <span>اكتشف خدماتنا</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                        <button onclick="switchMainView('contact')" class="btn-hero-secondary">
+                            <span>تواصل معنا</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Metric Cards at Bottom of Hero -->
+                <div class="hero-metrics-bar">
+                    <div class="hero-metric-box hover-gold scroll-reveal scroll-reveal-delay-1">
+                        <div class="hero-metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="hero-metric-num">جودة</div>
+                            <div class="hero-metric-label">التزام بالمعايير العالمية</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-metric-box hover-navy scroll-reveal scroll-reveal-delay-2">
+                        <div class="hero-metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </div>
+                        <div>
+                            <div class="hero-metric-num">5</div>
+                            <div class="hero-metric-label">قطاعات تنفيذية</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-metric-box hover-gold scroll-reveal scroll-reveal-delay-3">
+                        <div class="hero-metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <div>
+                            <div class="hero-metric-num">+111</div>
+                            <div class="hero-metric-label">فدان بنية تحتية تم تنفيذه</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-metric-box hover-navy scroll-reveal scroll-reveal-delay-4">
+                        <div class="hero-metric-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <div>
+                            <div class="hero-metric-num">2016</div>
+                            <div class="hero-metric-label">من عام نصنع الفرق</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Us Section -->
+            <section id="home-about" class="home-section">
+                <div class="about-grid">
+                    <div class="scroll-reveal">
+                        <span class="section-tag">من نحن</span>
+                        <h2 class="section-heading-large">
+                            نصنع المستقبل منذ عام 2016 بخبرة هندسية ورؤية عقارية
+                        </h2>
+                        <p class="about-lead-text">
+                            أسست شاركس جروب للمقاولات العامة والتطوير العقاري عام 2016 ككيان هندسي واستثماري واعد، يهدف إلى تقديم حلول متكاملة في مجالات المقاولات العامة، البنية التحتية، الطرق، التطوير العقاري، وإدارة المشروعات.
+                        </p>
+                        <p class="about-lead-text" style="margin-top: -10px;">
+                            منذ انطلاقتنا، نجحنا في دمج الخبرات الهندسية مع الرؤى الاستثمارية الحديثة، لتقديم مشروعات عمرانية متكاملة تقوم على الجودة، الالتزام، ودقة التنفيذ. لا نبني جدراناً فحسب، بل نشيد مجتمعات عمرانية متكاملة واستثمارات مستدامة.
+                        </p>
+
+                        <!-- Tabs -->
+                        <div class="about-tabs-nav">
+                            <button class="about-tab-btn active" onclick="switchAboutTab('story')">قصتنا</button>
+                            <button class="about-tab-btn" onclick="switchAboutTab('mission')">رسالتنا</button>
+                            <button class="about-tab-btn" onclick="switchAboutTab('vision')">رؤيتنا</button>
+                        </div>
+
+                        <div id="tab-story" class="about-tab-content active">
+                            <h4 style="color: var(--text-white); font-size: 1.15rem; font-weight: 700;">رحلة بدأت برؤية هندسية واضحة</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 8px;">
+                                بدأت شاركس جروب عام 2016 بهدف إعادة تعريف معايير البناء والتطوير العقاري في السوق المصري، من خلال تقديم خدمات متكاملة تبدأ من التخطيط والتصميم، مروراً بالتنفيذ والإنشاءات العامة، وصولاً إلى إدارة المشروعات والتسليم النهائي.
+                            </p>
+                            <ul class="about-points-list">
+                                <li class="about-point-item">
+                                    <span class="point-check-icon">✓</span>
+                                    <span>حلول متكاملة من التخطيط حتى التسليم</span>
+                                </li>
+                                <li class="about-point-item">
+                                    <span class="point-check-icon">✓</span>
+                                    <span>تنفيذ مشروعات حيوية وقومية</span>
+                                </li>
+                            </ul>
+                            <div class="about-goal-box">
+                                <div class="about-goal-title">الهدف الأسمى:</div>
+                                <div class="about-goal-desc">أن نكون نموذجاً يحتذى به بين شركات المقاولات والتطوير في مصر والوطن العربي.</div>
+                            </div>
+                        </div>
+
+                        <div id="tab-mission" class="about-tab-content">
+                            <h4 style="color: var(--text-white); font-size: 1.15rem; font-weight: 700;">رسالة البناء والتنمية المستدامة</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 8px;">
+                                تقديم خدمات إنشائية وعقارية متطورة تجمع بين المتانة الإنشائية، الدقة الهندسية، والالتزام بأعلى معايير السلامة المهنية، لتحقيق أعلى عائد استثماري لشركائنا وعملائنا.
+                            </p>
+                        </div>
+
+                        <div id="tab-vision" class="about-tab-content">
+                            <h4 style="color: var(--text-white); font-size: 1.15rem; font-weight: 700;">رؤيتنا للمستقبل</h4>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 8px;">
+                                الريادة الإقليمية في قيادة المشاريع التنموية الكبرى، وإرساء بصمة معمارية أيقونية تعكس التطور الحضاري والاستثماري لمصر والشرق الأوسط.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 24px;">
+                            <button onclick="switchMainView('contact')" class="btn-hero-primary" style="padding: 11px 22px; font-size: 0.92rem;">
+                                <span>تواصل معنا</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Building Image with Floating Animated Shield Logo -->
+                    <div class="about-image-wrapper scroll-reveal scroll-reveal-delay-2">
+                        <img src="assets/building_project.jpg" alt="مشاريع شاركس جروب الإنشائية" class="about-main-img">
+                        <div class="about-floating-shield animated-logo-frame">
+                            <img src="assets/logo.jpg" alt="شعار شاركس جروب درع ذهبي">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Values Section (Request 4: Redesigned with interactive dual-color hover) -->
+            <section id="home-values" class="values-section">
+                <div class="values-section-header scroll-reveal">
+                    <span class="section-tag">مبادئنا وثوابتنا</span>
+                    <h2 class="section-heading-large">قيمنا الجوهرية</h2>
+                    <p class="values-subtitle">الركائز الأساسية التي تقود رؤيتنا الهندسية والاستثمارية في شاركس جروب منذ 2016</p>
+                </div>
+
+                <div class="values-modern-grid">
+                    <!-- Card 1: النزاهة والشفافية (Hover shifts to Royal Navy) -->
+                    <div class="value-modern-card hover-navy scroll-reveal scroll-reveal-delay-1">
+                        <div class="value-card-top-bar">
+                            <div class="value-badge-num">01</div>
+                            <div class="value-modern-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                            </div>
+                        </div>
+                        <h3 class="value-modern-title">النزاهة والشفافية</h3>
+                        <p class="value-modern-desc">
+                            أساس تعاملاتنا مع عملائنا وفريق عملنا وشبكة موردينا، مبنية على الوضوح التام، الأمانة المهنية، والمصداقية المطلقة في كل تعاقد.
+                        </p>
+                        <div class="value-card-footer">
+                            <span>ركيزة الثقة</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: الجودة الشاملة (Hover shifts to Warm Gold) -->
+                    <div class="value-modern-card hover-gold scroll-reveal scroll-reveal-delay-2">
+                        <div class="value-card-top-bar">
+                            <div class="value-badge-num">02</div>
+                            <div class="value-modern-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                        </div>
+                        <h3 class="value-modern-title">الجودة الشاملة</h3>
+                        <p class="value-modern-desc">
+                            لا مساومة في جودة المواد الإنشائية أو دقة التنفيذ المعماري والرقابة الهندسية الصارمة في كل خطوة ومرحلة تنفيذية.
+                        </p>
+                        <div class="value-card-footer">
+                            <span>معيار التميز</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: الالتزام بالوقت (Hover shifts to Royal Navy) -->
+                    <div class="value-modern-card hover-navy scroll-reveal scroll-reveal-delay-3">
+                        <div class="value-card-top-bar">
+                            <div class="value-badge-num">03</div>
+                            <div class="value-modern-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                        </div>
+                        <h3 class="value-modern-title">الالتزام بالوقت</h3>
+                        <p class="value-modern-desc">
+                            نعتبر الجدول الزمني لكل مشروع عهداً مقدساً نلتزم بالوفاء به بدقة متناهية دون أي تأخير، حفاظاً على مصالح وثقة شركائنا.
+                        </p>
+                        <div class="value-card-footer">
+                            <span>دقة المواعيد</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: الشراكة المستدامة (Hover shifts to Warm Gold) -->
+                    <div class="value-modern-card hover-gold scroll-reveal scroll-reveal-delay-4">
+                        <div class="value-card-top-bar">
+                            <div class="value-badge-num">04</div>
+                            <div class="value-modern-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                        </div>
+                        <h3 class="value-modern-title">الشراكة المستدامة</h3>
+                        <p class="value-modern-desc">
+                            نؤمن بأن نجاح موردينا وعملائنا جزء لا يتجزأ من نجاحنا، ونحرص على بناء علاقات استثمارية وتجارية طويلة الأمد قائمة على المنفعة المتبادلة.
+                        </p>
+                        <div class="value-card-footer">
+                            <span>نمو مشترك</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="home-stats" class="stats-counter-section">
+                <div class="scroll-reveal">
+                    <span class="section-tag">إنجازاتنا</span>
+                    <h2 class="section-heading-large">أرقام تعكس خبرة شاركس جروب</h2>
+                </div>
+
+                <div class="stats-counter-grid">
+                    <div class="stat-counter-box hover-gold scroll-reveal scroll-reveal-delay-1">
+                        <div class="stat-counter-number" data-target="11">+11</div>
+                        <div class="stat-counter-label">سنوات خبرة</div>
+                    </div>
+
+                    <div class="stat-counter-box hover-navy scroll-reveal scroll-reveal-delay-2">
+                        <div class="stat-counter-number" data-target="42">42</div>
+                        <div class="stat-counter-label">مشروع تم تطويرها</div>
+                    </div>
+
+                    <div class="stat-counter-box hover-gold scroll-reveal scroll-reveal-delay-3">
+                        <div class="stat-counter-number" data-target="111">111</div>
+                        <div class="stat-counter-label">فدان بنية تحتية</div>
+                    </div>
+
+                    <div class="stat-counter-box hover-navy scroll-reveal scroll-reveal-delay-4">
+                        <div class="stat-counter-number" data-target="5">5</div>
+                        <div class="stat-counter-label">قطاعات تنفيذ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="home-footer">
+                <div class="footer-grid">
+                    <div>
+                        <div class="footer-brand-title">شاركس جروب</div>
+                        <p class="footer-brand-desc">
+                            شاركس جروب للمقاولات العامة والتطوير العقاري. كيان هندسي واستثماري تأسس عام 2016. يقدم حلولاً متكاملة في المقاولات العامة، البنية التحتية، الطرق، التطوير العقاري، والتشطيبات.
+                        </p>
+                        <!-- Footer Social Icons (Authentic Real App Squircles with Audio) -->
+                        <div class="footer-social-row">
+                            <a href="https://www.facebook.com/share/1EuuiUDaiS/" target="_blank" rel="noopener noreferrer"
+                               class="real-app-btn footer-app-btn app-facebook"
+                               onpointerdown="if(window.AppSounds) AppSounds.playFacebook()"
+                               onclick="if(window.AppSounds) AppSounds.playFacebook()"
+                               data-tooltip="فيسبوك" title="فيسبوك - Sharks Group">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                               class="real-app-btn footer-app-btn app-youtube"
+                               onpointerdown="if(window.AppSounds) AppSounds.playYouTube()"
+                               onclick="if(window.AppSounds) AppSounds.playYouTube()"
+                               data-tooltip="يوتيوب" title="يوتيوب - Sharks Group">
+                                <svg width="21" height="21" viewBox="0 0 24 24" fill="#ffffff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                               class="real-app-btn footer-app-btn app-linkedin"
+                               onpointerdown="if(window.AppSounds) AppSounds.playLinkedIn()"
+                               onclick="if(window.AppSounds) AppSounds.playLinkedIn()"
+                               data-tooltip="لينكد إن" title="لينكد إن - Sharks Group">
+                                <svg width="19" height="19" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                               class="real-app-btn footer-app-btn app-twitter"
+                               onpointerdown="if(window.AppSounds) AppSounds.playTwitter()"
+                               onclick="if(window.AppSounds) AppSounds.playTwitter()"
+                               data-tooltip="تويتر / X" title="تويتر / X - Sharks Group">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="footer-links-title">روابط مفيدة</div>
+                        <ul class="footer-links-list">
+                            <li><a href="javascript:void(0)" onclick="goToHomeSection('home-hero')">الرئيسية</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchMainView('services')">خدماتنا</a></li>
+                            <li><a href="javascript:void(0)" onclick="goToHomeSection('home-about')">عن الشركة</a></li>
+                            <li><a href="javascript:void(0)" onclick="goToHomeSection('home-values')">قيمنا</a></li>
+                            <li><a href="javascript:void(0)" onclick="goToHomeSection('home-stats')">إنجازاتنا</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchMainView('projects')">المشاريع</a></li>
+                            <li><a href="javascript:void(0)" onclick="switchMainView('contact')">اتصل بنا</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <div class="footer-links-title">ابدأ مشروعك معنا</div>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+                            لديك مشروع أو استفسار؟ اترك بياناتك وسيتواصل معك فريق شاركس جروب في أقرب وقت.
+                        </p>
+                        <button onclick="switchMainView('contact')" class="btn-gold" style="padding: 10px 18px;">
+                            <span>تواصل معنا ⬅</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exclusive Animated Creator Signature (User Request 3) -->
+                <div class="footer-creator-bar scroll-reveal">
+                    <div class="creator-signature-badge">
+                        <div class="creator-content">
+                            <div class="creator-status-indicator">
+                                <span class="creator-ping"></span>
+                                <span class="creator-dot"></span>
+                            </div>
+                            <span class="creator-label">Created by</span>
+                            <span class="creator-author">ENG. Ahmed Khaled</span>
+                            <span class="creator-sep">•</span>
+                            <span class="creator-company">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="creator-company-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                <strong>HAC FORCE</strong>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-copyright-bar">
+                    جميع الحقوق محفوظة &copy; 2026 شركة شاركس جروب للمقاولات العامة والتطوير العقاري.
+                </div>
+            </footer>
+        </div>
+
+        <!-- ==========================================
+             VIEW: DEDICATED "الخدمات" TAB VIEW
+             ========================================== -->
+        <div id="view-services" class="platform-view">
+            <!-- 1. Hero & Badges with Transparent Dynamic Slider -->
+            <section class="services-hero-section">
+                <!-- Services Rotating Background Slider (Uses User's Real Project Photos) -->
+                <div class="services-slider-track" id="servicesSliderTrackApp">
+                    <div class="services-slide active" style="background-image: url('assets/project_nile_foundation.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_infrastructure_pipes.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_engineers_site.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_road_earthwork.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_excavator_breaker.jpg');"></div>
+                </div>
+                <div class="services-overlay-gradient"></div>
+
+                <div class="services-hero-content scroll-reveal revealed">
+                    <span class="services-hero-tag">شاركس جروب</span>
+                    <h1 class="services-hero-title">
+                        حلول هندسية وإنشائية متكاملة<br>من التخطيط حتى التسليم
+                    </h1>
+                    <p class="services-hero-desc">
+                        تقدم شاركس جروب للمقاولات العامة والتطوير العقاري منظومة خدمات هندسية وتنفيذية متكاملة تشمل البنية التحتية، شبكات الطرق، الإنشاءات العامة، التطوير العقاري، والتشطيبات المعمارية الراقية، مع التزام كامل بالجودة والسلامة والبرامج الزمنية.
+                    </p>
+
+                    <div class="services-hero-actions">
+                        <button onclick="switchMainView('contact')" class="btn-hero-primary">
+                            <span>تواصل معنا الآن</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                        <button onclick="document.getElementById('services-list-in-app').scrollIntoView({ behavior: 'smooth' })" class="btn-hero-secondary">
+                            <span>استعراض قطاعات الخدمات</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Quality Badges Bar (Directly Matching Image 3) -->
+                <div class="services-badges-bar">
+                    <div class="services-badge-item hover-navy scroll-reveal revealed">
+                        <div class="services-badge-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
+                        <div class="services-badge-text">إلتزام تام<br>بالمواعيد</div>
+                    </div>
+
+                    <div class="services-badge-item hover-gold scroll-reveal revealed">
+                        <div class="services-badge-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <div class="services-badge-text">إدارة دقيقة<br>لكل مرحلة</div>
+                    </div>
+
+                    <div class="services-badge-item hover-navy scroll-reveal revealed">
+                        <div class="services-badge-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <div class="services-badge-text">فريق متخصص<br>ذو خبرة</div>
+                    </div>
+
+                    <div class="services-badge-item hover-gold scroll-reveal revealed">
+                        <div class="services-badge-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        </div>
+                        <div class="services-badge-text">جودة عالية<br>في التنفيذ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Services Showcase Cards Grid (Matching Images 1 & 2) -->
+            <section id="services-list-in-app" class="services-showcase-section">
+                <div class="services-showcase-list">
+
+                    <!-- Service Card 1: أعمال البنية التحتية والشبكات -->
+                    <div class="service-showcase-card scroll-reveal revealed">
+                        <div class="service-card-info">
+                            <div class="service-card-tag-row">
+                                <span class="service-category-badge">أعمال البنية التحتية والشبكات ⬅</span>
+                                <span class="service-card-number">01</span>
+                            </div>
+                            <h2 class="service-card-title">بنية تحتية متكاملة للمشروعات العمرانية</h2>
+                            <p class="service-card-desc">
+                                نقدم حلولاً متكاملة لتنفيذ شبكات المياه والصرف الصحي والكهرباء والاتصالات، مع تجهيز بنية تحتية قوية تدعم استدامة تشغيل المشروع وفقاً للمواصفات القياسية.
+                            </p>
+                            <ul class="service-points-list">
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>شبكات مياه وصرف صحي وخطوط الانحدار والربط</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>خطوط طرد وشبكات ومحطات رفع ومعالجة مياه</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تمديدات الكهرباء، الإنارة، والاتصالات وشبكات الفايبر</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>شبكات تصريف مياه الأمطار ودرء السيول</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تجهيز وتهيئة البنية التحتية بالمواصفات الفنية المعتمدة</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-card-visual">
+                            <img src="assets/service_infrastructure.jpg" alt="أعمال البنية التحتية والشبكات - شاركس جروب" class="service-main-image">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2: أعمال الطرق والتمهيد والتسوية (Reversed) -->
+                    <div class="service-showcase-card card-reversed scroll-reveal revealed">
+                        <div class="service-card-info">
+                            <div class="service-card-tag-row">
+                                <span class="service-category-badge">أعمال الطرق والتمهيد ⬅</span>
+                                <span class="service-card-number">02</span>
+                            </div>
+                            <h2 class="service-card-title">تمهيد ورصف الطرق بدقة تنفيذ عالية</h2>
+                            <p class="service-card-desc">
+                                ننفذ أعمال الطرق والتمهيد والتسوية لضمان ثبات واستقرار مسطح الطريق وتحقيق أعلى درجات الجودة والمتانة، بما يخدم المشروعات والمحاور الحيوية بكفاءة استثنائية.
+                            </p>
+                            <ul class="service-points-list">
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>أعمال الحفر والردم والتسويات الترابية وضبط المناسيب</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>أعمال التسوية والدمك وتوفير طبقات الأساس والأسفلت</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تمهيد ورصف الطرق الداخلية للمشروعات والمحاور الخارجية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تركيب الإنترلوك، البلدورات، والأرصفة الخرسانية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>اللوحات الإرشادية والمرورية، الدهانات، وتخطيط وإنارة الطرق</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تقليل الهبوطات ومعالجة التربة وتحسين قدرة التحمل الإنشائي</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-card-visual">
+                            <img src="assets/service_roads.jpg" alt="أعمال الطرق والتمهيد والرصف - شاركس جروب" class="service-main-image">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3: المقاولات العامة والإنشاءات -->
+                    <div class="service-showcase-card scroll-reveal revealed">
+                        <div class="service-card-info">
+                            <div class="service-card-tag-row">
+                                <span class="service-category-badge">المقاولات العامة والإنشاءات ⬅</span>
+                                <span class="service-card-number">03</span>
+                            </div>
+                            <h2 class="service-card-title">تنفيذ إنشائي متكامل من البداية حتى التسليم</h2>
+                            <p class="service-card-desc">
+                                ننفذ مشاريع المقاولات وفق أعلى معايير الجودة من خلال فريق هندسي وإشراف ميداني دقيق، مع الالتزام بالمخططات والمواصفات والجداول الزمنية المعتمدة لضمان جاهزية المنشآت.
+                            </p>
+                            <ul class="service-points-list">
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تنفيذ الأعمال الخرسانية والحديد والبيارات والمنشآت الثقيلة</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تنفيذ المباني والمنشآت السكنية، الإدارية، التجارية، والصناعية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تجهيز وتنفيذ خطط العمل للمراحل المختلفة بدقة متناهية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>أعمال الحوائط والأسقف والتسليح والربط الإنشائي المتين</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>إدارة الموقع والموارد وضبط الجودة لضمان سير العمل بكفاءة</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>التنسيق الكامل مع الجهات المعنية والاستشاريين حتى التسليم النهائي</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-card-visual">
+                            <img src="assets/service_construction.jpg" alt="المقاولات العامة والإنشاءات - شاركس جروب" class="service-main-image">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4: التطوير والاستثمار العقاري (Reversed) -->
+                    <div class="service-showcase-card card-reversed scroll-reveal revealed">
+                        <div class="service-card-info">
+                            <div class="service-card-tag-row">
+                                <span class="service-category-badge">التطوير والاستثمار العقاري ⬅</span>
+                                <span class="service-card-number">04</span>
+                            </div>
+                            <h2 class="service-card-title">مشروعات عقارية برؤية استثمارية مستدامة</h2>
+                            <p class="service-card-desc">
+                                نقدم خدمات التطوير العقاري التي تجمع بين التخطيط الاستراتيجي السليم وجودة التنفيذ والقيمة الاستثمارية طويلة المدى، لتطوير أصول عقارية تحقق أعلى عوائد مستدامة.
+                            </p>
+                            <ul class="service-points-list">
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>دراسة الفرص الاستثمارية وتحليلات الجدوى الفنية والاقتصادية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تخطيط وتطوير المشروعات والمجتمعات العمرانية المتكاملة</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>إدارة شاملة لكافة مراحل التطوير من الفكرة والتراخيص حتى التسليم</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تطوير الأراضي وتجهيزها وتهيئتها وفق الاستخدام الاستثماري الأمثل</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>حلول عمرانية متكاملة وبيئات سكنية واستثمارية ذات قيمة مستدامة</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-card-visual">
+                            <img src="assets/service_realestate.jpg" alt="التطوير والاستثمار العقاري - شاركس جروب" class="service-main-image">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 5: التشطيبات واللاندسكيب -->
+                    <div class="service-showcase-card scroll-reveal revealed">
+                        <div class="service-card-info">
+                            <div class="service-card-tag-row">
+                                <span class="service-category-badge">التشطيبات واللاندسكيب ⬅</span>
+                                <span class="service-card-number">05</span>
+                            </div>
+                            <h2 class="service-card-title">تشطيبات ولاندسكيب بمستوى نهائي احترافي</h2>
+                            <p class="service-card-desc">
+                                ننفذ أعمال التشطيبات الداخلية والخارجية واللاندسكيب والهاردسكيب لإخراج المشروعات بصورة متكاملة تجمع بين الفخامة المعمارية والقيمة الجمالية والوظيفية.
+                            </p>
+                            <ul class="service-points-list">
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تشطيبات معمارية داخلية فاخرة للقاعات والمباني والمكاتب</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تشطيبات واجهات خارجية عصرية بمواد مقاومة للعوامل الجوية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تصميم وتنفيذ أعمال اللاندسكيب والمساحات الخضراء والحدائق</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تنفيذ الهاردسكيب، الممرات، البرجولات، والمسارات الديكورية</span>
+                                </li>
+                                <li class="service-point-item">
+                                    <span class="service-point-icon">✓</span>
+                                    <span>تجهيز وفرش المساحات الإدارية والقاعات والتسليم الاحترافي الكامل</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="service-card-visual">
+                            <img src="assets/service_finishing.jpg" alt="التشطيبات واللاندسكيب - شاركس جروب" class="service-main-image">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 3. Quality Policy Section (Directly Matching Image 4) -->
+            <section class="quality-policy-section">
+                <div class="quality-header-wrap scroll-reveal revealed">
+                    <span class="quality-tag">الجودة</span>
+                    <h2 class="quality-title">سياسة الجودة في تنفيذ خدماتنا</h2>
+                    <p class="quality-lead-text">
+                        تلتزم شاركس جروب بتقديم أعلى معايير الجودة في كافة أعمال المقاولات والبنية التحتية والطرق، من خلال تطبيق المواصفات القياسية، اختيار المواد بعناية، والتعامل مع موردين ومصانع معتمدين لضمان جودة التنفيذ في كل مرحلة.
+                    </p>
+                </div>
+
+                <div class="quality-cards-grid">
+                    <div class="quality-card-item hover-navy scroll-reveal revealed">
+                        <div class="quality-card-number">01</div>
+                        <h3 class="quality-card-title">المواصفات القياسية</h3>
+                        <p class="quality-card-text">
+                            الالتزام بالكود الهندسي والمواصفات المعتمدة في تنفيذ الأعمال واختيار مواد البناء بما يضمن أقصى درجات الأمان والمتانة.
+                        </p>
+                    </div>
+
+                    <div class="quality-card-item hover-gold scroll-reveal revealed">
+                        <div class="quality-card-number">02</div>
+                        <h3 class="quality-card-title">الموردون المعتمدون</h3>
+                        <p class="quality-card-text">
+                            التعامل مع موردين ومصانع مؤهلين لضمان جودة الخامات الموردة لمواقع العمل ومطابقتها التامة للعينات المعتمدة.
+                        </p>
+                    </div>
+
+                    <div class="quality-card-item hover-navy scroll-reveal revealed">
+                        <div class="quality-card-number">03</div>
+                        <h3 class="quality-card-title">الرقابة والفحص الدوري</h3>
+                        <p class="quality-card-text">
+                            تطبيق نظام فحص واستلام للمواد والأعمال وفق المستندات الفنية والمواصفات المطلوبة عبر مهندسي ضبط الجودة بالموقع.
+                        </p>
+                    </div>
+
+                    <div class="quality-card-item hover-gold scroll-reveal revealed">
+                        <div class="quality-card-number">04</div>
+                        <h3 class="quality-card-title">التحسين المستمر</h3>
+                        <p class="quality-card-text">
+                            تطوير مهارات فريق العمل وتحديث آليات التنفيذ لمواكبة أحدث النظم الهندسية العالمية والمعدات الإنشائية المتطورة.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Workflow Stages Section (Directly Matching Image 4) -->
+            <section class="workflow-stages-section">
+                <div class="workflow-header-wrap scroll-reveal revealed">
+                    <h2 class="workflow-watermark-title">آلية العمل</h2>
+                    <p style="color: var(--text-muted); font-size: 1.05rem;">
+                        خطوات هندسية مدروسة نتبعها لتحويل رؤى عملائنا إلى مشروعات كبرى على أرض الواقع
+                    </p>
+                </div>
+
+                <div class="workflow-steps-grid">
+                    <div class="workflow-step-card hover-navy scroll-reveal revealed">
+                        <div class="workflow-step-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                        </div>
+                        <div class="workflow-step-num">01</div>
+                        <h3 class="workflow-step-title">تحليل متطلبات المشروع</h3>
+                        <p class="workflow-step-desc">
+                            نبدأ بفهم طبيعة المشروع، نطاق الأعمال، الموقع، المتطلبات الفنية، والجدول الزمني المطلوب لإعداد الرؤية الشاملة.
+                        </p>
+                    </div>
+
+                    <div class="workflow-step-card hover-gold scroll-reveal revealed">
+                        <div class="workflow-step-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+                        </div>
+                        <div class="workflow-step-num">02</div>
+                        <h3 class="workflow-step-title">التخطيط والدراسة الفنية</h3>
+                        <p class="workflow-step-desc">
+                            نضع خطة تنفيذ واضحة تشمل الموارد، مراحل العمل، التوريدات، المقايسات المعتمدة، ومعايير الجودة والسلامة المهنية.
+                        </p>
+                    </div>
+
+                    <div class="workflow-step-card hover-navy scroll-reveal revealed">
+                        <div class="workflow-step-icon-wrap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="workflow-step-num">03</div>
+                        <h3 class="workflow-step-title">التنفيذ والمتابعة والتسليم</h3>
+                        <p class="workflow-step-desc">
+                            ننفذ الأعمال وفق المواصفات بدقة هندسية عالية، مع متابعة مستمرة وإشراف دوري حتى التسليم النهائي بكفاءة وجودة فائقة.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Consultation & CTA Banner -->
+            <section class="services-cta-section">
+                <div class="services-cta-content scroll-reveal revealed">
+                    <h2 class="services-cta-title">هل لديك مشروع ترغب في تنفيذه بأعلى معايير الجودة؟</h2>
+                    <p class="services-cta-subtitle">
+                        تواصل الآن مع الخبراء والمهندسين في شاركس جروب لمناقشة تفاصيل مشروعك واستلام المقايسات والدراسات الفنية المعتمدة.
+                    </p>
+                    <button onclick="switchMainView('contact')" class="btn-hero-primary" style="padding: 15px 36px; font-size: 1.05rem;">
+                        <span>تواصل معنا الآن</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+             VIEW 2: DEDICATED "اتصل بنا" PAGE (REQUEST 2)
+             ========================================== -->
+        <div id="view-contact" class="platform-view">
+            <div class="contact-page-wrapper">
+                <!-- Top Header -->
+                <div class="contact-page-hero scroll-reveal">
+                    <span class="contact-page-tag">تواصل معنا</span>
+                    <h1 class="contact-page-title">تواصل معنا وأرسل رسالتك</h1>
+                    <p class="contact-page-desc">
+                        تواصل معنا مع شركة شاركس جروب لتنفيذ مشاريعك العقارية والهندسية وتلقي الاستشارات والحلول الفنية من فريقنا المتخصص.
+                    </p>
+                </div>
+
+                <!-- Executive Full-Width HQ Map Banner (User Request 1) -->
+                <a href="https://maps.app.goo.gl/yVFabn3ickojJNJy7" target="_blank" rel="noopener noreferrer" class="hq-interactive-map-banner scroll-reveal" title="فتح المقر الرئيسي في خرائط Google">
+                    <!-- Semi-transparent professional map background with subtle zoom effect -->
+                    <div class="hq-map-bg-layer" style="background-image: url('assets/hq_map_bg.jpg');"></div>
+                    <div class="hq-map-gradient-overlay"></div>
+
+                    <!-- Main Content occupying the entire space -->
+                    <div class="hq-map-banner-content">
+                        <div class="hq-map-header-row">
+                            <div class="hq-pin-beacon-large">
+                                <span class="hq-beacon-pulse"></span>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                            <div class="hq-map-text-group">
+                                <h3 class="hq-map-title">المقر الرئيسي - شاركس جروب</h3>
+                                <span class="hq-map-location-tag">دمنهور، محافظة البحيرة</span>
+                            </div>
+                        </div>
+
+                        <p class="hq-map-address-full">
+                            شارع عبد السلام الشاذلي - برج السلام - أمام مدرسة الصفوة للغات
+                        </p>
+
+                        <div class="hq-map-action-btn">
+                            <span>فتح الموقع في خرائط Google</span>
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 6 Contact Cards Grid (Matching user's image) -->
+                <div class="contact-cards-grid-6">
+                    <!-- Card 1: Address -->
+                    <div class="contact-card-item scroll-reveal scroll-reveal-delay-1">
+                        <div class="contact-card-top">
+                            <span class="contact-card-title">العنوان</span>
+                            <div class="contact-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                        </div>
+                        <p class="contact-card-detail">
+                            <a href="https://maps.app.goo.gl/yVFabn3ickojJNJy7" target="_blank" rel="noopener noreferrer" class="interactive-contact-link" title="فتح العنوان في خرائط Google">
+                                <span>محافظة البحيرة - مدخل دمنهور - ش عبد السلام الشاذلي - برج السلام - أمام مدرسة الصفوة للغات</span>
+                                <span class="contact-action-icon-btn" title="فتح في Google Maps">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Card 2: General Email -->
+                    <div class="contact-card-item scroll-reveal scroll-reveal-delay-2">
+                        <div class="contact-card-top">
+                            <span class="contact-card-title">البريد الإلكتروني</span>
+                            <div class="contact-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                        </div>
+                        <p class="contact-card-detail">
+                            <span style="display: block; margin-bottom: 8px;">للاستفسارات والتعاقدات العامة:</span>
+                            <a href="mailto:info@sharks-eg.com" class="interactive-contact-link" title="إرسال بريد إلكتروني">
+                                <strong>info@sharks-eg.com</strong>
+                                <span class="contact-action-icon-btn" title="إرسال بريد إلكتروني">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Phones -->
+                    <div class="contact-card-item scroll-reveal scroll-reveal-delay-3">
+                        <div class="contact-card-top">
+                            <span class="contact-card-title">أرقام الهواتف</span>
+                            <div class="contact-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            </div>
+                        </div>
+                        <p class="contact-card-detail" style="display: flex; flex-direction: column; gap: 10px;">
+                            <a href="tel:01038502003" onclick="handlePhoneClick('01038502003', event)" class="interactive-contact-link" title="اتصال أو نسخ الرقم">
+                                <strong style="direction: ltr; font-size: 1.05rem;">01038502003</strong>
+                                <span class="contact-action-icon-btn" title="اتصال أو نسخ الرقم">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </span>
+                            </a>
+                            <a href="tel:0453343599" onclick="handlePhoneClick('0453343599', event)" class="interactive-contact-link" title="اتصال أو نسخ الرقم">
+                                <strong style="direction: ltr; font-size: 1.05rem;">0453343599</strong>
+                                <span class="contact-action-icon-btn" title="اتصال أو نسخ الرقم">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Clean Contact Form (Matching user's image) -->
+                <div class="contact-form-container-clean scroll-reveal">
+                    <div class="contact-form-header">
+                        <h3>تواصل معنا وأرسل رسالتك</h3>
+                        <p>املأ الاستمارة التالية وسيتم الرد عليك والتواصل معك في أقرب وقت</p>
+                    </div>
+
+                    <form onsubmit="handleDedicatedContact(event)" class="clean-form">
+                        <div class="clean-form-row">
+                            <div class="clean-form-group">
+                                <label class="clean-form-label">الاسم الكامل *</label>
+                                <input type="text" class="clean-form-input" placeholder="اسمك الكريم" required>
+                            </div>
+                            <div class="clean-form-group">
+                                <label class="clean-form-label">الموبايل / الهاتف *</label>
+                                <input type="text" class="clean-form-input" placeholder="01xxxxxxxxx" required>
+                            </div>
+                        </div>
+
+                        <div class="clean-form-group">
+                            <label class="clean-form-label">البريد الإلكتروني *</label>
+                            <input type="email" class="clean-form-input" placeholder="example@domain.com" required>
+                        </div>
+
+                        <div class="clean-form-group">
+                            <label class="clean-form-label">اكتب رسالتك أو تفاصيل مشروعك هنا *</label>
+                            <textarea class="clean-form-textarea" rows="4" placeholder="اكتب استفسارك أو تفاصيل المشروع..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-modal-submit" style="margin-top: 10px;">
+                            <span>إرسال الرسالة الآن ⬅</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 3: DASHBOARD (REQUESTS 1 & 4)
+             ========================================== -->
+        <div id="view-dashboard" class="platform-view">
+            <div class="view-container dashboard-modern-container">
+                <!-- Top Header Banner -->
+                <div class="dash-modern-banner">
+                    <div class="dash-banner-info">
+                        <span class="dash-banner-badge">بوابة العمليات الذكية</span>
+                        <h1 class="dash-banner-title">لوحة تحكم شاركس جروب</h1>
+                        <p class="dash-banner-subtitle">المتابعة اللحظية للمشروعات الهندسية، المهام، ومعدلات الأداء</p>
+                    </div>
+                    <div class="dash-banner-actions">
+                        <button class="btn-dash-quick" onclick="switchMainView('projects')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            <span>المشاريع</span>
+                        </button>
+                        <button class="btn-dash-quick" onclick="switchMainView('tasks')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            <span>المهام</span>
+                        </button>
+                        <button class="btn-dash-quick" onclick="switchMainView('employees')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                            <span>الموظفين</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Master Grid: Tall 3D Showcase Card + Metrics & Charts Grid -->
+                <div class="dash-main-grid">
+                    <!-- Column 1: Tall 3D Architectural Showcase Card (Matches Reference Image) -->
+                    <div class="dash-feature-card">
+                        <div class="feature-card-header">
+                            <span class="feature-tag">التطوير الإنشائي الذكي</span>
+                            <h2 class="feature-title">Smart Construction</h2>
+                        </div>
+
+                        <div class="feature-card-visual" id="smartSliderVisual">
+                            <div class="smart-slides-track" id="smartSliderTrack">
+                                <div class="smart-slide active" data-index="0">
+                                    <img src="assets/project_nile_foundation.jpg" alt="صب الأساسات الخرسانية الكبرى" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="1">
+                                    <img src="assets/project_infrastructure_pipes.jpg" alt="شبكات ومحطات البنية التحتية والمياه" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="2">
+                                    <img src="assets/project_engineers_site.jpg" alt="الإشراف الهندسي وإدارة المشروعات" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="3">
+                                    <img src="assets/project_road_earthwork.jpg" alt="أعمال تمهيد ورصف شبكات الطرق" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="4">
+                                    <img src="assets/project_excavator_breaker.jpg" alt="أعمال الحفر والردم والتجهيزات الإنشائية" class="feature-building-img">
+                                </div>
+                            </div>
+                            <div class="feature-live-pill">
+                                <span class="pulse-dot"></span>
+                                <span>المشاريع الميدانية</span>
+                            </div>
+                            <!-- 7-Second Rotating Slide Indicators -->
+                            <div class="smart-slider-dots" id="smartSliderDots">
+                                <span class="smart-slider-dot active" onclick="switchSmartSlide(0)" title="صب الأساسات الخرسانية الكبرى"></span>
+                                <span class="smart-slider-dot" onclick="switchSmartSlide(1)" title="شبكات ومحطات البنية التحتية والمياه"></span>
+                                <span class="smart-slider-dot" onclick="switchSmartSlide(2)" title="الإشراف الهندسي وإدارة المشروعات"></span>
+                                <span class="smart-slider-dot" onclick="switchSmartSlide(3)" title="أعمال تمهيد ورصف شبكات الطرق"></span>
+                                <span class="smart-slider-dot" onclick="switchSmartSlide(4)" title="أعمال الحفر والردم والتجهيزات الإنشائية"></span>
+                            </div>
+                        </div>
+
+                        <!-- Frosted Bottom Bar (Matches Reference Image) -->
+                        <div class="feature-frosted-bar">
+                            <div class="frosted-bar-top">
+                                <span class="frosted-label">حالة الإنجاز الإنشائي</span>
+                                <span class="frosted-val" id="dashConstructionStatus">92% مكتمل</span>
+                            </div>
+                            <div class="frosted-progress-line">
+                                <div class="frosted-progress-fill" id="dashConstructionFill" style="width: 92%;"></div>
+                            </div>
+                            <div class="frosted-meta-row">
+                                <span id="dashActiveSiteProject">صب الأساسات الخرسانية الكبرى</span>
+                                <button class="btn-feature-link" onclick="switchMainView('projects')">استعراض المشاريع ⬅</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Dashboard Metrics & Charts Grid -->
+                    <div class="dash-content-grid">
+                        <!-- Top Row: 2 Arc Metric Cards (Task Execution & Schedule Health in Reference Image) -->
+                        <div class="dash-metrics-duo">
+                            <!-- Metric 1: إنجاز المهام (Task Execution) -->
+                            <div class="arc-metric-card" onclick="switchMainView('tasks')">
+                                <div class="arc-card-top">
+                                    <div class="arc-card-title-wrap">
+                                        <span class="arc-card-title">إنجاز المهام</span>
+                                        <div class="arc-trend-badge green">
+                                            <span>+5.1%</span>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <button class="arc-link-icon" title="عرض المهام">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="arc-card-body">
+                                    <div class="arc-number-wrap">
+                                        <div class="arc-big-number" id="dashTaskExecPercent">82%</div>
+                                        <div class="arc-sub-label"><span id="dashCompletedTasksCount">1</span> من <span id="dashTasksCount">4</span> مهام مكتملة</div>
+                                    </div>
+                                    <div class="arc-gauge-wrap">
+                                        <svg class="arc-gauge-svg" viewBox="0 0 100 100">
+                                            <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                            <circle class="gauge-fill-cyan" id="dashGaugeTasks" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="50"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Metric 2: كفاءة المشروعات (Projects Health) -->
+                            <div class="arc-metric-card" onclick="switchMainView('projects')">
+                                <div class="arc-card-top">
+                                    <div class="arc-card-title-wrap">
+                                        <span class="arc-card-title">المشاريع النشطة</span>
+                                        <div class="arc-trend-badge gold">
+                                            <span>94% ممتازة</span>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <button class="arc-link-icon" title="عرض المشاريع">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="arc-card-body">
+                                    <div class="arc-number-wrap">
+                                        <div class="arc-big-number"><span id="dashProjectsCount">3</span> مشاريع</div>
+                                        <div class="arc-sub-label">جاهزية هندسية عالية</div>
+                                    </div>
+                                    <div class="arc-gauge-wrap">
+                                        <svg class="arc-gauge-svg" viewBox="0 0 100 100">
+                                            <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                            <circle class="gauge-fill-gold" id="dashGaugeProjects" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="65"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Middle Card: توزيع الأعمال والمشاريع (Spaces Comparison Chart in Reference Image) -->
+                        <div class="dash-spaces-card">
+                            <div class="spaces-card-header">
+                                <div class="spaces-title-wrap">
+                                    <span class="spaces-title">توزيع الأعمال والمشاريع</span>
+                                    <div class="spaces-legend">
+                                        <span class="legend-item"><span class="legend-dot blue"></span>المشاريع قيد التنفيذ</span>
+                                        <span class="legend-item"><span class="legend-dot gold"></span>المشاريع المكتملة</span>
+                                    </div>
+                                </div>
+                                <button class="arc-link-icon" onclick="switchMainView('projects')" title="عرض المشاريع">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </button>
+                            </div>
+
+                            <div class="spaces-bars-wrap">
+                                <!-- Ruler background lines -->
+                                <div class="spaces-ruler">
+                                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                                </div>
+
+                                <div class="spaces-bars-container">
+                                    <!-- Bar 1 (Active Projects) -->
+                                    <div class="spaces-bar-col">
+                                        <div class="spaces-bar-val" id="dashInProgressVal">63%</div>
+                                        <div class="spaces-bar-pillar blue" id="dashInProgressPillar" style="height: 120px;">
+                                            <span class="pillar-tag" id="dashInProgressTag">+5.1%</span>
+                                        </div>
+                                        <div class="spaces-bar-label">قيد التنفيذ</div>
+                                    </div>
+
+                                    <!-- Bar 2 (Completed Projects) -->
+                                    <div class="spaces-bar-col">
+                                        <div class="spaces-bar-val" id="dashCompletedVal">37%</div>
+                                        <div class="spaces-bar-pillar gold" id="dashCompletedPillar" style="height: 80px;">
+                                            <span class="pillar-tag" id="dashCompletedTag">+5.1%</span>
+                                        </div>
+                                        <div class="spaces-bar-label">مكتملة ومستلمة</div>
+                                    </div>
+                                </div>
+
+                                <div class="spaces-side-stats">
+                                    <div class="side-stat-item">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                                        <div>
+                                            <span class="side-stat-title">إجمالي المواقع:</span>
+                                            <strong id="dashTotalSites">111 فدان</strong>
+                                        </div>
+                                    </div>
+                                    <div class="side-stat-item">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                                        <div>
+                                            <span class="side-stat-title">إجمالي الكوادر:</span>
+                                            <strong id="dashEmployeesCount">3 موظفين</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Split: Daily Workforce Output & Weekly Progress Tasks -->
+                        <div class="dash-bottom-duo">
+                            <!-- Workforce Activity (Daily Workforce Output in Reference Image) -->
+                            <div class="workforce-panel">
+                                <div class="panel-inner-header">
+                                    <div>
+                                        <span class="panel-inner-title">نشاط فريق العمل والعمليات</span>
+                                        <div class="panel-inner-sub">معدل الإنتاجية اليومية (CPI) <strong style="color:var(--gold-primary);">1.08</strong></div>
+                                    </div>
+                                </div>
+
+                                <!-- Equalizer strip meter (Matches image!) -->
+                                <div class="equalizer-strip">
+                                    <div class="eq-bar lit"></div><div class="eq-bar lit"></div><div class="eq-bar lit"></div>
+                                    <div class="eq-bar lit"></div><div class="eq-bar lit gold"></div><div class="eq-bar lit gold"></div>
+                                    <div class="eq-bar lit gold"></div><div class="eq-bar lit gold"></div><div class="eq-bar lit gold"></div>
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                </div>
+
+                                <ul class="activity-list" id="dashActivityList"></ul>
+                            </div>
+
+                            <!-- Tasks Velocity & Recent Tasks List -->
+                            <div class="velocity-panel">
+                                <div class="panel-inner-header">
+                                    <div>
+                                        <span class="panel-inner-title">آخر المهام التشغيلية</span>
+                                        <div class="panel-inner-sub">نسبة الإنجاز الأسبوعية <strong style="color:var(--status-green);">68%</strong></div>
+                                    </div>
+                                    <button class="btn-task-quick-add" onclick="openModal('modalAddTask')">
+                                        <span>+ مهمة جديدة</span>
+                                    </button>
+                                </div>
+
+                                <div id="dashLatestTasksContainer"></div>
+
+                                <!-- Latest Project Box -->
+                                <div class="dash-latest-proj-box" style="margin-top: 14px;">
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px;">أحدث مشروع تم إطلاقه:</div>
+                                    <div id="dashLatestProjectContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 4: PROJECTS (REQUEST 4)
+             ========================================== -->
+        <div id="view-projects" class="platform-view">
+            <div class="view-container">
+                <div class="section-banner">
+                    <div class="section-title-wrap">
+                        <h1>إدارة المشاريع</h1>
+                        <p>إضافة ومتابعة مشاريع شاركس جروب مباشرة</p>
+                    </div>
+                    <div>
+                        <button class="btn-gold" onclick="openModal('modalAddProject')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span>إضافة مشروع</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid"></div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 5: TASKS (REQUEST 4)
+             ========================================== -->
+        <div id="view-tasks" class="platform-view">
+            <div class="view-container">
+                <div class="section-banner">
+                    <div class="section-title-wrap">
+                        <h1>المهام</h1>
+                        <p>كل تعديلات المهام تظهر فوراً في لوحة التحكم</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-gold" onclick="openModal('modalAddTask')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span>مهمة جديدة</span>
+                        </button>
+                        <button class="btn-dark-outline" onclick="toggleTaskFilter()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                            <span>تصفية</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="tasksFilterRow" style="display: none; margin-bottom: 20px; background: var(--bg-card); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-card);">
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                        <select id="taskFilterStatus" class="clean-form-select" style="width: 200px;" onchange="renderTasks()">
+                            <option value="all">جميع الحالات</option>
+                            <option value="قيد التنفيذ">قيد التنفيذ</option>
+                            <option value="مكتمل">مكتمل</option>
+                            <option value="قيد الانتظار">قيد الانتظار</option>
+                        </select>
+                        <select id="taskFilterPriority" class="clean-form-select" style="width: 200px;" onchange="renderTasks()">
+                            <option value="all">جميع الأولويات</option>
+                            <option value="عالية">عالية</option>
+                            <option value="متوسطة">متوسطة</option>
+                            <option value="عادية">عادية</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tasks-list-container" id="tasksListContainer"></div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 6: EMPLOYEES (REQUEST 3)
+             ========================================== -->
+        <div id="view-employees" class="platform-view">
+            <div class="view-container">
+                <div class="section-banner">
+                    <div class="section-title-wrap">
+                        <h1>الموظفين</h1>
+                        <p>إضافة وتعديل بيانات فريق شاركس جروب</p>
+                    </div>
+                    <div>
+                        <button class="btn-gold" onclick="openModal('modalAddEmployee')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span>إضافة موظف</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive-box">
+                    <table class="employee-table">
+                        <thead>
+                            <tr>
+                                <th>الاسم</th>
+                                <th>الدور</th>
+                                <th>القسم</th>
+                                <th>التواصل</th>
+                                <th>تاريخ الإضافة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 7: FOUNDERS & LEADERSHIP (المؤسسين)
+             ========================================== -->
+        <div id="view-founders" class="platform-view">
+            <!-- Founders Hero with Rotating Slider Track Matching Services -->
+            <section class="founders-hero-banner">
+                <!-- Rotating Background Slider Track -->
+                <div class="services-slider-track" id="foundersSliderTrack">
+                    <div class="services-slide active" style="background-image: url('assets/project_nile_foundation.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_infrastructure_pipes.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_engineers_site.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_road_earthwork.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_excavator_breaker.jpg');"></div>
+                </div>
+                <div class="services-overlay-gradient"></div>
+
+                <div class="founders-hero-content scroll-reveal revealed">
+                    <div class="founders-hero-tag">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <span>رئيس مجلس الإدارة والمؤسس</span>
+                    </div>
+                    <h1 class="founders-hero-title">رؤية قيادية طموحة تقود مسيرة الإنجاز والتميز</h1>
+                    <p class="founders-hero-desc">
+                        القيادة الهندسية والاستثمارية التي وضعت اللبنات الأولى لمجموعة شاركس جروب في عام 2016، وتقود بفخر مسيرة التطوير المستمر وتنفيذ المشروعات الحيوية والتنموية بأعلى معايير الدقة والاحترافية.
+                    </p>
+                </div>
+
+                <!-- Stats -->
+                <div class="founders-stats-bar scroll-reveal scroll-reveal-delay-1">
+                    <div class="founder-stat-item hover-navy">
+                        <div class="founder-stat-num">+11</div>
+                        <div class="founder-stat-label">عاماً من الخبرة الاستراتيجية</div>
+                    </div>
+                    <div class="founder-stat-item hover-gold">
+                        <div class="founder-stat-num">+42</div>
+                        <div class="founder-stat-label">مشروعاً تم إنجازه وتسليمه</div>
+                    </div>
+                    <div class="founder-stat-item hover-navy">
+                        <div class="founder-stat-num">111</div>
+                        <div class="founder-stat-label">فدان بنية تحتية تحت الإشراف</div>
+                    </div>
+                    <div class="founder-stat-item hover-gold">
+                        <div class="founder-stat-num">5</div>
+                        <div class="founder-stat-label">قطاعات تنفيذية متخصصة</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Founders Grid -->
+            <section class="founders-main-section">
+                <div class="founders-section-header scroll-reveal">
+                    <span class="section-tag">القيادة العليا</span>
+                    <h2 class="section-heading-large">رئيس مجلس الإدارة والمؤسس لشاركس جروب</h2>
+                </div>
+
+                <div class="founders-cards-grid">
+                    <!-- Founder 1: رئيس مجلس الإدارة والمؤسس -->
+                    <div class="founder-card scroll-reveal scroll-reveal-delay-1">
+                        <div class="founder-card-header">
+                            <div class="founder-avatar-frame">
+                                <img src="assets/chairman.jpg" alt="المهندس / أحمد البقلي - رئيس مجلس الإدارة والمؤسس" class="founder-avatar-img">
+                            </div>
+                            <h3 class="founder-name">المهندس / أحمد البقلي</h3>
+                            <span class="founder-role-badge">رئيس مجلس الإدارة والمؤسس</span>
+                        </div>
+                        <div class="founder-card-body">
+                            <p class="founder-bio">
+                                قائد تنفيذي وخبير استثماري، أسس شاركس جروب عام 2016 برؤية واضحة لصنع فارق ملموس في قطاع المقاولات العامة والتطوير العمراني، والإشراف المباشر على كبرى المشاريع القومية.
+                            </p>
+                            <div class="founder-highlights-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>أبرز الإنجازات:</span>
+                            </div>
+                            <ul class="founder-highlights-list">
+                                <li class="founder-highlight-item">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                                    <span>قيادة تأسيس شاركس جروب والتوسع في 5 قطاعات تنفيذية</span>
+                                </li>
+                                <li class="founder-highlight-item">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                                    <span>الإشراف على تطوير أكثر من 111 فدان بنية تحتية وشبكات</span>
+                                </li>
+                                <li class="founder-highlight-item">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                                    <span>توقيع تحالفات استثمارية وهندسية لأكثر من 40 مشروعاً</span>
+                                </li>
+                            </ul>
+                            <div class="founder-quote-box">
+                                "الجودة ليست مجرد شعار، بل هي الأساس الراسخ لكل جدار نشيده ولكل مجتمع عمراني نطوره للأجيال القادمة."
+                            </div>
+                            <div class="founder-card-actions">
+                                <button class="btn-founder-details" onclick="openFounderModal('founder-1')">
+                                    <span>السيرة الذاتية الكاملة</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </button>
+                                <div class="founder-social-links">
+                                    <a href="javascript:void(0)" onclick="openEmailClient('info@sharks-eg.com')" class="founder-social-btn" title="مراسلة عبر البريد">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    </a>
+                                    <a href="https://linkedin.com" target="_blank" class="founder-social-btn" title="LinkedIn">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Governance & Values -->
+            <section class="founders-values-section">
+                <div class="founders-section-header scroll-reveal">
+                    <span class="section-tag">الحوكمة المؤسسية</span>
+                    <h2 class="section-heading-large">ركائز القيادة ومبادئ العمل الإداري</h2>
+                </div>
+
+                <div class="governance-grid">
+                    <div class="governance-card hover-navy scroll-reveal scroll-reveal-delay-1">
+                        <div class="governance-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3 class="governance-title">النزاهة والشفافية</h3>
+                        <p class="governance-desc">التزام تام بأعلى معايير الحوكمة والوضوح المالي والتعاقدي مع كافة الشركاء والعملاء.</p>
+                    </div>
+
+                    <div class="governance-card hover-gold scroll-reveal scroll-reveal-delay-2">
+                        <div class="governance-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        </div>
+                        <h3 class="governance-title">الجودة الهندسية الصارمة</h3>
+                        <p class="governance-desc">مراقبة دقيقة لكل مرحلة من مراحل البناء وفق أحدث الكودات والمواصفات القياسية المصرية والعالمية.</p>
+                    </div>
+
+                    <div class="governance-card hover-navy scroll-reveal scroll-reveal-delay-3">
+                        <div class="governance-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <h3 class="governance-title">التطوير والابتكار</h3>
+                        <p class="governance-desc">الاستثمار المستمر في التقنيات الهندسية الحديثة وتأهيل الكوادر البشرية لقيادة التحول الإنشائي.</p>
+                    </div>
+
+                    <div class="governance-card hover-gold scroll-reveal scroll-reveal-delay-4">
+                        <div class="governance-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3 class="governance-title">المسؤولية والتنمية المستدامة</h3>
+                        <p class="governance-desc">الإسهام الفاعل في بناء مجتمعات عمرانية متطورة تحافظ على البيئة وتدعم التنمية القومية.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+             VIEW 8: CAREERS (فرص العمل) - 15 DEPARTMENTS
+             ========================================== -->
+        <div id="view-careers" class="platform-view">
+            <!-- 1. Careers Hero Banner with Rotating Slider Track Matching Services -->
+            <section class="careers-hero-section">
+                <!-- Rotating Background Slider Track -->
+                <div class="services-slider-track" id="careersSliderTrack">
+                    <div class="services-slide active" style="background-image: url('assets/project_engineers_site.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_nile_foundation.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_infrastructure_pipes.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_road_earthwork.jpg');"></div>
+                    <div class="services-slide" style="background-image: url('assets/project_excavator_breaker.jpg');"></div>
+                </div>
+                <div class="services-overlay-gradient"></div>
+
+                <div class="careers-hero-content scroll-reveal revealed">
+                    <div class="careers-hero-tag">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        <span>بوابة التوظيف والفرص المهنية | Careers</span>
+                    </div>
+                    <h1 class="careers-hero-title">ابنِ مستقبلك المهني مع رواد المقاولات الكبرى</h1>
+                    <p class="careers-hero-desc">
+                        نبحث باستمرار عن الكفاءات الهندسية والإدارية واللوجستية الطموحة للانضمام إلى فريق عمل شاركس جروب في أضخم مشاريع البنية التحتية والإنشاءات والطرق والتطوير العقاري.
+                    </p>
+
+                    <div class="careers-stats-bar">
+                        <div class="careers-stat-item hover-navy" title="15 قسماً وتخصصاً متاحاً">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            <span>15 قسماً وتخصصاً متاحاً</span>
+                        </div>
+                        <div class="careers-stat-item hover-gold" title="مشاريع قومية واستثمارية كبرى">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>مشاريع قومية واستثمارية كبرى</span>
+                        </div>
+                        <div class="careers-stat-item hover-navy" title="بيئة عمل احترافية ومحفزة">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <span>بيئة عمل احترافية ومحفزة</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Search & Category Filters -->
+            <div class="careers-filter-wrap">
+                <div class="careers-filter-card scroll-reveal revealed">
+                    <div class="careers-search-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="careersSearchInput" placeholder="ابحث عن القسم أو التخصص..." oninput="handleCareerSearch(this.value)">
+                    </div>
+
+                    <div class="careers-pills">
+                        <button class="careers-pill-btn active" onclick="filterCareers('all', this)">جميع الأقسام (15)</button>
+                        <button class="careers-pill-btn" onclick="filterCareers('engineering', this)">القطاع الهندسي والفني</button>
+                        <button class="careers-pill-btn" onclick="filterCareers('management', this)">إدارة وتخطيط المشروعات</button>
+                        <button class="careers-pill-btn" onclick="filterCareers('admin-finance', this)">الإدارة والمالية والدعم</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. The 15 Departments Grid -->
+            <div class="careers-content-area">
+                <div class="careers-grid" id="careersGrid">
+                    <!-- Dept 1: مهندسين الطرق -->
+                    <div class="dept-card" data-category="engineering" data-keywords="طرق كباري اسفلت محاور هندسة مدنية مهندسين الطرق">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                                </div>
+                                <span class="dept-category-badge">القطاع الهندسي</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">مهندسين الطرق</h3>
+                                <span class="dept-subtitle">Roads & Highway Engineers</span>
+                            </div>
+                            <p class="dept-description">
+                                الإشراف الهندسي الميداني والتصميمي لمشاريع الطرق السريعة والمحاور الحضرية، تخطيط شبكات الأسفلت، اختبارات التربة، والتحكم في جودة الطبقات الإنشائية.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">هندسة مدنية</span>
+                                <span class="dept-tag">مواقع ومشروعات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('مهندسين الطرق')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 2: مهندسين الكهرباء -->
+                    <div class="dept-card" data-category="engineering" data-keywords="كهرباء جهد محطات تيار خفيف انارة مهندسين الكهربا الكهرباء">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                </div>
+                                <span class="dept-category-badge">القطاع الهندسي</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">مهندسين الكهرباء</h3>
+                                <span class="dept-subtitle">Electrical & Power Engineers</span>
+                            </div>
+                            <p class="dept-description">
+                                إدارة وتنفيذ شبكات الجهد المتوسط والمنخفض، محطات التوزيع الكهربائي، إنارة الطرق والمحاور والأنفاق، وأنظمة التيار الخفيف والمولدات الاحتياطية.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">شبكات وتوزيع</span>
+                                <span class="dept-tag">مشاريع كبرى</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('مهندسين الكهرباء')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 3: مهندسين الميكانيكا -->
+                    <div class="dept-card" data-category="engineering" data-keywords="ميكانيكا مرافق مياه صرف طلمبات تكييف حريق مهندسين الميكانيكا">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">القطاع الهندسي</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">مهندسين الميكانيكا</h3>
+                                <span class="dept-subtitle">Mechanical & MEP Engineers</span>
+                            </div>
+                            <p class="dept-description">
+                                تنفيذ وإشراف أعمال شبكات البنية التحتية للمياه والصرف الصحي، محطات الرفع، منظومات مكافحة الحريق، وشبكات الـ MEP والمعدات الميكانيكية الثقيلة.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">MEP ومحطات مياه</span>
+                                <span class="dept-tag">إشراف ميداني</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('مهندسين الميكانيكا')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 4: المكتب الفني -->
+                    <div class="dept-card" data-category="engineering" data-keywords="مكتب فني حصر مستخلصات شوب دروينج اوتوكاد رسومات المكتب الفنى">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                </div>
+                                <span class="dept-category-badge">القطاع الهندسي</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">المكتب الفني</h3>
+                                <span class="dept-subtitle">Technical Office Engineers</span>
+                            </div>
+                            <p class="dept-description">
+                                إعداد ومراجعة المخططات التنفيذية Shop Drawings، حصر الكميات والمقايسات، مطابقة المواصفات الفنية، وإعداد المستخلصات الدورية للمالك ومقاولي الباطن.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">Shop Drawings</span>
+                                <span class="dept-tag">حصر ومستخلصات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('المكتب الفني')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 5: منسق مستندات -->
+                    <div class="dept-card" data-category="management" data-keywords="منسق مستندات وثائق ارشفة دوكيومنت كنترول Document Controller منسق مستنداتو">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">التخطيط والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">منسق مستندات</h3>
+                                <span class="dept-subtitle">Document Controller</span>
+                            </div>
+                            <p class="dept-description">
+                                إدارة وتنظيم الدورة المستندية للمشروعات الهندسية، أرشفة المعاملات والمراسلات الفنية وتقارير الاستشاري، وإدارة منظومات الأرشفة الإلكترونية EDMS.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">EDMS</span>
+                                <span class="dept-tag">إدارة وتدقيق الوثائق</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('منسق مستندات')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 6: تكنولوجيا المعلومات -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="تكنولوجيا المعلومات اي تي شبكات خوادم برمجيات IT تكنولوجيا المعلومات">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">تكنولوجيا المعلومات</h3>
+                                <span class="dept-subtitle">Information Technology (IT)</span>
+                            </div>
+                            <p class="dept-description">
+                                إدارة البنية التحتية للشبكات والخوادم، تأمين الأنظمة المؤسسية والسحابية، الدعم الفني لمقرات الشركة والمواقع، وإدارة البرمجيات والأنظمة الهندسية.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">شبكات وسيرفرات</span>
+                                <span class="dept-tag">أمن المعلومات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('تكنولوجيا المعلومات')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 7: الموارد البشرية -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="الموارد البشرية اتش ار توظيف شؤون العاملين مواهب HR الموارد البشرية">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">الموارد البشرية</h3>
+                                <span class="dept-subtitle">Human Resources (HR)</span>
+                            </div>
+                            <p class="dept-description">
+                                استقطاب أفضل الكفاءات الهندسية والإدارية، إدارة عمليات التوظيف، شؤون العاملين والتأمينات، وتطوير برامج التدريب واللوائح المؤسسية للشركة.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">استقطاب الكفاءات</span>
+                                <span class="dept-tag">شؤون العاملين</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('الموارد البشرية')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 8: المشتريات -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="المشتريات توريدات موردين خامات اسعار عقود شراء المشتريات">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والمالية</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">المشتريات</h3>
+                                <span class="dept-subtitle">Procurement & Purchasing</span>
+                            </div>
+                            <p class="dept-description">
+                                استدراج ومقارنة عروض الأسعار، التفاوض مع كبرى مصانع الحديد والأسمنت والركام والمعدات، وتأمين سلاسل الإمداد لمواقع المشروعات بالجدول الزمني المحدد.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">سلاسل الإمداد</span>
+                                <span class="dept-tag">تفاوض وتعاقدات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('المشتريات')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 9: المحاسبين -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="المحاسبين محاسبة مالية تكاليف تدقيق ضرائب ميزانيات المحاسبين">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والمالية</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">المحاسبين</h3>
+                                <span class="dept-subtitle">Accounting & Finance</span>
+                            </div>
+                            <p class="dept-description">
+                                إدارة الحسابات المالية، محاسبة تكاليف المشروعات الإنشائية، إعداد التدفقات النقدية وميزانيات المشاريع، ومتابعة مستخلصات الموردين ومقاولي الباطن.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">محاسبة تكاليف</span>
+                                <span class="dept-tag">تدقيق وقوائم مالية</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('المحاسبين')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 10: المخازن -->
+                    <div class="dept-card" data-category="management" data-keywords="المخازن مستودعات جرد خامات معدات فحص المخازن">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                </div>
+                                <span class="dept-category-badge">التخطيط والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">المخازن</h3>
+                                <span class="dept-subtitle">Warehouse & Inventory Management</span>
+                            </div>
+                            <p class="dept-description">
+                                إدارة المستودعات المركزية ومخازن المشروعات، استلام وتخزين المواد الإنشائية وقطع الغيار، تنظيم عمليات الصرف للمواقع، والجرد الدوري المحكم.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">إدارة مخزون</span>
+                                <span class="dept-tag">جرد وفحص خامات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('المخازن')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 11: الأمن -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="الامن الامن والسلامة حراسة مواقع سلامة صحة مهنية HSE الامن">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">الأمن والسلامة</h3>
+                                <span class="dept-subtitle">Safety & Security (HSE)</span>
+                            </div>
+                            <p class="dept-description">
+                                تأمين المواقع الإنشائية والمعدات، تطبيق اشتراطات السلامة والصحة المهنية (HSE)، مراقبة الدخول والخروج، وإدارة خطط الطوارئ والوقاية من الحوادث.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">HSE & السلامة المهنية</span>
+                                <span class="dept-tag">تأمين مواقع ومقرات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('الأمن والسلامة')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 12: الشؤون الإدارية -->
+                    <div class="dept-card" data-category="admin-finance" data-keywords="الشؤون الادارية خدمات مقرات تراخيص علاقات حكومية شؤون ادارية الشؤون الادارية">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">الإدارة والدعم</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">الشؤون الإدارية</h3>
+                                <span class="dept-subtitle">Administrative Affairs</span>
+                            </div>
+                            <p class="dept-description">
+                                تسيير الخدمات الإدارية واللوجستية بمقرات وفروع الشركة، إدارة العقود والتراخيص والمراسلات الحكومية، وتوفير كافة متطلبات بيئة العمل المثالية.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">خدمات إدارية</span>
+                                <span class="dept-tag">تنسيق حكومي</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('الشؤون الإدارية')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 13: إدارة المشاريع -->
+                    <div class="dept-card" data-category="management" data-keywords="ادارة المشاريع بي ام او PMO بريمافيرا جداول زمنية تخطيط مخاطر ادارة المشاريع">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                                </div>
+                                <span class="dept-category-badge">إدارة وتخطيط المشروعات</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">إدارة المشاريع (PMO)</h3>
+                                <span class="dept-subtitle">Project Management Office</span>
+                            </div>
+                            <p class="dept-description">
+                                التخطيط والتحكم الزمني والمالي للمشاريع الكبرى، إعداد خطط التنفيذ ببرامج Primavera P6، إدارة المخاطر، ومتابعة مؤشرات الإنجاز والجودة بالمواقع.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">PMP / Primavera</span>
+                                <span class="dept-tag">تحكم ومتابعة نسب الإنجاز</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('إدارة المشاريع')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 14: التطوير المؤسسي -->
+                    <div class="dept-card" data-category="management" data-keywords="التطوير المؤسسي استراتيجية جودة نظم حوكمة تطوير اعمال التطوير المؤسسي">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+                                </div>
+                                <span class="dept-category-badge">إدارة وتخطيط المشروعات</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">التطوير المؤسسي</h3>
+                                <span class="dept-subtitle">Corporate Development & Strategy</span>
+                            </div>
+                            <p class="dept-description">
+                                بناء وتطوير الاستراتيجيات والسياسات العامة للمجموعة، تحسين الكفاءة التشغيلية، تطبيق نظم الحوكمة والجودة المؤسسية، واستكشاف الفرص الاستثمارية الواعدة.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">تخطيط استراتيجي</span>
+                                <span class="dept-tag">تطوير نظم وحوكمة</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('التطوير المؤسسي')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Dept 15: دعم المشاريع -->
+                    <div class="dept-card" data-category="management" data-keywords="دعم المشاريع لوجستيات تزويد مواقع وقود صيانة مساندة ميدانية دعم المشاريع">
+                        <div>
+                            <div class="dept-card-top">
+                                <div class="dept-icon-box">
+                                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                                </div>
+                                <span class="dept-category-badge">إدارة وتخطيط المشروعات</span>
+                            </div>
+                            <div class="dept-title-group">
+                                <h3 class="dept-title">دعم المشاريع</h3>
+                                <span class="dept-subtitle">Project Support & Logistics</span>
+                            </div>
+                            <p class="dept-description">
+                                تقديم المساندة الميدانية واللوجستية المستمرة لمواقع العمل، تنسيق تزويد المعدات والوقود، الصيانة السريعة للآليات الإنشائية، وحل أي معوقات تشغيلية.
+                            </p>
+                            <div class="dept-tags-row">
+                                <span class="dept-tag">دوام كامل</span>
+                                <span class="dept-tag">مساندة ميدانية</span>
+                                <span class="dept-tag">إمداد وصيانة معدات</span>
+                            </div>
+                        </div>
+                        <button type="button" class="dept-apply-btn" onclick="openJobModal('دعم المشاريع')">
+                            <span>التقديم على هذا القسم</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===================================================================
+         FLOATING ACTIONS DOCK (WHATSAPP + تابعنا STACKED ON BOTTOM-LEFT)
+         =================================================================== -->
+    <div class="floating-left-stack">
+        <!-- 1. WhatsApp Button (تواصل معنا) -->
+        <a href="https://wa.me/201038502003" target="_blank" class="whatsapp-floating-btn" title="تواصل عبر الواتساب">
+            <span class="whatsapp-notif-dot">1</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>تواصل معنا</span>
+        </a>
+
+        <!-- 2. Follow Us Widget (تابعنا) - Underneath WhatsApp -->
+        <div class="sticky-social-dock" id="stickySocialDock" title="تابعنا عبر منصات التواصل الاجتماعي">
+            <button class="social-dock-toggle-btn" onclick="toggleSocialDock(event)" type="button" aria-label="عرض حسابات التواصل الاجتماعي">
+                <svg class="social-dock-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>تابعنا</span>
+            </button>
+            
+            <div class="social-dock-apps">
+                <!-- Facebook App Icon -->
+                <a href="https://www.facebook.com/share/1EuuiUDaiS/" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-facebook" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playFacebook()"
+                   onclick="if(window.AppSounds) AppSounds.playFacebook()" 
+                   data-tooltip="فيسبوك" title="فيسبوك - Sharks Group">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+
+                <!-- YouTube App Icon -->
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-youtube" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playYouTube()"
+                   onclick="if(window.AppSounds) AppSounds.playYouTube()" 
+                   data-tooltip="يوتيوب" title="يوتيوب - Sharks Group">
+                    <svg width="25" height="25" viewBox="0 0 24 24" fill="#ffffff"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+
+                <!-- LinkedIn App Icon -->
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-linkedin" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playLinkedIn()"
+                   onclick="if(window.AppSounds) AppSounds.playLinkedIn()" 
+                   data-tooltip="لينكد إن" title="لينكد إن - Sharks Group">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+
+                <!-- X (Twitter) App Icon -->
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
+                   class="real-app-btn app-twitter" 
+                   onpointerdown="if(window.AppSounds) AppSounds.playTwitter()"
+                   onclick="if(window.AppSounds) AppSounds.playTwitter()" 
+                   data-tooltip="تويتر / X" title="تويتر / X - Sharks Group">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="#ffffff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================
+         MODALS (EMPLOYEES, PROJECTS, TASKS, DETAILS)
+         =================================================================== -->
+    <!-- Modal 1: Add Employee -->
+    <div class="modal-overlay" id="modalAddEmployee">
+        <div class="clean-modal-box">
+            <div class="clean-modal-header">
+                <button class="clean-modal-close" onclick="closeModal('modalAddEmployee')">&times;</button>
+                <h3 class="clean-modal-title">إضافة موظف جديد</h3>
+            </div>
+            <form id="formAddEmployee" class="clean-form" onsubmit="handleAddEmployee(event)">
+                <div class="clean-form-group">
+                    <label class="clean-form-label">اسم الموظف</label>
+                    <input type="text" id="empName" class="clean-form-input" required placeholder="م. أحمد نبيل">
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">البريد الإلكتروني</label>
+                    <input type="email" id="empEmail" class="clean-form-input" required placeholder="it@sharksgroup.com">
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">رقم الهاتف</label>
+                    <input type="text" id="empPhone" class="clean-form-input" required placeholder="01xxxxxxxxx">
+                </div>
+
+                <div class="clean-form-row">
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">الدور الوظيفي</label>
+                        <select id="empRole" class="clean-form-select">
+                            <option value="مسؤول النظام">مسؤول النظام</option>
+                            <option value="مهندس موقع">مهندس موقع</option>
+                            <option value="مهندس مكتب فني">مهندس مكتب فني</option>
+                            <option value="مهندس معماري">مهندس معماري</option>
+                            <option value="موظف إداري" selected>موظف إداري</option>
+                            <option value="مدير مشروع">مدير مشروع</option>
+                        </select>
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">القسم</label>
+                        <select id="empDept" class="clean-form-select">
+                            <option value="الهندسة المدنية" selected>الهندسة المدنية</option>
+                            <option value="تكنولوجيا المعلومات">تكنولوجيا المعلومات</option>
+                            <option value="المكتب الفني">المكتب الفني</option>
+                            <option value="التصميم المعماري">التصميم المعماري</option>
+                            <option value="الشؤون الإدارية">الشؤون الإدارية</option>
+                            <option value="المبيعات والتسويق">المبيعات والتسويق</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-modal-submit">إضافة الموظف</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: Edit Employee -->
+    <div class="modal-overlay" id="modalEditEmployee">
+        <div class="clean-modal-box">
+            <div class="clean-modal-header">
+                <button class="clean-modal-close" onclick="closeModal('modalEditEmployee')">&times;</button>
+                <h3 class="clean-modal-title">تعديل بيانات الموظف</h3>
+            </div>
+            <form id="formEditEmployee" class="clean-form" onsubmit="handleEditEmployee(event)">
+                <input type="hidden" id="editEmpId">
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">اسم الموظف</label>
+                    <input type="text" id="editEmpName" class="clean-form-input" required>
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">البريد الإلكتروني</label>
+                    <input type="email" id="editEmpEmail" class="clean-form-input" required>
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">رقم الهاتف</label>
+                    <input type="text" id="editEmpPhone" class="clean-form-input" required>
+                </div>
+
+                <div class="clean-form-row">
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">الدور الوظيفي</label>
+                        <select id="editEmpRole" class="clean-form-select">
+                            <option value="مسؤول النظام">مسؤول النظام</option>
+                            <option value="مهندس موقع">مهندس موقع</option>
+                            <option value="مهندس مكتب فني">مهندس مكتب فني</option>
+                            <option value="مهندس معماري">مهندس معماري</option>
+                            <option value="موظف إداري">موظف إداري</option>
+                            <option value="مدير مشروع">مدير مشروع</option>
+                        </select>
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">القسم</label>
+                        <select id="editEmpDept" class="clean-form-select">
+                            <option value="الهندسة المدنية">الهندسة المدنية</option>
+                            <option value="تكنولوجيا المعلومات">تكنولوجيا المعلومات</option>
+                            <option value="المكتب الفني">المكتب الفني</option>
+                            <option value="التصميم المعماري">التصميم المعماري</option>
+                            <option value="الشؤون الإدارية">الشؤون الإدارية</option>
+                            <option value="المبيعات والتسويق">المبيعات والتسويق</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-modal-submit">حفظ التعديلات</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 3: Add Project -->
+    <div class="modal-overlay" id="modalAddProject">
+        <div class="clean-modal-box">
+            <div class="clean-modal-header">
+                <button class="clean-modal-close" onclick="closeModal('modalAddProject')">&times;</button>
+                <h3 class="clean-modal-title">إضافة مشروع جديد</h3>
+            </div>
+            <form id="formAddProject" class="clean-form" onsubmit="handleAddProject(event)">
+                <div class="clean-form-group">
+                    <label class="clean-form-label">اسم المشروع</label>
+                    <input type="text" id="projTitle" class="clean-form-input" required placeholder="مثال: كمبوند شاركس ريزيدنس">
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">الموقع الجغرافي</label>
+                    <input type="text" id="projLocation" class="clean-form-input" required placeholder="التجمع الخامس، القاهرة الجديدة">
+                </div>
+
+                <div class="clean-form-row">
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">تاريخ البدء / الإطلاق</label>
+                        <input type="text" id="projDate" class="clean-form-input" placeholder="15 يناير 2026">
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">المساحة المقدرة (بالفدان)</label>
+                        <input type="number" id="projFeddan" class="clean-form-input" placeholder="مثال: 55" min="1">
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">حالة المشروع</label>
+                        <select id="projStatus" class="clean-form-select">
+                            <option value="جاري التنفيذ" selected>جاري التنفيذ</option>
+                            <option value="مكتمل">مكتمل</option>
+                            <option value="قيد التخطيط">قيد التخطيط</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">وصف ونطاق أعمال المشروع</label>
+                    <textarea id="projDesc" class="clean-form-textarea" rows="3" placeholder="مشروع سكني متكامل لشركة شاركس جروب..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-modal-submit">إضافة المشروع</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 4: Add Task -->
+    <div class="modal-overlay" id="modalAddTask">
+        <div class="clean-modal-box">
+            <div class="clean-modal-header">
+                <button class="clean-modal-close" onclick="closeModal('modalAddTask')">&times;</button>
+                <h3 class="clean-modal-title">إنشاء مهمة جديدة</h3>
+            </div>
+            <form id="formAddTask" class="clean-form" onsubmit="handleAddTask(event)">
+                <div class="clean-form-group">
+                    <label class="clean-form-label">عنوان المهمة</label>
+                    <input type="text" id="taskTitle" class="clean-form-input" required placeholder="مثال: مراجعة المخططات الإنشائية">
+                </div>
+
+                <div class="clean-form-row">
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">المشروع التابع له</label>
+                        <select id="taskProjectSelect" class="clean-form-select" required></select>
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">الموظف المسؤول</label>
+                        <select id="taskEmployeeSelect" class="clean-form-select" required></select>
+                    </div>
+                </div>
+
+                <div class="clean-form-row">
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">الأولوية</label>
+                        <select id="taskPriority" class="clean-form-select">
+                            <option value="عالية" selected>عالية</option>
+                            <option value="متوسطة">متوسطة</option>
+                            <option value="عادية">عادية</option>
+                        </select>
+                    </div>
+
+                    <div class="clean-form-group">
+                        <label class="clean-form-label">الحالة</label>
+                        <select id="taskStatus" class="clean-form-select">
+                            <option value="قيد التنفيذ" selected>قيد التنفيذ</option>
+                            <option value="مكتمل">مكتمل</option>
+                            <option value="قيد الانتظار">قيد الانتظار</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="clean-form-group">
+                    <label class="clean-form-label">تاريخ الاستحقاق</label>
+                    <input type="text" id="taskDueDate" class="clean-form-input" placeholder="20 أبريل 2026">
+                </div>
+
+                <button type="submit" class="btn-modal-submit">إنشاء المهمة</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 5: Project Details -->
+    <div class="modal-overlay" id="modalProjectDetails">
+        <div class="clean-modal-box">
+            <div class="clean-modal-header">
+                <button class="clean-modal-close" onclick="closeModal('modalProjectDetails')">&times;</button>
+                <h3 class="clean-modal-title" id="detailsProjectTitle">تفاصيل المشروع</h3>
+            </div>
+            <div id="projectDetailsContent" style="display: flex; flex-direction: column; gap: 14px; color: var(--text-muted); font-size: 0.95rem;"></div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Job Application Modal (Sends to info@sharks-eg.com) -->
+    <div class="modal-overlay" id="modalJobApplication">
+        <div class="job-modal-box">
+            <div class="job-modal-header">
+                <div class="job-modal-title-wrap">
+                    <h3>طلب انضمام: <span class="target-dept-name" id="modalTargetDeptName">مهندسين الطرق</span></h3>
+                    <p class="job-modal-subtitle">أرسل بياناتك وسيرتك الذاتية مباشرة إلى إدارة الموارد البشرية بشاركس جروب</p>
+                </div>
+                <button class="job-modal-close" onclick="closeJobModal()">&times;</button>
+            </div>
+
+            <form id="formJobApplication" onsubmit="handleJobApplicationSubmit(event)">
+                <input type="hidden" id="jobHiddenDept" value="مهندسين الطرق">
+
+                <div class="job-form-grid">
+                    <div class="job-form-group">
+                        <label for="jobApplicantName">الاسم الكامل <span class="required-star">*</span></label>
+                        <input type="text" id="jobApplicantName" class="job-input" placeholder="الاسم ثلاثي أو رباعي" required>
+                    </div>
+
+                    <div class="job-form-group">
+                        <label for="jobApplicantEmail">البريد الإلكتروني <span class="required-star">*</span></label>
+                        <input type="email" id="jobApplicantEmail" class="job-input" placeholder="example@domain.com" required>
+                    </div>
+
+                    <div class="job-form-group">
+                        <label for="jobApplicantPhone">رقم الهاتف / الواتساب <span class="required-star">*</span></label>
+                        <input type="tel" id="jobApplicantPhone" class="job-input" placeholder="010xxxxxxxx" required>
+                    </div>
+
+                    <div class="job-form-group">
+                        <label for="jobDepartmentSelect">القسم المطلوب <span class="required-star">*</span></label>
+                        <select id="jobDepartmentSelect" class="job-select" required onchange="syncJobDept(this.value)">
+                            <option value="مهندسين الطرق">مهندسين الطرق</option>
+                            <option value="مهندسين الكهرباء">مهندسين الكهرباء</option>
+                            <option value="مهندسين الميكانيكا">مهندسين الميكانيكا</option>
+                            <option value="المكتب الفني">المكتب الفني</option>
+                            <option value="منسق مستندات">منسق مستندات</option>
+                            <option value="تكنولوجيا المعلومات">تكنولوجيا المعلومات</option>
+                            <option value="الموارد البشرية">الموارد البشرية</option>
+                            <option value="المشتريات">المشتريات</option>
+                            <option value="المحاسبين">المحاسبين</option>
+                            <option value="المخازن">المخازن</option>
+                            <option value="الأمن والسلامة">الأمن والسلامة</option>
+                            <option value="الشؤون الإدارية">الشؤون الإدارية</option>
+                            <option value="إدارة المشاريع">إدارة المشاريع</option>
+                            <option value="التطوير المؤسسي">التطوير المؤسسي</option>
+                            <option value="دعم المشاريع">دعم المشاريع</option>
+                        </select>
+                    </div>
+
+                    <div class="job-form-group">
+                        <label for="jobExperienceLevel">سنوات الخبرة</label>
+                        <select id="jobExperienceLevel" class="job-select">
+                            <option value="حديث التخرج / أقل من سنة">حديث التخرج / أقل من سنة</option>
+                            <option value="من 1 إلى 3 سنوات">من 1 إلى 3 سنوات</option>
+                            <option value="من 3 إلى 5 سنوات" selected>من 3 إلى 5 سنوات</option>
+                            <option value="من 5 إلى 10 سنوات">من 5 إلى 10 سنوات</option>
+                            <option value="أكثر من 10 سنوات (قيادي / استشاري)">أكثر من 10 سنوات (قيادي / استشاري)</option>
+                        </select>
+                    </div>
+
+                    <div class="job-form-group">
+                        <label for="jobPortfolioLink">رابط الأعمال / Portfolio أو LinkedIn</label>
+                        <input type="url" id="jobPortfolioLink" class="job-input" placeholder="https://linkedin.com/in/...">
+                    </div>
+
+                    <div class="job-form-group full-width">
+                        <label>السيرة الذاتية (CV / Resume) <span class="required-star">*</span></label>
+                        <div class="cv-upload-zone" id="cvUploadZone" onclick="document.getElementById('jobCvFile').click()">
+                            <input type="file" id="jobCvFile" accept=".pdf,.doc,.docx" style="display: none;" onchange="handleCvFileSelect(this)">
+                            <div class="cv-upload-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            </div>
+                            <div class="cv-upload-text">اضغط لرفع السيرة الذاتية أو اسحب الملف هنا</div>
+                            <div class="cv-upload-hint">الملفات المدعومة: PDF, Word (الحد الأقصى 15 ميجابايت)</div>
+                        </div>
+                        <div class="cv-file-display" id="cvFileDisplay">
+                            <div class="cv-file-name-row">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span id="cvFileNameText">ملف_السيرة_الذاتية.pdf</span>
+                                <span id="cvFileSizeText" style="color: var(--text-muted); font-size: 0.8rem; margin-right: 8px;"></span>
+                            </div>
+                            <button type="button" class="cv-file-remove-btn" onclick="removeCvFile(event)" title="حذف الملف">&times;</button>
+                        </div>
+                    </div>
+
+                    <div class="job-form-group full-width">
+                        <label for="jobExtraDocsNotes">أوراق إضافية أو ملاحظات وشهادات خبرة</label>
+                        <textarea id="jobExtraDocsNotes" class="job-textarea" placeholder="اذكر أي شهادات مهنية، دورات تدريبية، أو مستندات إضافية ترغب في إرفاقها..."></textarea>
+                    </div>
+                </div>
+
+                <div class="job-modal-actions">
+                    <button type="button" class="btn-job-cancel" onclick="closeJobModal()">إلغاء</button>
+                    <button type="submit" class="btn-job-submit">
+                        <span>إرسال طلب التوظيف</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 7: Job Success Modal -->
+    <div class="modal-overlay" id="modalJobSuccess">
+        <div class="job-modal-box" style="max-width: 520px;">
+            <div class="job-success-card">
+                <div class="job-success-icon">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <h3 class="job-success-title">تم تسجيل طلب التوظيف بنجاح!</h3>
+                <div class="job-email-target-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>الوجهة: info@sharks-eg.com</span>
+                </div>
+                <p class="job-success-desc" id="jobSuccessMessage">
+                    شكراً لاهتمامك بالانضمام إلى شركة شاركس جروب. تم تجهيز تفاصيل طلبك وإرسالها إلى إدارة الموارد البشرية وسنقوم بمراجعة سيرتك الذاتية والتواصل معك قريباً.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <a id="directMailtoLink" href="#" class="btn-job-submit" style="text-decoration: none;">
+                        <span>فتح تطبيق البريد للإرسال</span>
+                    </a>
+                    <button type="button" class="btn-job-cancel" onclick="closeModal('modalJobSuccess')">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copy Toast Notification -->
+    <div id="copyToast" class="copy-toast"></div>
+
+    <!-- Scripts with Cache-Busting -->
+    <script>
+        // Permanent override: Absolutely no sound outside social media buttons
+        window.AudioDisableTabs = true;
+    </script>
+    <script src="js/sounds.js?v=20260910_v14"></script>
+    <script src="js/data.js?v=20260910_v14"></script>
+    <script src="js/tracker.js?v=20260910_v14"></script>
+    <script src="js/app.js?v=20260910_v14"></script>
+</body>
+</html>
