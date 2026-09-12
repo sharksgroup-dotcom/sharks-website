@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الإدارة المركزية | شركة شاركس جروب</title>
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+    <link rel="stylesheet" href="css/style.css?v=20260912_v2">
+    <link rel="stylesheet" href="css/admin.css?v=20260912_v2">
+</head>
+<body>
+
+    <!-- ===================================================================
+         CINEMATIC 3-SECOND SPLASH SCREEN WITH 3D SWIMMING SHARK EMBLEM
+         (REQUEST 6 - SYNCED WITH 1-HOUR CACHE RULE)
+         =================================================================== -->
+    <div id="sharksSplashScreen" class="sharks-splash-screen" aria-label="شاشة الترحيب">
+        <!-- Ambient Ocean Deep Background Rays & Bubbles -->
+        <div class="splash-ocean-ambient">
+            <div class="splash-water-caustic"></div>
+            <div class="splash-water-ray ray-1"></div>
+            <div class="splash-water-ray ray-2"></div>
+            <div class="splash-water-ray ray-3"></div>
+            <div class="splash-bubbles">
+                <span class="bubble b1"></span>
+                <span class="bubble b2"></span>
+                <span class="bubble b3"></span>
+                <span class="bubble b4"></span>
+                <span class="bubble b5"></span>
+            </div>
+        </div>
+
+        <!-- Center Emblem Showcase with Layered Swimming Shark -->
+        <div class="splash-center-content">
+            <!-- Pulsing Water Ripple Rings Behind Shield -->
+            <div class="splash-ripple-ring ring-1"></div>
+            <div class="splash-ripple-ring ring-2"></div>
+
+            <!-- The Architectural Shield Stage (Stable 3D Foundation) -->
+            <div class="splash-emblem-stage">
+                <!-- 1. Majestic Gold Architectural Shield Base Frame -->
+                <img src="assets/sharks_shield_frame.jpg" alt="شاركس جروب درع الشعار" class="splash-shield-bg">
+
+                <!-- 2. Ambient Deep Water Portal Core inside the Shield Center -->
+                <div class="splash-portal-core">
+                    <div class="portal-vortex-glow"></div>
+                    <div class="portal-light-swirl"></div>
+                </div>
+
+                <!-- 3. The 3D Mechanical Cybernetic Shark Swimming INSIDE the Shield -->
+                <div class="splash-shark-cruiser">
+                    <div class="shark-body-animator">
+                        <img src="assets/sharks_shark_cropped.png" alt="قرش شاركس جروب الميكانيكي" class="splash-shark-img">
+                        <div class="shark-specular-sweep"></div>
+                        <div class="shark-eye-glow"></div>
+                        <div class="shark-core-glow"></div>
+                        <div class="shark-trail-bubbles">
+                            <span class="st-bubble b1"></span>
+                            <span class="st-bubble b2"></span>
+                            <span class="st-bubble b3"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Luxury Shield Glass / Gold Sheen Overlay -->
+                <div class="splash-shield-sheen"></div>
+            </div>
+
+            <!-- Brand Slogan Typography -->
+            <div class="splash-brand-group">
+                <div class="splash-brand-subtitle">ريادة المقاولات العامة والتطوير العقاري</div>
+                <div class="splash-brand-en">ENGINEERING EXCELLENCE & URBAN DEVELOPMENT • SINCE 2016</div>
+            </div>
+
+            <!-- Luxury Progress Loading Indicator -->
+            <div class="splash-loader-wrap">
+                <div class="splash-loader-bar">
+                    <div class="splash-loader-fill" id="splashLoaderFill"></div>
+                </div>
+                <div class="splash-loader-status" id="splashStatusText">جاري تهيئة منظومة الإدارة المركزية...</div>
+            </div>
+        </div>
+
+        <!-- Discreet Skip Button -->
+        <button type="button" class="splash-skip-btn" onclick="dismissAdminSplashScreen()" title="تخطي شاشة البداية">
+            <span>تخطي ⇥</span>
+        </button>
+    </div>
+
+    <!-- Ambient Background Lighting -->
+    <div class="adm-bg-glow adm-bg-glow-1"></div>
+    <div class="adm-bg-glow adm-bg-glow-2"></div>
+
+    <!-- ===============================================================
+         1. LOGIN VIEW (SHIELD / AUTH GUARD)
+         =============================================================== -->
+    <div class="adm-login-wrapper" id="adminLoginWrapper">
+        <div class="adm-login-card">
+            <div class="adm-brand-badge">
+                <div class="adm-brand-logo">
+                    <img src="assets/logo.jpg" alt="شعار شاركس جروب">
+                </div>
+                <div class="adm-brand-title">
+                    <h2>شاركس جروب</h2>
+                    <span>بوابة الإدارة والعمليات المركزية</span>
+                </div>
+            </div>
+
+            <div class="adm-login-heading">
+                <h3>تسجيل دخول الإدارة</h3>
+                <p>يرجى إدخال بيانات حساب المدير المصرح له للوصول للوحة التحكم</p>
+            </div>
+
+            <div class="adm-alert-error" id="loginErrorAlert"></div>
+
+            <form id="adminLoginForm">
+                <div class="adm-form-group">
+                    <label for="loginEmail">اسم المستخدم أو البريد الإلكتروني</label>
+                    <div class="adm-input-wrap">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <input type="text" id="loginEmail" class="adm-input" placeholder="أدخل اسم المستخدم..." autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="adm-form-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <label for="loginPassword" style="margin:0;">كلمة المرور السرية</label>
+                        <button type="button" class="adm-forgot-pass-btn" onclick="openForgotPasswordModal()">نسيت كلمة المرور؟</button>
+                    </div>
+                    <div class="adm-input-wrap">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <input type="password" id="loginPassword" class="adm-input" placeholder="أدخل كلمة المرور..." autocomplete="new-password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="adm-btn-login">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                    <span>دخول آمن للوحة التحكم</span>
+                </button>
+            </form>
+
+            <div class="adm-login-footer">
+                <a href="index.html">⬅ العودة إلى الموقع الرئيسي للعملاء</a>
+                <span>اتصال مشفر &bull; SSL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         2. AUTHENTICATED ADMIN DASHBOARD
+         =============================================================== -->
+    <div class="adm-dashboard-wrapper" id="adminDashboardWrapper">
+        <!-- Top Navbar -->
+        <header class="adm-navbar">
+            <div class="adm-nav-left">
+                <a href="admin.html" class="adm-nav-brand">
+                    <div class="adm-nav-logo">
+                        <img src="assets/logo.jpg" alt="شاركس جروب">
+                    </div>
+                    <div class="adm-nav-titles">
+                        <h1>شاركس جروب</h1>
+                        <span>مركز القيادة والإدارة المركزية</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="adm-nav-right">
+                <a href="index.html" target="_blank" style="color:var(--adm-text-muted); text-decoration:none; font-size:0.86rem; display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.05); padding:7px 14px; border-radius:var(--adm-radius); border:1px solid var(--adm-border-subtle);">
+                    <span>عرض الموقع للعملاء</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+
+                <!-- Theme Toggle Button (Day / Night Mode - Request 2) -->
+                <button type="button" class="adm-theme-toggle" id="adminThemeToggle" onclick="toggleAdminTheme()" title="تبديل الوضع النهاري / الليلي" aria-label="تبديل الوضع">
+                    <svg class="adm-sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="adm-moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+
+                <!-- User Profile (Dynamic User & Clickable Avatar - Request 2) -->
+                <div class="adm-user-profile">
+                    <div class="adm-user-avatar clickable" id="adminUserAvatarBtn" onclick="triggerAvatarUpload()" title="اضغط لرفع أو تغيير صورتك الشخصية">
+                        <div id="adminAvatarContainer" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                            <img src="assets/eng_ahmed_khaled.jpg" alt="User Avatar" class="adm-avatar-img" id="adminAvatarImg">
+                        </div>
+                        <div class="adm-avatar-overlay" title="رفع صورة جديدة">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        </div>
+                    </div>
+                    <input type="file" id="adminAvatarFileInput" accept="image/*" style="display:none" onchange="handleAvatarFileSelect(event)">
+                    <div class="adm-user-info">
+                        <span class="adm-user-name" id="adminUserName">ENG. Ahmed Khaled</span>
+                        <span class="adm-user-role" id="adminUserRole">المؤسس والمدير العام</span>
+                    </div>
+                </div>
+
+                <button class="adm-btn-logout" id="adminLogoutBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>تسجيل خروج</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Subnav Tabs (Request 1) -->
+        <nav class="adm-subnav">
+            <button class="adm-tab-btn active" data-tab="overview">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+                <span>نظرة عامة</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="dashboard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <span>لوحة التحكم</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="suppliers">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                <span>إدارة الموردين</span>
+                <span class="adm-tab-badge" id="badgeTabSuppliers">0</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="projects">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                <span>المشاريع</span>
+                <span class="adm-tab-badge" id="badgeTabProjects">0</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="tasks">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                <span>المهام</span>
+                <span class="adm-tab-badge" id="badgeTabTasks">0</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="employees">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>الموظفين</span>
+                <span class="adm-tab-badge" id="badgeTabEmployees">0</span>
+            </button>
+
+            <button class="adm-tab-btn" data-tab="careers">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                <span>فرص العمل</span>
+                <span class="adm-tab-badge" id="badgeTabCareers">0</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="adm-content-container">
+
+            <!-- -----------------------------------------------------------
+                 PANEL 1: OVERVIEW (نظرة عامة ومؤشرات الأداء - REQUEST 1)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel active" id="panel-overview">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>نظرة عامة ومؤشرات الأداء</h2>
+                        <p>ملخص شامل لعمليات ومشاريع وتوريدات شاركس جروب</p>
+                    </div>
+                </div>
+
+                <!-- KPI Grid -->
+                <div class="adm-kpi-grid">
+                    <div class="adm-kpi-card" onclick="switchAdminTab('suppliers')" style="cursor:pointer;">
+                        <div class="adm-kpi-icon gold">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                        </div>
+                        <div class="adm-kpi-info">
+                            <h4>إجمالي الموردين المعتمدين</h4>
+                            <div class="adm-kpi-value" id="statSuppliersTotal">0</div>
+                            <span style="font-size:0.78rem; color:#34d399;">منهم <strong id="statSuppliersPublic">0</strong> ظاهر للعملاء</span>
+                        </div>
+                    </div>
+
+                    <div class="adm-kpi-card" onclick="switchAdminTab('projects')" style="cursor:pointer;">
+                        <div class="adm-kpi-icon blue">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <div class="adm-kpi-info">
+                            <h4>المشاريع الإنشائية</h4>
+                            <div class="adm-kpi-value" id="statProjectsCount">0</div>
+                            <span style="font-size:0.78rem; color:var(--adm-text-dim);">جاري التنفيذ والتطوير</span>
+                        </div>
+                    </div>
+
+                    <div class="adm-kpi-card" onclick="switchAdminTab('tasks')" style="cursor:pointer;">
+                        <div class="adm-kpi-icon purple">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                        </div>
+                        <div class="adm-kpi-info">
+                            <h4>المهام التنفيذية</h4>
+                            <div class="adm-kpi-value" id="statTasksCount">0</div>
+                            <span style="font-size:0.78rem; color:var(--adm-text-dim);">متابعة دقيقة لكل مرحلة</span>
+                        </div>
+                    </div>
+
+                    <div class="adm-kpi-card" onclick="switchAdminTab('employees')" style="cursor:pointer;">
+                        <div class="adm-kpi-icon green">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                        </div>
+                        <div class="adm-kpi-info">
+                            <h4>فريق العمل والمهندسين</h4>
+                            <div class="adm-kpi-value" id="statEmployeesCount">0</div>
+                            <span style="font-size:0.78rem; color:var(--adm-text-dim);">كوادر هندسية وإدارية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities Box (Request 5) -->
+                <div class="adm-table-card">
+                    <div style="padding:16px 20px; border-bottom:1px solid var(--adm-border-subtle); display:flex; align-items:center; justify-content:space-between;">
+                        <h3 style="font-size:1.1rem; font-weight:800; color:var(--adm-gold);">سجل أحدث العمليات والأنشطة الإدارية</h3>
+                    </div>
+                    <div id="adminRecentActivities"></div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 2: CLASSIC DASHBOARD (لوحة تحكم شاركس جروب - REQUEST 1)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-dashboard">
+                <div class="dash-modern-banner" style="margin-bottom: 24px;">
+                    <div class="dash-banner-info">
+                        <span class="dash-banner-badge">بوابة العمليات الذكية</span>
+                        <h1 class="dash-banner-title">لوحة تحكم شاركس جروب</h1>
+                        <p class="dash-banner-subtitle">المتابعة اللحظية للمشروعات الهندسية، المهام، ومعدلات الأداء</p>
+                    </div>
+                    <div class="dash-banner-actions">
+                        <button class="btn-dash-quick" onclick="switchAdminTab('suppliers')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            <span>الموردين</span>
+                        </button>
+                        <button class="btn-dash-quick" onclick="switchAdminTab('projects')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            <span>المشاريع</span>
+                        </button>
+                        <button class="btn-dash-quick" onclick="switchAdminTab('tasks')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            <span>المهام</span>
+                        </button>
+                        <button class="btn-dash-quick" onclick="switchAdminTab('employees')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                            <span>الموظفين</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Master Grid: Tall 3D Showcase Card + Metrics & Charts Grid -->
+                <div class="dash-main-grid">
+                    <!-- Column 1: Tall 3D Architectural Showcase Card -->
+                    <div class="dash-feature-card">
+                        <div class="feature-card-header">
+                            <span class="feature-tag">التطوير الإنشائي الذكي</span>
+                            <h2 class="feature-title">Smart Construction</h2>
+                        </div>
+
+                        <div class="feature-card-visual" id="adminSmartSliderVisual">
+                            <div class="smart-slides-track" id="adminSmartSliderTrack">
+                                <div class="smart-slide active" data-index="0">
+                                    <img src="assets/project_nile_foundation.jpg" alt="صب الأساسات الخرسانية الكبرى" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="1">
+                                    <img src="assets/project_infrastructure_pipes.jpg" alt="شبكات ومحطات البنية التحتية والمياه" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="2">
+                                    <img src="assets/project_engineers_site.jpg" alt="الإشراف الهندسي وإدارة المشروعات" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="3">
+                                    <img src="assets/project_road_earthwork.jpg" alt="أعمال تمهيد ورصف شبكات الطرق" class="feature-building-img">
+                                </div>
+                                <div class="smart-slide" data-index="4">
+                                    <img src="assets/project_excavator_breaker.jpg" alt="أعمال الحفر والردم والتجهيزات الإنشائية" class="feature-building-img">
+                                </div>
+                            </div>
+                            <div class="feature-live-pill">
+                                <span class="pulse-dot"></span>
+                                <span>المشاريع الميدانية</span>
+                            </div>
+                            <div class="smart-slider-dots" id="adminSmartSliderDots">
+                                <span class="smart-slider-dot active" onclick="switchAdminSmartSlide(0)"></span>
+                                <span class="smart-slider-dot" onclick="switchAdminSmartSlide(1)"></span>
+                                <span class="smart-slider-dot" onclick="switchAdminSmartSlide(2)"></span>
+                                <span class="smart-slider-dot" onclick="switchAdminSmartSlide(3)"></span>
+                                <span class="smart-slider-dot" onclick="switchAdminSmartSlide(4)"></span>
+                            </div>
+                        </div>
+
+                        <!-- Frosted Bottom Bar -->
+                        <div class="feature-frosted-bar">
+                            <div class="frosted-bar-top">
+                                <span class="frosted-label">حالة الإنجاز الإنشائي</span>
+                                <span class="frosted-val" id="adminDashConstructionStatus">92% مكتمل</span>
+                            </div>
+                            <div class="frosted-progress-line">
+                                <div class="frosted-progress-fill" id="adminDashConstructionFill" style="width: 92%;"></div>
+                            </div>
+                            <div class="frosted-meta-row">
+                                <span id="adminDashActiveSiteProject">صب الأساسات الخرسانية الكبرى</span>
+                                <button class="btn-feature-link" onclick="switchAdminTab('projects')">استعراض المشاريع ⬅</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Dashboard Metrics & Charts Grid -->
+                    <div class="dash-content-grid">
+                        <!-- Top Row: 2 Arc Metric Cards -->
+                        <div class="dash-metrics-duo">
+                            <!-- Metric 1: إنجاز المهام -->
+                            <div class="arc-metric-card" onclick="switchAdminTab('tasks')">
+                                <div class="arc-card-top">
+                                    <div class="arc-card-title-wrap">
+                                        <span class="arc-card-title">إنجاز المهام</span>
+                                        <div class="arc-trend-badge green">
+                                            <span>+5.1%</span>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <button class="arc-link-icon" title="عرض المهام">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="arc-card-body">
+                                    <div class="arc-number-wrap">
+                                        <div class="arc-big-number" id="adminDashTaskExecPercent">82%</div>
+                                        <div class="arc-sub-label"><span id="adminDashCompletedTasksCount">0</span> من <span id="adminDashTasksCount">0</span> مهام مكتملة</div>
+                                    </div>
+                                    <div class="arc-gauge-wrap">
+                                        <svg class="arc-gauge-svg" viewBox="0 0 100 100">
+                                            <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                            <circle class="gauge-fill-cyan" id="adminDashGaugeTasks" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="50"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Metric 2: كفاءة المشروعات -->
+                            <div class="arc-metric-card" onclick="switchAdminTab('projects')">
+                                <div class="arc-card-top">
+                                    <div class="arc-card-title-wrap">
+                                        <span class="arc-card-title">المشاريع النشطة</span>
+                                        <div class="arc-trend-badge gold">
+                                            <span>94% ممتازة</span>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </div>
+                                    </div>
+                                    <button class="arc-link-icon" title="عرض المشاريع">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                    </button>
+                                </div>
+                                <div class="arc-card-body">
+                                    <div class="arc-number-wrap">
+                                        <div class="arc-big-number"><span id="adminDashProjectsCount">0</span> مشاريع</div>
+                                        <div class="arc-sub-label">جاهزية هندسية عالية</div>
+                                    </div>
+                                    <div class="arc-gauge-wrap">
+                                        <svg class="arc-gauge-svg" viewBox="0 0 100 100">
+                                            <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                            <circle class="gauge-fill-gold" id="adminDashGaugeProjects" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="65"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Middle Card: توزيع الأعمال والمشاريع -->
+                        <div class="dash-spaces-card">
+                            <div class="spaces-card-header">
+                                <div class="spaces-title-wrap">
+                                    <span class="spaces-title">توزيع الأعمال والمشاريع</span>
+                                    <div class="spaces-legend">
+                                        <span class="legend-item"><span class="legend-dot blue"></span>المشاريع قيد التنفيذ</span>
+                                        <span class="legend-item"><span class="legend-dot purple"></span>قيد المراجعة</span>
+                                        <span class="legend-item"><span class="legend-dot gold"></span>المشاريع المكتملة</span>
+                                    </div>
+                                </div>
+                                <button class="arc-link-icon" onclick="switchAdminTab('projects')" title="عرض المشاريع">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </button>
+                            </div>
+
+                            <div class="spaces-bars-wrap">
+                                <div class="spaces-ruler">
+                                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                                </div>
+
+                                <div class="spaces-bars-container">
+                                    <!-- Bar 1 (Active Projects) -->
+                                    <div class="spaces-bar-col">
+                                        <div class="spaces-bar-val" id="adminDashInProgressVal">63%</div>
+                                        <div class="spaces-bar-pillar blue" id="adminDashInProgressPillar" style="height: 120px;">
+                                            <span class="pillar-tag" id="adminDashInProgressTag">+5.1%</span>
+                                        </div>
+                                        <div class="spaces-bar-label">قيد التنفيذ</div>
+                                    </div>
+
+                                    <!-- Bar 2 (Under Review Projects - Request 4) -->
+                                    <div class="spaces-bar-col">
+                                        <div class="spaces-bar-val" id="adminDashReviewVal">0%</div>
+                                        <div class="spaces-bar-pillar purple" id="adminDashReviewPillar" style="height: 60px;">
+                                            <span class="pillar-tag" id="adminDashReviewTag">0%</span>
+                                        </div>
+                                        <div class="spaces-bar-label">قيد المراجعة</div>
+                                    </div>
+
+                                    <!-- Bar 3 (Completed Projects) -->
+                                    <div class="spaces-bar-col">
+                                        <div class="spaces-bar-val" id="adminDashCompletedVal">37%</div>
+                                        <div class="spaces-bar-pillar gold" id="adminDashCompletedPillar" style="height: 80px;">
+                                            <span class="pillar-tag" id="adminDashCompletedTag">+5.1%</span>
+                                        </div>
+                                        <div class="spaces-bar-label">مكتملة ومستلمة</div>
+                                    </div>
+                                </div>
+
+                                <div class="spaces-side-stats">
+                                    <div class="side-stat-item">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                                        <div>
+                                            <span class="side-stat-title">إجمالي المواقع:</span>
+                                            <strong id="adminDashTotalSites">111 فدان</strong>
+                                        </div>
+                                    </div>
+                                    <div class="side-stat-item">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                                        <div>
+                                            <span class="side-stat-title">إجمالي الكوادر:</span>
+                                            <strong id="adminDashEmployeesCount">3 موظفين</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Split: Daily Workforce Output & Weekly Progress Tasks -->
+                        <div class="dash-bottom-duo">
+                            <!-- Workforce Activity -->
+                            <div class="workforce-panel">
+                                <div class="panel-inner-header">
+                                    <div>
+                                        <span class="panel-inner-title">نشاط فريق العمل والعمليات</span>
+                                        <div class="panel-inner-sub">معدل الإنتاجية اليومية (CPI) <strong style="color:var(--gold-primary);">1.08</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="equalizer-strip" id="adminDashEqualizerStrip">
+                                    <!-- Dynamically rendered per project count & pillar color (Request 1) -->
+                                </div>
+
+                                <ul class="activity-list" id="adminDashActivityList"></ul>
+                            </div>
+
+                            <!-- Tasks Velocity & Recent Tasks List (Request 5: Button Removed) -->
+                            <div class="velocity-panel">
+                                <div class="panel-inner-header">
+                                    <div>
+                                        <span class="panel-inner-title">آخر المهام التشغيلية</span>
+                                        <div class="panel-inner-sub">المتابعة الميدانية المباشرة لفريق العمل</div>
+                                    </div>
+                                    <button class="btn-dash-quick" onclick="switchAdminTab('tasks')" style="padding:5px 12px; font-size:0.8rem;">
+                                        <span>عرض كافة المهام ⬅</span>
+                                    </button>
+                                </div>
+
+                                <div id="adminDashLatestTasksContainer"></div>
+
+                                <div class="dash-latest-proj-box" style="margin-top: 14px;">
+                                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px;">أحدث مشروع تم إطلاقه:</div>
+                                    <div id="adminDashLatestProjectContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 3: SUPPLIERS MANAGEMENT (الموردين)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-suppliers">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--adm-gold)" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            <span>إدارة الموردين وشركاء التوريد</span>
+                        </h2>
+                        <p>تحكم كامل في الموردين المعتمدين، وبيانات الاتصال، وتحديد ما يظهر للعملاء في الموقع العام</p>
+                    </div>
+
+                    <button class="adm-btn-add" onclick="openAddSupplierModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>إضافة مورد جديد</span>
+                    </button>
+                </div>
+
+                <div class="adm-table-card">
+                    <div class="adm-table-toolbar">
+                        <div class="adm-search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="searchSuppliersInput" class="adm-search-input" placeholder="بحث بالاسم أو التخصص...">
+                        </div>
+                        <div style="font-size:0.86rem; color:var(--adm-text-dim);">
+                            💡 نصيحة: يمكنك إخفاء أي مورد من الموقع العام بضغطة زر دون حذفه.
+                        </div>
+                    </div>
+
+                    <div class="adm-table-responsive">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>المورد والشركة</th>
+                                    <th>مجال التوريد</th>
+                                    <th>مسؤول التواصل والهاتف</th>
+                                    <th>تاريخ الاعتماد</th>
+                                    <th>حالة الظهور للجمهور</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 3: PROJECTS MANAGEMENT (المشاريع)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-projects">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--adm-gold)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            <span>إدارة المشاريع الإنشائية</span>
+                        </h2>
+                        <p>تحديث نسب الإنجاز، إضافة مشاريع جديدة، والتحكم في المشاريع المعروضة للعملاء</p>
+                    </div>
+
+                    <button class="adm-btn-add" onclick="openAddProjectModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>إضافة مشروع</span>
+                    </button>
+                </div>
+
+                <div class="adm-table-card">
+                    <div class="adm-table-toolbar">
+                        <div class="adm-search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="searchProjectsInput" class="adm-search-input" placeholder="بحث في المشاريع...">
+                        </div>
+                    </div>
+
+                    <div class="adm-table-responsive">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم المشروع والموقع</th>
+                                    <th>الحالة</th>
+                                    <th>نسبة الإنجاز</th>
+                                    <th>المساحة</th>
+                                    <th>العرض للعملاء</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 4: TASKS MANAGEMENT (المهام)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-tasks">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--adm-gold)" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            <span>متابعة المهام التنفيذية</span>
+                        </h2>
+                        <p>جدولة ومتابعة مهام المهندسين وفرق العمل في المواقع الإنشائية</p>
+                    </div>
+
+                    <button class="adm-btn-add" onclick="openAddTaskModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>مهمة جديدة</span>
+                    </button>
+                </div>
+
+                <div class="adm-table-card">
+                    <div class="adm-table-toolbar">
+                        <div class="adm-search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="searchTasksInput" class="adm-search-input" placeholder="بحث في المهام...">
+                        </div>
+                    </div>
+
+                    <div class="adm-table-responsive">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>عنوان المهمة</th>
+                                    <th>المشروع المرتبط</th>
+                                    <th>المسؤول</th>
+                                    <th>الأولوية</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasksTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 5: EMPLOYEES MANAGEMENT (الموظفين)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-employees">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--adm-gold)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                            <span>سجل الموظفين وفريق العمل</span>
+                        </h2>
+                        <p>إدارة بيانات المهندسين، الكوادر الإدارية، وأقسام الشركة</p>
+                    </div>
+
+                    <button class="adm-btn-add" onclick="openAddEmployeeModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>إضافة موظف</span>
+                    </button>
+                </div>
+
+                <div class="adm-table-card">
+                    <div class="adm-table-toolbar">
+                        <div class="adm-search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="searchEmployeesInput" class="adm-search-input" placeholder="بحث في الموظفين...">
+                        </div>
+                    </div>
+
+                    <div class="adm-table-responsive">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>الاسم والبريد</th>
+                                    <th>المسمى الوظيفي</th>
+                                    <th>القسم</th>
+                                    <th>رقم الهاتف</th>
+                                    <th>تاريخ الانضمام</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- -----------------------------------------------------------
+                 PANEL 7: CAREERS MANAGEMENT (فرص العمل والأقسام الوظيفية - REQUEST 7)
+                 ----------------------------------------------------------- -->
+            <div class="adm-view-panel" id="panel-careers">
+                <div class="adm-section-header">
+                    <div class="adm-section-title">
+                        <h2>إدارة فرص العمل والأقسام الوظيفية</h2>
+                        <p>التحكم في التخصصات والأقسام المعروضة في موقع الزوار وتحديث الشواغر وحالة الظهور</p>
+                    </div>
+                    <button class="adm-btn-primary" onclick="openAddCareerModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>إضافة قسم وظيفي جديد</span>
+                    </button>
+                </div>
+
+                <div class="adm-table-card" id="careersTableCard">
+                    <div class="adm-table-filters" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                        <div class="adm-search-input-wrap compact-search">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="careersSearchFilter" class="adm-search-input compact" placeholder="بحث سريع في الأقسام والوظائف..." oninput="renderCareersTable(this.value)">
+                        </div>
+                        <button type="button" class="adm-btn-secondary" onclick="openManageCareerCategoriesModal()" style="padding:6px 14px; font-size:0.82rem;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            <span>إدارة وحذف القطاعات المؤسسية</span>
+                        </button>
+                    </div>
+
+                    <div class="adm-table-responsive careers-table-scroll" id="careersTableResponsive">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم القسم والتخصص</th>
+                                    <th>القطاع المؤسسي</th>
+                                    <th>الشواغر</th>
+                                    <th>الكلمات الدلالية</th>
+                                    <th>حالة العرض بالموقع</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="careersTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ===============================================================
+         MODALS (SUPPLIER / PROJECT / TASK / EMPLOYEE)
+         =============================================================== -->
+
+    <!-- Modal 1: Supplier -->
+    <div class="adm-modal-overlay" id="modalSupplier">
+        <div class="adm-modal">
+            <div class="adm-modal-header">
+                <h3 id="modalSupplierTitle">إضافة مورد جديد</h3>
+                <button class="adm-modal-close" onclick="closeModal('modalSupplier')">&times;</button>
+            </div>
+            <form id="formSupplier">
+                <div class="adm-modal-body">
+                    <div class="adm-form-field">
+                        <label for="supplierName">اسم المورد / الشركة *</label>
+                        <input type="text" id="supplierName" placeholder="مثال: حديد عز أو أسمنت السويس" required>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="supplierCategory">مجال التوريد والتخصص *</label>
+                            <select id="supplierCategory" required>
+                                <option value="حديد وتسليح">حديد وتسليح</option>
+                                <option value="أسمنت وخرسانة">أسمنت وخرسانة</option>
+                                <option value="عوازل ومواد كيميائية">عوازل ومواد كيميائية</option>
+                                <option value="دهانات وتشطيبات">دهانات وتشطيبات</option>
+                                <option value="كابلات وكهروميكانيك">كابلات وكهروميكانيك</option>
+                                <option value="معدات ثقيلة وحفر">معدات ثقيلة وحفر</option>
+                                <option value="توريدات معمارية عامة">توريدات معمارية عامة</option>
+                            </select>
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="supplierLogo">رابط صورة الشعار (أو مسار الصورة)</label>
+                            <input type="text" id="supplierLogo" placeholder="assets/logo.jpg">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="supplierContact">مسؤول المبيعات / التوريد</label>
+                            <input type="text" id="supplierContact" placeholder="مثال: م. أحمد عبد العزيز">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="supplierPhone">رقم هاتف التواصل</label>
+                            <input type="text" id="supplierPhone" placeholder="01000000000">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="supplierEmail">البريد الإلكتروني للطلبات</label>
+                            <input type="email" id="supplierEmail" placeholder="orders@company.com">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="supplierWebsite">الموقع الإلكتروني للمورد</label>
+                            <input type="url" id="supplierWebsite" placeholder="https://www.example.com">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="supplierDesc">نبذة عن المورد وجودة المنتجات</label>
+                        <textarea id="supplierDesc" placeholder="نبذة توضيحية عن طبيعة المواد الموردة وجودتها ومطابقتها للمواصفات..."></textarea>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label class="adm-checkbox-label">
+                            <input type="checkbox" id="supplierVisible" checked>
+                            <span>إظهار هذا المورد في تابة "الموردين" في الموقع العام للعملاء</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalSupplier')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">حفظ المورد في السحابة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: Project -->
+    <div class="adm-modal-overlay" id="modalProject">
+        <div class="adm-modal">
+            <div class="adm-modal-header">
+                <h3 id="modalProjectTitle">إضافة مشروع جديد</h3>
+                <button class="adm-modal-close" onclick="closeModal('modalProject')">&times;</button>
+            </div>
+            <form id="formProject">
+                <div class="adm-modal-body">
+                    <div class="adm-form-field">
+                        <label for="projectTitle">اسم المشروع الإنشائي *</label>
+                        <input type="text" id="projectTitle" placeholder="مثال: كمبوند شاركس ريزيدنس" required>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="projectLocation">الموقع الجغرافي</label>
+                            <input type="text" id="projectLocation" placeholder="التجمع الخامس، القاهرة">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="projectStatus">حالة المشروع</label>
+                            <select id="projectStatus">
+                                <option value="قيد التنفيذ">قيد التنفيذ</option>
+                                <option value="قيد المراجعة">قيد المراجعة</option>
+                                <option value="مكتمل ومستلم">مكتمل ومستلم</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="projectProgress">نسبة الإنجاز الفعلية (%)</label>
+                            <input type="number" id="projectProgress" min="0" max="100" value="65">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="projectFeddan">المساحة الإجمالية (فدان)</label>
+                            <input type="number" id="projectFeddan" value="50">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="projectImage">رابط صورة المشروع</label>
+                        <input type="text" id="projectImage" placeholder="assets/project_nile_foundation.jpg">
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="projectDesc">وصف المشروع ومواصفاته</label>
+                        <textarea id="projectDesc" placeholder="تفاصيل المشروع والخدمات والمعايير الهندسية المنفذة..."></textarea>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label class="adm-checkbox-label">
+                            <input type="checkbox" id="projectVisible" checked>
+                            <span>عرض المشروع في معرض سابقة الأعمال للجمهور</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalProject')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">حفظ المشروع</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 3: Task -->
+    <div class="adm-modal-overlay" id="modalTask">
+        <div class="adm-modal">
+            <div class="adm-modal-header">
+                <h3 id="modalTaskTitle">إضافة مهمة جديدة</h3>
+                <button class="adm-modal-close" onclick="closeModal('modalTask')">&times;</button>
+            </div>
+            <form id="formTask">
+                <div class="adm-modal-body">
+                    <div class="adm-form-field">
+                        <label for="taskTitle">عنوان المهمة *</label>
+                        <input type="text" id="taskTitle" placeholder="مثال: صب خرسانة القواعد المسلحة" required>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="taskProject">المشروع المرتبط</label>
+                            <input type="text" id="taskProject" placeholder="كمبوند شاركس ريزيدنس">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="taskAssignedTo">المسؤول عن التنفيذ</label>
+                            <select id="taskAssignedTo" class="adm-input">
+                                <option value="فريق العمل العام">فريق العمل العام</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="taskPriority">الأولوية</label>
+                            <select id="taskPriority">
+                                <option value="عالية">عالية</option>
+                                <option value="متوسطة">متوسطة</option>
+                                <option value="عادية">عادية</option>
+                            </select>
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="taskStatus">الحالة</label>
+                            <select id="taskStatus">
+                                <option value="قيد التنفيذ">قيد التنفيذ</option>
+                                <option value="مكتمل">مكتمل</option>
+                                <option value="قيد الانتظار">قيد الانتظار</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="taskDueDate">تاريخ التسليم المستهدف</label>
+                        <input type="text" id="taskDueDate" placeholder="25 أبريل 2026">
+                    </div>
+                </div>
+
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalTask')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">حفظ المهمة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 4: Employee -->
+    <div class="adm-modal-overlay" id="modalEmployee">
+        <div class="adm-modal">
+            <div class="adm-modal-header">
+                <h3 id="modalEmployeeTitle">إضافة موظف جديد</h3>
+                <button class="adm-modal-close" onclick="closeModal('modalEmployee')">&times;</button>
+            </div>
+            <form id="formEmployee">
+                <div class="adm-modal-body">
+                    <div class="adm-form-field">
+                        <label for="empName">اسم الموظف / المهندس *</label>
+                        <input type="text" id="empName" placeholder="الاسم ثلاثي" required>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="empRole">المسمى الوظيفي</label>
+                            <input type="text" id="empRole" placeholder="مدير مشروع / مهندس موقع">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="empDepartment">القسم</label>
+                            <input type="text" id="empDepartment" placeholder="الهندسة المدنية / الإدارة">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="empPhone">رقم الهاتف</label>
+                            <input type="text" id="empPhone" placeholder="01000000000">
+                        </div>
+
+                        <div class="adm-form-field">
+                            <label for="empEmail">البريد الإلكتروني</label>
+                            <input type="email" id="empEmail" placeholder="engineer@sharksgroup.com">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalEmployee')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">حفظ الموظف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===============================================================
+         MODAL: FORGOT PASSWORD & SMS OTP RECOVERY (REQUEST 1)
+         =============================================================== -->
+    <div class="adm-modal-overlay" id="modalForgotPassword">
+        <div class="adm-modal" style="max-width: 440px;">
+            <div class="adm-modal-header">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div style="width:38px; height:38px; border-radius:10px; background:rgba(245,158,11,0.15); display:flex; align-items:center; justify-content:center; color:var(--adm-gold);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <div>
+                        <h3 style="font-size:1.15rem; font-weight:800; color:var(--adm-text-main); margin:0;">استعادة كلمة المرور</h3>
+                        <span style="font-size:0.78rem; color:var(--adm-text-dim);">تحقق أمني معتمد برقم الهاتف</span>
+                    </div>
+                </div>
+                <button type="button" class="adm-modal-close" onclick="closeModal('modalForgotPassword')">&times;</button>
+            </div>
+
+            <!-- Step 1: Enter Authorized Phone Number -->
+            <div id="fpStep1" class="adm-modal-body" style="padding:22px;">
+                <p style="font-size:0.88rem; color:var(--adm-text-muted); margin-bottom:18px; line-height:1.6;">
+                    يرجى إدخال رقم هاتف المدير المعتمد لتلقي رمز الأمان والتحقق من هويتك:
+                </p>
+                <div class="adm-form-field" style="margin-bottom:18px;">
+                    <label>رقم الهاتف المعتمد *</label>
+                    <div class="adm-input-wrap">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <input type="tel" id="fpPhoneInput" class="adm-input" placeholder="010xxxxxxxx" dir="ltr" style="text-align:right;">
+                    </div>
+                    <span id="fpPhoneError" style="display:none; color:#ef4444; font-size:0.8rem; margin-top:6px; font-weight:600;"></span>
+                </div>
+                <button type="button" class="adm-btn-primary" style="width:100%; justify-content:center;" onclick="handleRequestOtpSubmit()">
+                    <span>إرسال كود التحقق الأمني</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+
+            <!-- Step 2: Enter 6-digit OTP Code -->
+            <div id="fpStep2" class="adm-modal-body" style="padding:22px; display:none;">
+                <div id="fpOtpSentAlert" style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); border-radius:var(--adm-radius); padding:12px; margin-bottom:16px; font-size:0.86rem; color:#34d399; line-height:1.5;">
+                </div>
+                <div class="adm-form-field" style="margin-bottom:18px;">
+                    <label>أدخل رمز التحقق (6 أرقام) *</label>
+                    <input type="text" id="fpOtpInput" class="adm-input" maxlength="6" placeholder="123456" style="text-align:center; font-size:1.35rem; letter-spacing:8px; font-weight:800; direction:ltr;">
+                    <span id="fpOtpError" style="display:none; color:#ef4444; font-size:0.8rem; margin-top:6px; font-weight:600;"></span>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="adm-btn-secondary" onclick="backToFpStep1()" style="flex:1;">رجوع</button>
+                    <button type="button" class="adm-btn-primary" style="flex:2; justify-content:center;" onclick="handleVerifyOtpSubmit()">
+                        <span>تأكيد الرمز</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Set New Password -->
+            <div id="fpStep3" class="adm-modal-body" style="padding:22px; display:none;">
+                <p style="font-size:0.88rem; color:var(--adm-text-muted); margin-bottom:16px;">
+                    تم التحقق من هويتك بنجاح ✓. اختر الحساب المطلوب وأدخل كلمة المرور الجديدة:
+                </p>
+                <div class="adm-form-field" style="margin-bottom:14px;">
+                    <label>الحساب المراد تعيين كلمة السر له *</label>
+                    <select id="fpUserSelect" class="adm-input" style="width:100%;">
+                        <option value="ahmedkhaled">ahmedkhaled (ENG. Ahmed Khaled)</option>
+                        <option value="ahmedelbaqly">ahmedelbaqly (ENG. Ahmed Elbaqly)</option>
+                    </select>
+                </div>
+                <div class="adm-form-field" style="margin-bottom:18px;">
+                    <label>كلمة المرور الجديدة *</label>
+                    <input type="password" id="fpNewPasswordInput" class="adm-input" placeholder="كلمة المرور الجديدة (6 أحرف أو أكثر)" minlength="6">
+                    <span id="fpResetError" style="display:none; color:#ef4444; font-size:0.8rem; margin-top:6px; font-weight:600;"></span>
+                </div>
+                <button type="button" class="adm-btn-primary" style="width:100%; justify-content:center;" onclick="handleResetPasswordSubmit()">
+                    <span>حفظ كلمة المرور الجديدة والعودة للدخول</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Career Department (Request 7) -->
+    <div class="adm-modal-overlay" id="modalCareer">
+        <div class="adm-modal" style="max-width: 600px;">
+            <div class="adm-modal-header">
+                <h3 id="modalCareerTitle">إضافة قسم وظيفي جديد</h3>
+                <button class="adm-modal-close" onclick="closeModal('modalCareer')">&times;</button>
+            </div>
+            <form id="formCareer">
+                <div class="adm-modal-body">
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <label for="careerTitleAr">اسم التخصص / القسم بالعربية *</label>
+                            <input type="text" id="careerTitleAr" placeholder="مثال: مهندسين الطرق" required>
+                        </div>
+                        <div class="adm-form-field">
+                            <label for="careerTitleEn">اسم التخصص بالإنجليزية *</label>
+                            <input type="text" id="careerTitleEn" placeholder="Roads & Highway Engineers" dir="ltr" required>
+                        </div>
+                    </div>
+
+                    <div class="adm-form-row">
+                        <div class="adm-form-field">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+                                <label for="careerCategory" style="margin:0;">القطاع المؤسسي *</label>
+                                <div style="display:flex; gap:10px; align-items:center;">
+                                    <button type="button" class="adm-btn-text" onclick="openAddCareerCategoryModal()" style="font-size:0.8rem; color:var(--adm-gold); background:transparent; border:none; cursor:pointer; font-weight:700; text-decoration:underline;">+ إضافة قطاع</button>
+                                    <button type="button" class="adm-btn-text" onclick="openManageCareerCategoriesModal()" style="font-size:0.8rem; color:#ef4444; background:transparent; border:none; cursor:pointer; font-weight:700; text-decoration:underline;">⚙️ إدارة وحذف القطاعات</button>
+                                </div>
+                            </div>
+                            <select id="careerCategory" required onchange="handleCareerCategorySelectChange(this)">
+                                <option value="engineering">القطاع الهندسي والفني</option>
+                                <option value="management">إدارة وتخطيط المشروعات</option>
+                                <option value="admin-finance">الإدارة والمالية والدعم</option>
+                            </select>
+                        </div>
+                        <div class="adm-form-field">
+                            <label for="careerVacancies">عدد الشواغر والفرص المتاحة</label>
+                            <input type="number" id="careerVacancies" min="1" max="50" value="3">
+                        </div>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="careerTags">الوسوم (افصل بينها بفواصل ,)</label>
+                        <input type="text" id="careerTags" placeholder="دوام كامل, هندسة مدنية, مواقع ومشروعات">
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="careerKeywords">الكلمات الدلالية للبحث في الموقع</label>
+                        <input type="text" id="careerKeywords" placeholder="طرق كباري اسفلت محاور هندسة مدنية">
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label for="careerDesc">وصف المهام ومتطلبات القسم *</label>
+                        <textarea id="careerDesc" placeholder="الإشراف الهندسي الميداني والتصميمي لمشاريع الطرق..." rows="3" required></textarea>
+                    </div>
+
+                    <div class="adm-form-field">
+                        <label class="adm-checkbox-label">
+                            <input type="checkbox" id="careerVisible" checked>
+                            <span>عرض هذا التخصص في صفحة فرص العمل للعامة فورياً</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalCareer')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">حفظ القسم الوظيفي</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 6: Add New Career Category / Sector (Request 2) -->
+    <div class="adm-modal-overlay" id="modalNewCareerCategory" style="z-index: 10005;">
+        <div class="adm-modal" style="max-width: 440px;">
+            <div class="adm-modal-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.2rem; color:var(--adm-gold);">🏷️</span>
+                    <h3 style="margin:0; font-size:1.1rem;">إضافة قطاع مؤسسي جديد</h3>
+                </div>
+                <button type="button" class="adm-modal-close" onclick="closeModal('modalNewCareerCategory')">&times;</button>
+            </div>
+            <form id="formNewCareerCategory" onsubmit="handleNewCareerCategorySubmit(event)">
+                <div class="adm-modal-body" style="padding:20px;">
+                    <p style="font-size:0.86rem; color:var(--adm-text-muted); margin-bottom:14px; line-height:1.5;">
+                        أدخل اسم القطاع المؤسسي الجديد الذي سيظهر في قائمة الوظائف وفلاتر الموقع العام:
+                    </p>
+                    <div class="adm-form-field">
+                        <label for="newCategoryName">اسم القطاع بالعربية *</label>
+                        <input type="text" id="newCategoryName" class="adm-input" placeholder="مثال: قطاع الطاقة والبيئة أو التكنولوجيا الرقمية" required>
+                    </div>
+                </div>
+                <div class="adm-modal-footer">
+                    <button type="button" class="adm-btn-secondary" onclick="closeModal('modalNewCareerCategory')">إلغاء</button>
+                    <button type="submit" class="adm-btn-primary">إضافة واعتماد القطاع</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 7: Manage & Delete Career Categories / Sectors (User Request 1) -->
+    <div class="adm-modal-overlay" id="modalManageCareerCategories" style="z-index: 10006;">
+        <div class="adm-modal" style="max-width: 540px;">
+            <div class="adm-modal-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.25rem; color:var(--adm-gold);">⚙️</span>
+                    <h3 style="margin:0; font-size:1.15rem;">إدارة وحذف القطاعات المؤسسية للتوظيف</h3>
+                </div>
+                <button type="button" class="adm-modal-close" onclick="closeModal('modalManageCareerCategories')">&times;</button>
+            </div>
+            <div class="adm-modal-body" style="padding:20px;">
+                <p style="font-size:0.88rem; color:var(--adm-text-muted); margin-bottom:16px; line-height:1.6;">
+                    يمكنك حذف أي قطاع غير مرغوب فيه فورياً، أو إضافة قطاع جديد يُعتمد مباشرة في القوائم المنسدلة وفلاتر الموقع العام:
+                </p>
+
+                <!-- Categories list container -->
+                <div id="careerCategoriesManageList" style="max-height: 260px; overflow-y: auto; margin-bottom: 18px; border: 1px solid var(--adm-border); border-radius: 10px; padding: 10px; background: rgba(0,0,0,0.2);">
+                    <!-- Categories rendered dynamically by admin.js -->
+                </div>
+
+                <!-- Quick Add Form -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px dashed var(--adm-border-subtle); border-radius: 8px; padding: 12px;">
+                    <label style="display:block; font-size:0.82rem; color:var(--adm-gold); margin-bottom:6px; font-weight:700;">+ إضافة قطاع مؤسسي جديد سريعاً:</label>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <input type="text" id="quickNewCategoryName" class="adm-input" placeholder="اكتب اسم القطاع الجديد هنا..." style="flex:1;">
+                        <button type="button" class="adm-btn-primary" onclick="handleQuickAddCategory()" style="white-space:nowrap; padding:9px 18px; font-size:0.88rem;">+ إضافة واعتماد</button>
+                    </div>
+                </div>
+            </div>
+            <div class="adm-modal-footer">
+                <button type="button" class="adm-btn-secondary" onclick="closeModal('modalManageCareerCategories')">إغلاق النافذة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

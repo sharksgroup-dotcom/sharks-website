@@ -23,6 +23,7 @@ function initApp() {
     renderTasks();
     renderEmployees();
     populateTaskModalSelects();
+    renderPublicCareers();
 
     // Check for deep-link hash or cross-page stored view
     const hash = window.location.hash.replace('#', '');
@@ -42,13 +43,23 @@ function initApp() {
 }
 
 // -------------------------------------------------------------
-// ULTRA-FAST CINEMATIC SPLASH SCREEN CONTROLLER
+// ULTRA-FAST CINEMATIC SPLASH SCREEN CONTROLLER WITH SESSION CACHE (REQUEST 4)
 // -------------------------------------------------------------
 let splashTimeout = null;
 
 function initSplashScreen() {
     const splash = document.getElementById('sharksSplashScreen');
     if (!splash) return;
+
+    // Show splash screen only once per browser session (User Request 4)
+    const sessionShown = sessionStorage.getItem('sharks_splash_shown');
+    if (sessionShown === 'true') {
+        splash.style.display = 'none';
+        return;
+    }
+
+    // First visit in current session -> record and show
+    sessionStorage.setItem('sharks_splash_shown', 'true');
 
     const statusText = document.getElementById('splashStatusText');
 
@@ -185,11 +196,12 @@ function switchMainView(viewName) {
         'services': 'view-services',
         'founders': 'view-founders',
         'contact': 'view-contact',
-        'dashboard': 'view-dashboard',
         'projects': 'view-projects',
+        'suppliers': 'view-suppliers',
+        'careers': 'view-careers',
+        'dashboard': 'view-dashboard',
         'tasks': 'view-tasks',
-        'employees': 'view-employees',
-        'careers': 'view-careers'
+        'employees': 'view-employees'
     };
 
     const targetViewId = viewMap[viewName] || 'view-home';
@@ -209,11 +221,12 @@ function switchMainView(viewName) {
         'services': 'tabNavServices',
         'founders': 'tabNavFounders',
         'contact': 'tabNavContact',
-        'dashboard': 'tabNavDashboard',
         'projects': 'tabNavProjects',
+        'suppliers': 'tabNavSuppliers',
+        'careers': 'tabNavCareers',
+        'dashboard': 'tabNavDashboard',
         'tasks': 'tabNavTasks',
-        'employees': 'tabNavEmployees',
-        'careers': 'tabNavCareers'
+        'employees': 'tabNavEmployees'
     };
 
     document.querySelectorAll('.unified-nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -236,13 +249,17 @@ function switchMainView(viewName) {
     if (dropdown) dropdown.classList.remove('show');
 
     // Dynamic data refresh when opening specific views
-    if (viewName === 'dashboard') {
-        renderDashboard();
-    } else if (viewName === 'projects') {
+    if (viewName === 'projects') {
         renderProjects();
-    } else if (viewName === 'tasks') {
+    } else if (viewName === 'suppliers') {
+        renderPublicSuppliers();
+    } else if (viewName === 'careers') {
+        renderPublicCareers();
+    } else if (viewName === 'dashboard' && typeof renderDashboard === 'function') {
+        renderDashboard();
+    } else if (viewName === 'tasks' && typeof renderTasks === 'function') {
         renderTasks();
-    } else if (viewName === 'employees') {
+    } else if (viewName === 'employees' && typeof renderEmployees === 'function') {
         renderEmployees();
     }
 
@@ -685,24 +702,30 @@ function toggleTaskStatus(id) {
 }
 
 // -------------------------------------------------------------
-// 2. PROJECTS VIEW
+// 2. PROJECTS VIEW (PUBLIC SHOWCASE)
 // -------------------------------------------------------------
 function renderProjects() {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
 
-    const projects = tracker.getProjects();
+    const projects = (typeof SharksCloud !== 'undefined') ? SharksCloud.getProjects(true) : tracker.getProjects();
 
     if (projects.length === 0) {
-        grid.innerHTML = `<p style="color: var(--text-dim); font-size: 0.95rem;">لم يتم إضافة أي مشروع بعد. اضغط على "+ إضافة مشروع".</p>`;
+        grid.innerHTML = `<p style="color: var(--text-dim); font-size: 0.95rem;">لم يتم إضافة أي مشروع بعد.</p>`;
         return;
     }
 
     grid.innerHTML = projects.map(p => `
-        <div class="project-full-card">
+        <div class="project-full-card" style="cursor: pointer;" onclick="showProjectDetails('${p.id}')">
+            <div style="height: 200px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; border: 1px solid var(--border-subtle); position: relative;">
+                <img src="${p.image || 'assets/project_nile_foundation.jpg'}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/project_nile_foundation.jpg'">
+                <div style="position: absolute; top: 12px; right: 12px;">
+                    <span class="badge-status-green">${p.status || 'جاري التنفيذ'}</span>
+                </div>
+            </div>
+
             <div class="project-card-header">
                 <h3 class="project-card-title">${p.title}</h3>
-                <button class="badge-status-green" style="cursor:pointer; border:none; font-family:inherit;" onclick="toggleProjectStatus('${p.id}')" title="انقر للتبديل بين جاري التنفيذ ومكتمل">${p.status}</button>
             </div>
 
             <div class="project-meta-row">
@@ -712,14 +735,14 @@ function renderProjects() {
                 </div>
                 <div class="meta-icon-item">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                    <span>${p.date}</span>
+                    <span>${p.date || '2026'}</span>
                 </div>
             </div>
 
             <p class="project-card-description">${p.description}</p>
 
-            <button class="project-card-btn" onclick="showProjectDetails('${p.id}')">
-                <span>تفاصيل المشروع</span>
+            <button class="project-card-btn" onclick="event.stopPropagation(); showProjectDetails('${p.id}')">
+                <span>استعراض التفاصيل</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             </button>
         </div>
@@ -727,43 +750,129 @@ function renderProjects() {
 }
 
 function showProjectDetails(projId) {
-    const proj = tracker.getProjects().find(x => x.id === projId);
+    const list = (typeof SharksCloud !== 'undefined') ? SharksCloud.getProjects(false) : tracker.getProjects();
+    const proj = list.find(x => x.id === projId);
     if (!proj) return;
 
     document.getElementById('detailsProjectTitle').textContent = proj.title;
     document.getElementById('projectDetailsContent').innerHTML = `
+        <div style="height: 220px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 8px;">
+            <img src="${proj.image || 'assets/project_nile_foundation.jpg'}" alt="${proj.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/project_nile_foundation.jpg'">
+        </div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <span>حالة المشروع:</span>
-            <button class="badge-status-green" style="cursor:pointer; border:none; font-family:inherit;" onclick="toggleProjectStatus('${proj.id}')" title="انقر للتبديل بين جاري التنفيذ ومكتمل">${proj.status}</button>
+            <span class="badge-status-green">${proj.status}</span>
         </div>
         <div>
             <strong style="color:var(--text-white);">الموقع الجغرافي:</strong>
             <p style="margin-top:4px;">${proj.location}</p>
         </div>
         <div>
-            <strong style="color:var(--text-white);">تاريخ البدء / الإطلاق:</strong>
-            <p style="margin-top:4px;">${proj.date}</p>
+            <strong style="color:var(--text-white);">المساحة الإجمالية:</strong>
+            <p style="margin-top:4px;">${proj.feddan || 55} فدان</p>
         </div>
         <div>
             <strong style="color:var(--text-white);">نطاق ومواصفات المشروع:</strong>
             <p style="margin-top:4px; line-height:1.6;">${proj.description}</p>
         </div>
-        <div style="margin-top:10px; padding-top:14px; border-top:1px solid var(--border-subtle); display:flex; justify-content:flex-end;">
-            <button class="btn-table-delete" onclick="deleteProjectItem('${proj.id}')">حذف المشروع</button>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+            <button class="btn-hero-primary" style="padding: 9px 20px; font-size: 0.88rem;" onclick="closeModal('modalProjectDetails'); switchMainView('contact');">
+                <span>طلب استشارة أو معلومات</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <button class="btn-dark-outline" style="padding: 8px 16px; font-size: 0.86rem;" onclick="closeModal('modalProjectDetails')">إغلاق</button>
         </div>
     `;
 
     openModal('modalProjectDetails');
 }
 
-function deleteProjectItem(id) {
-    if (confirm("هل أنت متأكد من حذف هذا المشروع؟")) {
-        tracker.deleteProject(id);
-        closeModal('modalProjectDetails');
-        renderProjects();
-        renderDashboard();
-    }
+// -------------------------------------------------------------
+// 2.1 PUBLIC SUPPLIERS VIEW (الموردين وشركاء التوريد)
+// -------------------------------------------------------------
+let currentPublicSupplierCategory = 'all';
+
+function filterPublicSuppliers(category) {
+    currentPublicSupplierCategory = category;
+
+    // Update filter buttons active state
+    document.querySelectorAll('.supplier-filter-btn').forEach(btn => {
+        const txt = btn.textContent.trim();
+        if (txt === 'جميع الموردين' && category === 'all') {
+            btn.classList.add('active');
+        } else if (txt === category) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    renderPublicSuppliers(category);
 }
+
+function renderPublicSuppliers(category = 'all') {
+    const grid = document.getElementById('publicSuppliersGrid');
+    if (!grid) return;
+
+    let suppliers = (typeof SharksCloud !== 'undefined') ? SharksCloud.getSuppliers(true) : [];
+
+    if (category !== 'all') {
+        suppliers = suppliers.filter(s => s.category === category);
+    }
+
+    if (suppliers.length === 0) {
+        grid.innerHTML = `
+            <div class="supplier-empty-state">
+                <p>لا توجد شركات مسجلة في هذا التخصص حالياً.</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = suppliers.map(s => `
+        <div class="supplier-public-card">
+            <div class="supplier-card-accent"></div>
+            <div>
+                <div class="supplier-card-top">
+                    <div class="supplier-logo-box">
+                        <img src="${s.logo || 'assets/logo.jpg'}" alt="${s.name}" onerror="this.src='assets/logo.jpg'">
+                    </div>
+                    <span class="supplier-verified-badge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>مورد معتمد</span>
+                    </span>
+                </div>
+
+                <h3 class="supplier-card-name">${s.name}</h3>
+                <div class="supplier-card-badge-wrap">
+                    <span class="supplier-category-pill">
+                        ${s.category}
+                    </span>
+                </div>
+
+                <p class="supplier-card-desc">
+                    ${s.description || 'توريد خامات ومواد هندسية مطابقة لأعلى معايير الجودة العالمية لمشروعات شاركس جروب.'}
+                </p>
+            </div>
+
+            <div class="supplier-card-footer">
+                <span class="supplier-contact-label">
+                    ${s.contactPerson ? 'جهة الاعتماد: ' + s.contactPerson : 'شريك معتمد'}
+                </span>
+                ${s.website ? `
+                    <a href="${s.website}" target="_blank" rel="noopener noreferrer" class="supplier-link-btn">
+                        <span>زيارة الموقع</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                ` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+window.filterPublicSuppliers = filterPublicSuppliers;
+window.renderPublicSuppliers = renderPublicSuppliers;
+
 
 // -------------------------------------------------------------
 // 3. TASKS VIEW
@@ -1228,6 +1337,151 @@ function handleCareerSearch(query) {
     });
 }
 
+function getCareerIconSvg(category) {
+    if (category === 'management') {
+        return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>`;
+    } else if (category === 'admin-finance') {
+        return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>`;
+    } else {
+        return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`;
+    }
+}
+
+function escapeCareerHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function renderPublicCareers() {
+    const grid = document.getElementById('careersGrid');
+    if (!grid) return;
+
+    if (typeof SharksCloud === 'undefined' || !SharksCloud.getCareers) {
+        return;
+    }
+
+    const careers = SharksCloud.getCareers(true); // only visible departments
+
+    // 1. Update count in hero stats bar & title (Request 7)
+    const countText = document.getElementById('careersCountText');
+    if (countText) {
+        countText.textContent = `${careers.length} قسماً وتخصصاً متاحاً`;
+        if (countText.parentElement) {
+            countText.parentElement.title = `${careers.length} قسماً وتخصصاً متاحاً`;
+        }
+    }
+
+    // 2. Update count and category filter pills dynamically (Request 2 & 3 & 7)
+    const pillsContainer = document.getElementById('careersPillsContainer');
+    if (pillsContainer) {
+        const categories = (typeof SharksCloud !== 'undefined' && SharksCloud.getCareerCategories)
+            ? SharksCloud.getCareerCategories()
+            : [
+                { id: 'engineering', label: 'القطاع الهندسي والفني' },
+                { id: 'management', label: 'إدارة وتخطيط المشروعات' },
+                { id: 'admin-finance', label: 'الإدارة والمالية والدعم' }
+            ];
+
+        // Filter to ONLY available institutional sectors with active jobs/departments (User Request 3)
+        const availableCategories = categories.filter(cat => {
+            return careers.some(c => c.category === cat.id);
+        });
+
+        const activeBtn = pillsContainer.querySelector('.careers-pill-btn.active');
+        const prevActiveCat = activeBtn ? (activeBtn.getAttribute('data-category') || 'all') : 'all';
+        const isStillValid = prevActiveCat === 'all' || availableCategories.some(c => c.id === prevActiveCat);
+        const activeCat = isStillValid ? prevActiveCat : 'all';
+
+        let pillsHtml = `
+            <button id="careersFilterAllPill" data-category="all" class="careers-pill-btn ${activeCat === 'all' ? 'active' : ''}" onclick="filterCareers('all', this)">
+                جميع الأقسام (${careers.length})
+            </button>
+        `;
+
+        availableCategories.forEach(cat => {
+            const countInCat = careers.filter(c => c.category === cat.id).length;
+            pillsHtml += `
+                <button data-category="${escapeCareerHtml(cat.id)}" class="careers-pill-btn ${activeCat === cat.id ? 'active' : ''}" onclick="filterCareers('${escapeCareerHtml(cat.id)}', this)">
+                    ${escapeCareerHtml(cat.label)} (${countInCat})
+                </button>
+            `;
+        });
+
+        pillsContainer.innerHTML = pillsHtml;
+    } else {
+        const allPill = document.getElementById('careersFilterAllPill');
+        if (allPill) {
+            allPill.textContent = `جميع الأقسام (${careers.length})`;
+        }
+    }
+
+    // 3. Update department select options in job application modal
+    const jobDeptSelect = document.getElementById('jobDepartmentSelect');
+    if (jobDeptSelect && careers.length > 0) {
+        const currentVal = jobDeptSelect.value;
+        jobDeptSelect.innerHTML = careers.map(c => `
+            <option value="${escapeCareerHtml(c.titleAr)}">${escapeCareerHtml(c.titleAr)} - ${escapeCareerHtml(c.titleEn || '')}</option>
+        `).join('');
+        if (currentVal) {
+            jobDeptSelect.value = currentVal;
+        }
+    }
+
+    // 4. Render department cards in grid
+    if (careers.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: var(--text-muted); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+                <p style="font-size: 1.1rem; margin: 0;">لا توجد أقسام توظيف معلنة في الوقت الحالي.</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = careers.map(c => {
+        const tagsHtml = (c.tags || []).map(t => `<span class="dept-tag">${escapeCareerHtml(t)}</span>`).join('');
+        const safeTitle = escapeCareerHtml(c.titleAr || '');
+        const safeTitleJs = safeTitle.replace(/'/g, "\\'");
+        return `
+            <div class="dept-card" data-category="${escapeCareerHtml(c.category || 'engineering')}" data-keywords="${escapeCareerHtml((c.keywords || '') + ' ' + (c.titleAr || ''))}">
+                <div>
+                    <div class="dept-card-top">
+                        <div class="dept-icon-box">
+                            ${getCareerIconSvg(c.category)}
+                        </div>
+                        <span class="dept-category-badge">${escapeCareerHtml(c.categoryLabel || 'القطاع المؤسسي')}</span>
+                    </div>
+                    <div class="dept-title-group">
+                        <h3 class="dept-title">${safeTitle}</h3>
+                        <span class="dept-subtitle">${escapeCareerHtml(c.titleEn || '')}</span>
+                    </div>
+                    <p class="dept-description">
+                        ${escapeCareerHtml(c.description || '')}
+                    </p>
+                    <div class="dept-tags-row">
+                        ${tagsHtml}
+                    </div>
+                </div>
+                <button type="button" class="dept-apply-btn" onclick="openJobModal('${safeTitleJs}')">
+                    <span>التقديم على هذا القسم</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+// Real-time synchronization when admin updates careers or categories in another tab
+window.addEventListener('storage', (e) => {
+    if (e.key === 'sharks_careers_db' || e.key === 'sharks_career_categories_db') {
+        renderPublicCareers();
+    }
+});
+
 function openJobModal(deptName) {
     const modal = document.getElementById('modalJobApplication');
     if (!modal) return;
@@ -1444,6 +1698,9 @@ window.handleCvFileSelect = handleCvFileSelect;
 window.removeCvFile = removeCvFile;
 window.handleJobApplicationSubmit = handleJobApplicationSubmit;
 window.initServicesSliderApp = initServicesSliderApp;
+window.renderPublicSuppliers = renderPublicSuppliers;
+window.filterPublicSuppliers = filterPublicSuppliers;
+window.renderPublicCareers = renderPublicCareers;
 
 
 
