@@ -705,6 +705,8 @@ class SharksCloudStoreManager {
             entityType: appData.entityType || 'مورد',
             companyName: appData.companyName || '',
             category: appData.category || 'توريدات عامة',
+            supplyCategory: appData.supplyCategory || '',
+            contractingCategory: appData.contractingCategory || '',
             contactPerson: appData.contactPerson || '',
             contactTitle: appData.contactTitle || 'مسؤول التوريدات',
             phone: appData.phone || '',

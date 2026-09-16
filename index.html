@@ -201,11 +201,11 @@
                     </button>
                 </li>
 
-                <!-- 4. الموردين (جديد: سلاسل الإمداد المعتمدة) -->
+                <!-- 4. قيد الموردين والمقاولين -->
                 <li class="unified-nav-item">
                     <button class="unified-nav-btn" id="tabNavSuppliers" onclick="switchMainView('suppliers')">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                        <span>الموردين</span>
+                        <span>قيد الموردين و المقاولين</span>
                     </button>
                 </li>
 
@@ -1183,9 +1183,9 @@
                 <!-- Section Banner -->
                 <div class="section-banner" style="margin-bottom: 32px;">
                     <div class="section-title-wrap">
-                        <span class="dash-banner-badge" style="display: inline-block; margin-bottom: 8px;">بوابة تأهيل واعتماد الموردين | انضم لسلاسل إمداد شاركس جروب</span>
-                        <h1>تسجيل واعتماد مورد جديد</h1>
-                        <p>نرحب بانضمام المصانع والشركات والموزعين المعتمدين لشبكة توريدات مشروعات شاركس جروب الإنشائية والتطوير العمراني. يرجى ملء البيانات وإرفاق الأوراق الثبوتية للاعتماد من لجنة المشتريات المركزية.</p>
+                        <span class="dash-banner-badge" style="display: inline-block; margin-bottom: 8px;">بوابة التأهيل المسبق | قيد الموردين والمقاولين</span>
+                        <h1>قيد الموردين والمقاولين</h1>
+                        <p>نرحب بانضمام المصانع والشركات والموزعين والمقاولين لشبكة أعمال وتوريدات مشروعات شاركس جروب الإنشائية والتطوير العمراني. يرجى ملء البيانات وإرفاق الأوراق الثبوتية للاعتماد وقيد الكيان بسجلات الشركة.</p>
                     </div>
                 </div>
 
@@ -1231,7 +1231,7 @@
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                         </div>
                         <div>
-                            <h2>استمارة التأهيل المسبق وتسجيل مورد او مقاول معتمد</h2>
+                            <h2>استمارة التأهيل المسبق و قيد موردين او مقاولين</h2>
                             <p>يرجى استيفاء البيانات بدقة، ورفع نسخ واضحة من السجل التجاري والبطاقة الضريبية وسابقة الأعمال.</p>
                         </div>
                     </div>
@@ -1239,7 +1239,7 @@
                     <form id="formSupplierPortal" onsubmit="handleSupplierPortalSubmit(event)">
                         <!-- Form Sections -->
                         <div class="portal-form-grid">
-                            <!-- Field: صفة الكيان (مورد أو مقاول معتمد) -->
+                            <!-- Field: صفة الكيان (مورد أو مقاول) -->
                             <div class="portal-form-group span-2">
                                 <label class="portal-label">
                                     <span>صفة التسجيل المطلوبة في سجلات الشركة</span>
@@ -1249,14 +1249,14 @@
                                     <label class="entity-option-card" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius-sm, 8px); background: rgba(255,255,255,0.03); border: 1.5px solid var(--border-card, rgba(255,255,255,0.12)); cursor: pointer; transition: all 0.2s;">
                                         <input type="radio" name="supplierEntityType" value="مورد" checked style="accent-color: var(--gold-primary, #ebc760); width: 18px; height: 18px; cursor: pointer;">
                                         <div>
-                                            <strong style="display: block; color: var(--text-white, #fff); font-size: 0.95rem;">مورد معتمد</strong>
+                                            <strong style="display: block; color: var(--text-white, #fff); font-size: 0.95rem;">مورد</strong>
                                             <span style="display: block; font-size: 0.78rem; color: var(--text-muted, #94a3b8); margin-top: 2px;">توريد خامات، معدات، أو مواد بناء وإنشاءات</span>
                                         </div>
                                     </label>
                                     <label class="entity-option-card" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius-sm, 8px); background: rgba(255,255,255,0.03); border: 1.5px solid var(--border-card, rgba(255,255,255,0.12)); cursor: pointer; transition: all 0.2s;">
                                         <input type="radio" name="supplierEntityType" value="مقاول" style="accent-color: var(--gold-primary, #ebc760); width: 18px; height: 18px; cursor: pointer;">
                                         <div>
-                                            <strong style="display: block; color: var(--text-white, #fff); font-size: 0.95rem;">مقاول معتمد</strong>
+                                            <strong style="display: block; color: var(--text-white, #fff); font-size: 0.95rem;">مقاول</strong>
                                             <span style="display: block; font-size: 0.78rem; color: var(--text-muted, #94a3b8); margin-top: 2px;">أعمال مقاولات باطن، تشطيبات، أو بنية تحتية</span>
                                         </div>
                                     </label>
@@ -1272,26 +1272,20 @@
                                 <input type="text" id="supplierCompanyName" class="portal-input" placeholder="مثال: شركة النيل للتوريدات العامة والمقاولات" required>
                             </div>
 
-                            <!-- Field: مجال التوريد -->
+                            <!-- Field: مجال ونوع التوريد الرئيسي -->
                             <div class="portal-form-group">
                                 <label class="portal-label">
                                     <span>مجال ونوع التوريد الرئيسي</span>
-                                    <span class="required-star">*</span>
                                 </label>
-                                <select id="supplierCategory" class="portal-input portal-select" required>
-                                    <option value="" disabled selected>اختر مجال التوريد...</option>
-                                    <option value="حديد وتسليح">حديد وتسليح وصلب</option>
-                                    <option value="أسمنت وخرسانة جاهزة">أسمنت وخرسانة جاهزة ومواد بناء</option>
-                                    <option value="كهروميكانيك وشبكات">كهروميكانيك ومحطات وشبكات كهرباء</option>
-                                    <option value="مواسير ومستلزمات بنية تحتية">مواسير وشبكات مياه وصرف ومحابس</option>
-                                    <option value="عوازل ومواد كيميائية">عوازل مائية وحرارية وكيماويات بناء حديث</option>
-                                    <option value="دهانات وتشطيبات معمارية">دهانات وديكور وتشطيبات معمارية</option>
-                                    <option value="أعمال ألومنيوم وواجهات وزجاج">أعمال ألومنيوم وواجهات وزجاج واستركشر</option>
-                                    <option value="أخشاب وأبواب ونجارة">أخشاب وأبواب ونجارة معمارية</option>
-                                    <option value="نقل ولوجستيات ومعدات ثقيلة">نقل ولوجستيات ومعدات ثقيلة ورافعات</option>
-                                    <option value="توريدات عمومية ومهمات موقع">توريدات عمومية ومهمات سلامة ومواقع</option>
-                                    <option value="أخرى">نشاط توريدات آخر</option>
-                                </select>
+                                <input type="text" id="supplierCategory" class="portal-input" placeholder="اكتب مجال التوريد (مثال: حديد، أسمنت، عوازل، كابلات...)">
+                            </div>
+
+                            <!-- Field: مجال ونوع المقاولات -->
+                            <div class="portal-form-group">
+                                <label class="portal-label">
+                                    <span>مجال و نوع المقاولات</span>
+                                </label>
+                                <input type="text" id="supplierContractingCategory" class="portal-input" placeholder="اكتب نوع المقاولات (مثال: شبكات بنية تحتية، تشطيبات، خرسانات...)">
                             </div>
 
                             <!-- Field: المقر الرئيسي والمحافظة -->

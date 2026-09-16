@@ -904,7 +904,8 @@ function handleSupplierPortalSubmit(event) {
     event.preventDefault();
 
     const companyName = document.getElementById('supplierCompanyName').value.trim();
-    const category = document.getElementById('supplierCategory').value;
+    const supplyCategory = (document.getElementById('supplierCategory')?.value || '').trim();
+    const contractingCategory = (document.getElementById('supplierContractingCategory')?.value || '').trim();
     const governorate = document.getElementById('supplierGovernorate').value.trim();
     const contactPerson = document.getElementById('supplierContactPerson').value.trim();
     const contactTitle = (document.getElementById('supplierContactTitle').value || '').trim();
@@ -916,8 +917,8 @@ function handleSupplierPortalSubmit(event) {
     const website = (document.getElementById('supplierWebsite').value || '').trim();
     const notes = (document.getElementById('supplierNotes').value || '').trim();
 
-    if (!companyName || !category || !contactPerson || !phone || !commercialReg || !taxCard) {
-        showToast('يرجى استيفاء جميع الحقول الإلزامية المطلوبة.');
+    if (!companyName || (!supplyCategory && !contractingCategory) || !governorate || !contactPerson || !phone || !commercialReg || !taxCard) {
+        showToast('يرجى استيفاء جميع الحقول الإلزامية وتحديد مجال التوريد أو المقاولات.');
         return;
     }
 
@@ -938,11 +939,17 @@ function handleSupplierPortalSubmit(event) {
         const entityTypeRadio = document.querySelector('input[name="supplierEntityType"]:checked');
         const entityType = entityTypeRadio ? entityTypeRadio.value : 'مورد';
 
+        const categoryCombined = supplyCategory && contractingCategory 
+            ? `${supplyCategory} | مقاولات: ${contractingCategory}` 
+            : (supplyCategory || contractingCategory || 'عام');
+
         const applicationData = {
             trackingCode: trackingCode,
             entityType: entityType,
             companyName: companyName,
-            category: category,
+            category: categoryCombined,
+            supplyCategory: supplyCategory,
+            contractingCategory: contractingCategory,
             contactPerson: contactPerson,
             contactTitle: contactTitle,
             phone: phone,
@@ -960,7 +967,7 @@ function handleSupplierPortalSubmit(event) {
         if (window.SharksCloud && SharksCloud.addSupplierApplication) {
             SharksCloud.addSupplierApplication(applicationData);
         } else if (window.tracker) {
-            tracker.logActivity(`تم استلام طلب اعتماد ${entityType} جديد: ${companyName}`);
+            tracker.logActivity(`تم استلام طلب قيد ${entityType} جديد: ${companyName}`);
         }
 
         // Show Success Modal
@@ -969,12 +976,12 @@ function handleSupplierPortalSubmit(event) {
 
         const msgElem = document.getElementById('supplierSuccessMessage');
         if (msgElem) {
-            msgElem.textContent = `تم تسجيل طلبكم لشركة (${companyName}) في مجال (${category}) برقم تتبع (${trackingCode}) بنجاح. تم حفظ كافة المستندات وعددها (${supplierUploadedFiles.length}) ملف، وجاري فحصها من لجنة المشتريات والتوريدات وسيتم التواصل معكم قريباً.`;
+            msgElem.textContent = `تم تسجيل طلبكم لشركة (${companyName}) في مجال (${categoryCombined}) برقم تتبع (${trackingCode}) بنجاح. تم حفظ كافة المستندات وعددها (${supplierUploadedFiles.length}) ملف، وجاري فحصها من لجنة المشتريات والتوريدات وسيتم التواصل معكم قريباً.`;
         }
 
         const whatsappDirect = document.getElementById('supplierWhatsappDirectBtn');
         if (whatsappDirect) {
-            const waText = encodeURIComponent(`مرحباً إدارة المشتريات بشركة شاركس جروب، تم تقديم طلب اعتماد وتأهيل مورد رسمي لشركة: ${companyName}، كود الطلب: ${trackingCode}.`);
+            const waText = encodeURIComponent(`مرحباً إدارة المشتريات بشركة شاركس جروب، تم تقديم طلب قيد ${entityType} لشركة: ${companyName}، كود الطلب: ${trackingCode}.`);
             whatsappDirect.href = `https://wa.me/201111994425?text=${waText}`;
         }
 

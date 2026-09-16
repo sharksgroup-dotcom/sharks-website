@@ -1229,7 +1229,10 @@ function openSupplierDocsModal(id) {
     if (infoBanner) {
         infoBanner.innerHTML = `
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:8px;">
-                <div>🏢 <strong>المجال:</strong> ${escapeHtml(app.category || '-')} (${escapeHtml(app.governorate || '-')})</div>
+                ${app.supplyCategory ? `<div>📦 <strong>مجال التوريد:</strong> ${escapeHtml(app.supplyCategory)}</div>` : ''}
+                ${app.contractingCategory ? `<div>🏗️ <strong>مجال المقاولات:</strong> ${escapeHtml(app.contractingCategory)}</div>` : ''}
+                ${!app.supplyCategory && !app.contractingCategory ? `<div>🏢 <strong>المجال:</strong> ${escapeHtml(app.category || '-')}</div>` : ''}
+                <div>📍 <strong>المقر والمحافظة:</strong> ${escapeHtml(app.governorate || '-')}</div>
                 <div>👤 <strong>المفوض:</strong> ${escapeHtml(app.contactPerson || '-')} - ${escapeHtml(app.contactTitle || '')}</div>
                 <div>📜 <strong>السجل التجاري:</strong> ${escapeHtml(app.commercialRegister || '-')}</div>
                 <div>💳 <strong>البطاقة الضريبية:</strong> ${escapeHtml(app.taxCard || '-')}</div>
