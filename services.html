@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="خدمات شاركس جروب للمقاولات العامة والتطوير العقاري - حلول هندسية وإنشائية متكاملة من التخطيط حتى التسليم">
     <title>الخدمات | شاركس جروب للمقاولات العامة والتطوير العقاري</title>
 
+    <!-- Preload Critical Banner and Logo for Instant Paint -->
+    <link rel="preload" as="image" href="assets/project_nile_foundation.jpg">
+    <link rel="preload" as="image" href="assets/logo.jpg">
+
     <!-- Stylesheet (With Cache-Busting Version) -->
-    <link rel="stylesheet" href="css/style.css?v=20260912_v3">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="css/style.css?v=20260912_v4">
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+    <!-- Immediate Theme Pre-paint Guard: Always default to light mode -->
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('sharks_theme_v2') || localStorage.getItem('sharks_admin_theme_v2') || 'light';
+                if (theme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body dir="rtl">
 
@@ -111,10 +126,6 @@
 
         <!-- Left Area: CTA Button + Theme Toggle -->
         <div class="nav-left-area">
-            <a href="admin.html" class="btn-nav-admin" title="بوابة تسجيل دخول الإدارة المركزية" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: rgba(235, 199, 96, 0.12); border: 1.5px solid rgba(235, 199, 96, 0.4); color: var(--gold-primary); text-decoration: none; font-size: 0.84rem; font-weight: 700; transition: all 0.25s ease;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2.5" ry="2.5"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                <span>دخول الإدارة</span>
-            </a>
 
             <!-- CTA Button -->
             <a href="index.html#contact" onclick="localStorage.setItem('sharks_active_view', 'contact')" class="btn-nav-cta">
@@ -609,8 +620,14 @@
             </div>
         </div>
 
-        <div class="footer-copyright-bar">
-            جميع الحقوق محفوظة &copy; 2026 شركة شاركس جروب للمقاولات العامة والتطوير العقاري.
+        <div class="footer-copyright-bar" style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <span>جميع الحقوق محفوظة &copy; 2026 شركة شاركس جروب للمقاولات العامة والتطوير العقاري.</span>
+            <a href="admin.html" class="footer-admin-lock-btn" title="بوابة الإدارة المركزية" aria-label="بوابة الإدارة المركزية">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2.5" ry="2.5"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </a>
         </div>
     </footer>
 
@@ -675,9 +692,9 @@
     <!-- Sound & Theme Engine -->
     <script src="js/sounds.js?v=20260909_4"></script>
     <script>
-        // Synchronized Theme Engine
+        // Synchronized Theme Engine (Always default to light mode)
         function initTheme() {
-            const savedTheme = localStorage.getItem('sharks_theme') || 'dark';
+            const savedTheme = localStorage.getItem('sharks_theme_v2') || localStorage.getItem('sharks_admin_theme_v2') || 'light';
             applyTheme(savedTheme);
         }
 
@@ -685,7 +702,10 @@
             const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
             const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
             applyTheme(nextTheme);
+            localStorage.setItem('sharks_theme_v2', nextTheme);
+            localStorage.setItem('sharks_admin_theme_v2', nextTheme);
             localStorage.setItem('sharks_theme', nextTheme);
+            localStorage.setItem('sharks_admin_theme', nextTheme);
 
             // Dynamic shockwave pulse animation on button
             const themeBtn = document.getElementById('themeToggleBtn');

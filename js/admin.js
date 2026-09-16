@@ -7,34 +7,65 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdminApp();
 });
 
-let currentAdminTab = 'overview';
+const VALID_ADMIN_TABS = ['dashboard', 'overview', 'suppliers', 'projects', 'tasks', 'employees', 'careers'];
+
+function getInitialAdminTab() {
+    try {
+        const hash = (window.location.hash || '').replace('#', '').trim();
+        if (hash && VALID_ADMIN_TABS.includes(hash)) {
+            return hash;
+        }
+        const stored = sessionStorage.getItem('sharks_admin_active_tab');
+        if (stored && VALID_ADMIN_TABS.includes(stored)) {
+            return stored;
+        }
+    } catch (e) {}
+    return 'dashboard';
+}
+
+let currentAdminTab = getInitialAdminTab();
 let editingSupplierId = null;
 let editingProjectId = null;
 let editingTaskId = null;
 let editingEmployeeId = null;
 
 // -------------------------------------------------------------------
-// Theme Switcher (Day / Night Mode - Request 2)
+// Theme Switcher (Day / Night Mode - Default is always Light)
 // -------------------------------------------------------------------
 function initAdminTheme() {
-    const savedTheme = localStorage.getItem('sharks_admin_theme') || localStorage.getItem('sharks_theme') || 'dark';
-    if (savedTheme === 'light') {
+    const savedTheme = localStorage.getItem('sharks_admin_theme_v2') || localStorage.getItem('sharks_theme_v2') || 'light';
+    applyAdminTheme(savedTheme);
+}
+
+function applyAdminTheme(theme) {
+    if (theme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
     } else {
         document.documentElement.removeAttribute('data-theme');
+    }
+    const toggleBtn = document.getElementById('adminThemeToggle');
+    if (toggleBtn) {
+        toggleBtn.setAttribute('title', theme === 'light' ? 'التبديل إلى الوضع الليلي' : 'التبديل إلى الوضع النهاري');
     }
 }
 
 function toggleAdminTheme() {
     const current = document.documentElement.getAttribute('data-theme');
     const newTheme = current === 'light' ? 'dark' : 'light';
-    if (newTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-    } else {
-        document.documentElement.removeAttribute('data-theme');
-    }
+    applyAdminTheme(newTheme);
+    localStorage.setItem('sharks_admin_theme_v2', newTheme);
+    localStorage.setItem('sharks_theme_v2', newTheme);
     localStorage.setItem('sharks_admin_theme', newTheme);
     localStorage.setItem('sharks_theme', newTheme);
+
+    // Shockwave pulse animation matching user interface
+    const toggleBtn = document.getElementById('adminThemeToggle');
+    if (toggleBtn) {
+        toggleBtn.classList.remove('pulse-active');
+        void toggleBtn.offsetWidth; // force browser repaint
+        toggleBtn.classList.add('pulse-active');
+        setTimeout(() => toggleBtn.classList.remove('pulse-active'), 750);
+    }
 }
 
 // Cinematic Splash Screen Controller with Session-Based Cache (User Request 4)
@@ -107,13 +138,12 @@ function initAdminApp() {
     initAdminTheme();
     initAdminSplashScreen();
 
-    // Check if session exists (with 30 minutes inactivity timeout - Request 6)
+    // Check if session exists (Only logout on explicit logout - Request 2)
     const session = SharksCloud.checkAuth();
-    if (session && !session.timedOut) {
+    if (session) {
         showDashboardView(session);
-        setupInactivityTracking();
     } else {
-        showLoginView(session && session.timedOut);
+        showLoginView();
     }
 
     setupLoginEvents();
@@ -124,7 +154,7 @@ function initAdminApp() {
 // -------------------------------------------------------------------
 // 1. Auth & View State
 // -------------------------------------------------------------------
-function showLoginView(isTimeout = false) {
+function showLoginView() {
     document.getElementById('adminLoginWrapper').style.display = 'flex';
     document.getElementById('adminDashboardWrapper').style.display = 'none';
 
@@ -135,12 +165,8 @@ function showLoginView(isTimeout = false) {
     }
     const errorAlert = document.getElementById('loginErrorAlert');
     if (errorAlert) {
-        if (isTimeout) {
-            errorAlert.textContent = 'انتهت جلسة العمل لتجاوز 30 دقيقة من عدم النشاط. يرجى إعادة تسجيل الدخول للمتابعة.';
-            errorAlert.style.display = 'block';
-        } else {
-            errorAlert.style.display = 'none';
-        }
+        errorAlert.textContent = '';
+        errorAlert.style.display = 'none';
     }
 }
 
@@ -368,8 +394,14 @@ function setupLoginEvents() {
 
         const result = SharksCloud.login(email, password);
         if (result.success) {
+            document.documentElement.classList.add('adm-logged-in');
             errorAlert.style.display = 'none';
             showToast('تم تسجيل الدخول بنجاح! مرحباً بك في لوحة الإدارة.');
+            currentAdminTab = 'dashboard';
+            try {
+                sessionStorage.setItem('sharks_admin_active_tab', 'dashboard');
+                localStorage.removeItem('sharks_admin_active_tab');
+            } catch(e) {}
             showDashboardView(result.session);
         } else {
             errorAlert.textContent = result.error || 'بيانات تسجيل الدخول غير صحيحة';
@@ -381,6 +413,14 @@ function setupLoginEvents() {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             if (confirm('هل أنت متأكد من رغبتك في تسجيل الخروج من لوحة الإدارة؟')) {
+                document.documentElement.classList.remove('adm-logged-in');
+                try {
+                    sessionStorage.removeItem('sharks_admin_active_tab');
+                    localStorage.removeItem('sharks_admin_active_tab');
+                    if (window.history && window.history.replaceState) {
+                        window.history.replaceState(null, '', window.location.pathname);
+                    }
+                } catch(e) {}
                 SharksCloud.logout();
                 showToast('تم تسجيل الخروج بأمان.');
                 showLoginView();
@@ -410,7 +450,15 @@ function setupAdminTabs() {
 }
 
 function switchAdminTab(tabName) {
+    if (!VALID_ADMIN_TABS.includes(tabName)) tabName = 'dashboard';
     currentAdminTab = tabName;
+    try {
+        sessionStorage.setItem('sharks_admin_active_tab', tabName);
+        document.documentElement.setAttribute('data-admin-active-tab', tabName);
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + tabName);
+        }
+    } catch (e) {}
 
     // Update active tab buttons
     document.querySelectorAll('.adm-tab-btn').forEach(btn => {
@@ -431,10 +479,24 @@ function switchAdminTab(tabName) {
         activePanel.classList.add('active');
     }
 
+    // Clear unread badge for the opened tab
+    if (typeof SharksCloud !== 'undefined' && SharksCloud.clearUnreadBadge) {
+        SharksCloud.clearUnreadBadge(tabName);
+    }
+    updateAdminTabBadges();
+
     // Refresh data for the active panel
     if (tabName === 'overview') renderOverviewKPIs();
     if (tabName === 'dashboard') renderClassicDashboard();
-    if (tabName === 'suppliers') renderSuppliersTable();
+    if (tabName === 'suppliers') {
+        localStorage.setItem('sharks_suppliers_badge_hidden', 'true');
+        const badgeSup = document.getElementById('badgeTabSuppliers');
+        if (badgeSup) badgeSup.style.display = 'none';
+        const badgeApps = document.getElementById('badgeSupplierAppsCount');
+        if (badgeApps) badgeApps.style.display = 'none';
+        renderSupplierApplicationsTable();
+        renderSuppliersTable();
+    }
     if (tabName === 'projects') renderProjectsTable();
     if (tabName === 'tasks') renderTasksTable();
     if (tabName === 'employees') renderEmployeesTable();
@@ -442,7 +504,38 @@ function switchAdminTab(tabName) {
 }
 
 // -------------------------------------------------------------------
-// 3. Overview & Classic Dashboard Panels
+// Dynamic Red Notification Badges for Admin Tabs (Request 3)
+// -------------------------------------------------------------------
+function updateAdminTabBadges() {
+    if (typeof SharksCloud === 'undefined' || !SharksCloud.getUnreadBadges) return;
+    const unread = SharksCloud.getUnreadBadges();
+
+    const badgeDefs = [
+        { id: 'badgeTabSuppliers', key: 'suppliers', count: unread.suppliers || 0 },
+        { id: 'badgeTabProjects', key: 'projects', count: unread.projects || 0 },
+        { id: 'badgeTabTasks', key: 'tasks', count: unread.tasks || 0 },
+        { id: 'badgeTabEmployees', key: 'employees', count: unread.employees || 0 },
+        { id: 'badgeTabCareers', key: 'careers', count: unread.careers || 0 }
+    ];
+
+    badgeDefs.forEach(b => {
+        const elem = document.getElementById(b.id);
+        if (!elem) return;
+        if (currentAdminTab === b.key || b.count <= 0) {
+            elem.style.display = 'none';
+            elem.textContent = '0';
+            elem.classList.remove('active-alert');
+        } else {
+            elem.textContent = b.count;
+            elem.style.display = 'inline-flex';
+            elem.classList.add('active-alert');
+        }
+    });
+}
+window.updateAdminTabBadges = updateAdminTabBadges;
+
+// -------------------------------------------------------------------
+// 3. Operational Overview & Analytics (Request 1)
 // -------------------------------------------------------------------
 function renderDashboardOverview() {
     renderOverviewKPIs();
@@ -450,6 +543,7 @@ function renderDashboardOverview() {
 }
 
 function renderOverviewKPIs() {
+    if (typeof SharksCloud === 'undefined') return;
     const stats = SharksCloud.getStats();
 
     const supTot = document.getElementById('statSuppliersTotal');
@@ -467,21 +561,8 @@ function renderOverviewKPIs() {
     const empCnt = document.getElementById('statEmployeesCount');
     if (empCnt) empCnt.textContent = stats.employeesCount;
 
-    // Update Tab Badges
-    const badgeSup = document.getElementById('badgeTabSuppliers');
-    if (badgeSup) badgeSup.textContent = stats.suppliersCount;
-
-    const badgeProj = document.getElementById('badgeTabProjects');
-    if (badgeProj) badgeProj.textContent = stats.projectsCount;
-
-    const badgeTask = document.getElementById('badgeTabTasks');
-    if (badgeTask) badgeTask.textContent = stats.tasksCount;
-
-    const badgeEmp = document.getElementById('badgeTabEmployees');
-    if (badgeEmp) badgeEmp.textContent = stats.employeesCount;
-
-    const badgeCar = document.getElementById('badgeTabCareers');
-    if (badgeCar) badgeCar.textContent = stats.careersCount;
+    // Update Red Tab Badges for additions (shows newly added unread items only)
+    updateAdminTabBadges();
 
     // Render Recent Activities (Request 6: Date & Time in Recent Activities Log)
     const activitiesContainer = document.getElementById('adminRecentActivities');
@@ -631,6 +712,57 @@ function renderClassicDashboard() {
     const empCountEl = document.getElementById('adminDashEmployeesCount');
     if (empCountEl) empCountEl.textContent = `${employees.length} موظفين`;
 
+    // Suppliers Statistics & Space Bars (Pillars) for "توزيع الأعمال والمشاريع"
+    const allSupplierApps = SharksCloud.getSupplierApplications ? SharksCloud.getSupplierApplications() : [];
+    const registeredSupCount = allSupplierApps.length;
+    const approvedSupCount = allSupplierApps.filter(a => a.status === 'معتمد').length;
+    const rejectedSupCount = allSupplierApps.filter(a => a.status === 'مرفوض').length;
+
+    // Side stats in card
+    const supRegEl = document.getElementById('adminDashSuppliersRegistered');
+    if (supRegEl) supRegEl.textContent = `${registeredSupCount} مورد`;
+    const supAppEl = document.getElementById('adminDashSuppliersApproved');
+    if (supAppEl) supAppEl.textContent = `${approvedSupCount} مورد`;
+    const supRejEl = document.getElementById('adminDashSuppliersRejected');
+    if (supRejEl) supRejEl.textContent = `${rejectedSupCount} مورد`;
+
+    // Space Bars (Pillars)
+    const supRegValEl = document.getElementById('adminDashSupRegisteredVal');
+    if (supRegValEl) supRegValEl.textContent = registeredSupCount;
+    const supRegTagEl = document.getElementById('adminDashSupRegisteredTag');
+    if (supRegTagEl) supRegTagEl.textContent = `${registeredSupCount} طلب`;
+    const supRegPillar = document.getElementById('adminDashSupRegisteredPillar');
+    if (supRegPillar) {
+        const height = registeredSupCount > 0 ? Math.min(130, Math.max(30, 40 + registeredSupCount * 18)) : 25;
+        supRegPillar.style.height = `${height}px`;
+    }
+
+    const supAppValEl = document.getElementById('adminDashSupApprovedVal');
+    if (supAppValEl) supAppValEl.textContent = approvedSupCount;
+    const supAppTagEl = document.getElementById('adminDashSupApprovedTag');
+    if (supAppTagEl) {
+        const appPct = registeredSupCount > 0 ? Math.round((approvedSupCount / registeredSupCount) * 100) : 0;
+        supAppTagEl.textContent = `${appPct}%`;
+    }
+    const supAppPillar = document.getElementById('adminDashSupApprovedPillar');
+    if (supAppPillar) {
+        const height = registeredSupCount > 0 ? Math.min(130, Math.max(25, 30 + (approvedSupCount / registeredSupCount) * 85)) : 25;
+        supAppPillar.style.height = `${height}px`;
+    }
+
+    const supRejValEl = document.getElementById('adminDashSupRejectedVal');
+    if (supRejValEl) supRejValEl.textContent = rejectedSupCount;
+    const supRejTagEl = document.getElementById('adminDashSupRejectedTag');
+    if (supRejTagEl) {
+        const rejPct = registeredSupCount > 0 ? Math.round((rejectedSupCount / registeredSupCount) * 100) : 0;
+        supRejTagEl.textContent = `${rejPct}%`;
+    }
+    const supRejPillar = document.getElementById('adminDashSupRejectedPillar');
+    if (supRejPillar) {
+        const height = registeredSupCount > 0 ? Math.min(130, Math.max(25, 25 + (rejectedSupCount / registeredSupCount) * 75)) : 25;
+        supRejPillar.style.height = `${height}px`;
+    }
+
     // 4. Workforce Activity Equalizer Strip (Tied to Projects - Request 1)
     const eqStrip = document.getElementById('adminDashEqualizerStrip');
     if (eqStrip) {
@@ -772,7 +904,7 @@ function renderSuppliersTable(filterQuery = '') {
                             <img src="${s.logo || 'assets/logo.jpg'}" alt="${escapeHtml(s.name)}" onerror="this.src='assets/logo.jpg'">
                         </div>
                         <div>
-                            <strong style="color:#ffffff; display:block; font-size:0.95rem;">${escapeHtml(s.name)}</strong>
+                            <strong style="color:var(--adm-text-main); display:block; font-size:0.95rem;">${escapeHtml(s.name)}</strong>
                             <span style="color:var(--adm-text-dim); font-size:0.8rem;">${escapeHtml(s.description || '').substring(0, 45)}...</span>
                         </div>
                     </div>
@@ -891,6 +1023,416 @@ function deleteSupplierPrompt(id, name) {
 }
 
 // -------------------------------------------------------------------
+// 4.1 SUPPLIER APPLICATIONS CONTROLLER (طلبات تسجيل الموردين الواردة)
+// -------------------------------------------------------------------
+function switchSupplierSubTab(subtab) {
+    const btnRequests = document.getElementById('subtabBtnSupplierRequests');
+    const btnDirectory = document.getElementById('subtabBtnSupplierDirectory');
+    const panelRequests = document.getElementById('subpanel-supplier-requests');
+    const panelDirectory = document.getElementById('subpanel-supplier-directory');
+
+    if (subtab === 'requests') {
+        if (btnRequests) {
+            btnRequests.classList.add('active');
+            btnRequests.style.background = '';
+            btnRequests.style.borderColor = '';
+            btnRequests.style.color = '';
+        }
+        if (btnDirectory) {
+            btnDirectory.classList.remove('active');
+            btnDirectory.style.background = '';
+            btnDirectory.style.borderColor = '';
+            btnDirectory.style.color = '';
+        }
+        if (panelRequests) panelRequests.style.display = 'block';
+        if (panelDirectory) panelDirectory.style.display = 'none';
+        renderSupplierApplicationsTable();
+    } else {
+        if (btnDirectory) {
+            btnDirectory.classList.add('active');
+            btnDirectory.style.background = '';
+            btnDirectory.style.borderColor = '';
+            btnDirectory.style.color = '';
+        }
+        if (btnRequests) {
+            btnRequests.classList.remove('active');
+            btnRequests.style.background = '';
+            btnRequests.style.borderColor = '';
+            btnRequests.style.color = '';
+        }
+        if (panelRequests) panelRequests.style.display = 'none';
+        if (panelDirectory) panelDirectory.style.display = 'block';
+        renderSuppliersTable();
+    }
+}
+
+function renderSupplierApplicationsTable() {
+    const tbody = document.getElementById('supplierApplicationsTableBody');
+    if (!tbody) return;
+
+    const allApps = SharksCloud.getSupplierApplications ? SharksCloud.getSupplierApplications() : [];
+
+    // Calculate quick stats
+    const totalCount = allApps.length;
+    const newCount = allApps.filter(a => a.status === 'جديد').length;
+    const reviewCount = allApps.filter(a => a.status === 'قيد المراجعة').length;
+    const approvedCount = allApps.filter(a => a.status === 'معتمد').length;
+
+    const statTotal = document.getElementById('statTotalSupplierApps');
+    const statNew = document.getElementById('statNewSupplierApps');
+    const statReview = document.getElementById('statReviewSupplierApps');
+    const statApproved = document.getElementById('statApprovedSupplierApps');
+    const badgeAppsCount = document.getElementById('badgeSupplierAppsCount');
+    const badgeTabSuppliers = document.getElementById('badgeTabSuppliers');
+
+    if (statTotal) statTotal.textContent = totalCount;
+    if (statNew) statNew.textContent = newCount;
+    if (statReview) statReview.textContent = reviewCount;
+    if (statApproved) statApproved.textContent = approvedCount;
+
+    if (badgeAppsCount) {
+        if (localStorage.getItem('sharks_suppliers_badge_hidden') === 'true' || currentAdminTab === 'suppliers') {
+            badgeAppsCount.style.display = 'none';
+        } else {
+            badgeAppsCount.textContent = newCount;
+            badgeAppsCount.style.display = newCount > 0 ? 'inline-block' : 'none';
+        }
+    }
+    updateAdminTabBadges();
+
+    // Filters
+    const searchInput = document.getElementById('searchSupplierAppsInput');
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    const statusSelect = document.getElementById('filterSupplierAppsStatus');
+    const statusFilter = statusSelect ? statusSelect.value : 'all';
+
+    let filtered = allApps;
+    if (statusFilter && statusFilter !== 'all') {
+        filtered = filtered.filter(a => a.status === statusFilter);
+    }
+    if (query) {
+        filtered = filtered.filter(a =>
+            (a.companyName && a.companyName.toLowerCase().includes(query)) ||
+            (a.contactPerson && a.contactPerson.toLowerCase().includes(query)) ||
+            (a.phone && a.phone.includes(query)) ||
+            (a.trackingCode && a.trackingCode.toLowerCase().includes(query)) ||
+            (a.category && a.category.toLowerCase().includes(query)) ||
+            (a.commercialRegister && a.commercialRegister.includes(query))
+        );
+    }
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center; padding:36px; color:var(--adm-text-dim);">
+                    لا توجد طلبات تسجيل موردين مطابقة حالياً. ستظهر هنا الطلبات فور إرسالها من بوابة الموردين في الموقع العام.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = filtered.map(app => {
+        const docsCount = app.documents ? app.documents.length : 0;
+        const cleanPhone = (app.phone || '').replace(/\\D/g, '');
+        const cleanWa = (app.whatsapp || app.phone || '').replace(/\\D/g, '');
+        const waMsg = encodeURIComponent(`مرحباً أستاذ/ة ${app.contactPerson || ''} - شركة ${app.companyName || ''}، بخصوص طلب اعتماد وتأهيل التوريد المقدم لشركة شاركس جروب (كود: ${app.trackingCode || ''}).`);
+        const waLink = `https://wa.me/${cleanWa.startsWith('2') ? cleanWa : '2' + cleanWa}?text=${waMsg}`;
+
+        return `
+            <tr>
+                <td>
+                    <div style="font-family:monospace; color:var(--adm-gold); font-weight:700; font-size:0.88rem;">${escapeHtml(app.trackingCode || '-')}</div>
+                    <span style="font-size:0.78rem; color:var(--adm-text-dim);">${escapeHtml(app.createdAt || '-')}</span>
+                </td>
+                <td>
+                    <div style="font-weight:700; color:var(--adm-text-main); font-size:0.95rem;">${escapeHtml(app.companyName || 'بدون اسم')}</div>
+                    <div style="display:flex; gap:6px; align-items:center; margin-top:4px; flex-wrap:wrap;">
+                        <span class="adm-badge ${app.entityType === 'مقاول' ? 'warning' : 'info'}" style="font-size:0.75rem; font-weight:700;">${escapeHtml(app.entityType || 'مورد')}</span>
+                        <span class="adm-badge" style="font-size:0.75rem; background:rgba(255,255,255,0.06); border:1px solid var(--adm-border); color:var(--adm-text-main);">${escapeHtml(app.category || 'عام')}</span>
+                        <span style="font-size:0.78rem; color:var(--adm-text-dim);">📍 ${escapeHtml(app.governorate || '-')}</span>
+                    </div>
+                </td>
+                <td>
+                    <div style="font-size:0.88rem; font-weight:600; color:var(--adm-text-main);">${escapeHtml(app.contactPerson || '-')}</div>
+                    <div style="font-size:0.78rem; color:var(--adm-text-dim); margin-bottom:4px;">${escapeHtml(app.contactTitle || 'مسؤول التوريدات')}</div>
+                    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                        <a href="tel:${escapeHtml(app.phone)}" style="color:var(--adm-gold); text-decoration:none; font-size:0.82rem; direction:ltr;" title="اتصال مباشر">
+                            📞 ${escapeHtml(app.phone || '-')}
+                        </a>
+                        ${app.whatsapp ? `
+                            <a href="${waLink}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:6px; background:rgba(37, 211, 102, 0.15); border:1px solid rgba(37, 211, 102, 0.35); color:#25d366; text-decoration:none; font-size:0.76rem; font-weight:700;" title="مراسلة واتساب">
+                                💬 واتساب
+                            </a>
+                        ` : ''}
+                    </div>
+                </td>
+                <td>
+                    <div style="font-size:0.82rem; color:var(--adm-text-dim);">
+                        <div>س.ت: <strong style="color:var(--adm-text-main);">${escapeHtml(app.commercialRegister || '-')}</strong></div>
+                        <div style="margin-top:2px;">ب.ض: <strong style="color:var(--adm-text-main);">${escapeHtml(app.taxCard || '-')}</strong></div>
+                    </div>
+                </td>
+                <td>
+                    ${docsCount > 0 ? `
+                        <button class="adm-btn-action" onclick="openSupplierDocsModal('${app.id}')" style="display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:8px; background:rgba(235, 199, 96, 0.12); border:1px solid rgba(235, 199, 96, 0.35); color:var(--adm-gold); font-size:0.8rem; font-weight:700;" title="معاينة وفحص المستندات">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            <span>${docsCount} ملفات</span>
+                        </button>
+                    ` : `
+                        <span style="font-size:0.8rem; color:var(--adm-text-dim);">لا توجد ملفات</span>
+                    `}
+                </td>
+                <td>
+                    <select class="adm-table-select" onchange="changeSupplierAppStatus('${app.id}', this.value)">
+                        <option value="جديد" ${app.status === 'جديد' ? 'selected' : ''}>🟡 جديد</option>
+                        <option value="قيد المراجعة" ${app.status === 'قيد المراجعة' ? 'selected' : ''}>🔵 قيد المراجعة</option>
+                        <option value="معتمد" ${app.status === 'معتمد' ? 'selected' : ''}>🟢 معتمد</option>
+                        <option value="مرفوض" ${app.status === 'مرفوض' ? 'selected' : ''}>🔴 مرفوض</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="adm-actions-cell">
+                        ${app.status !== 'معتمد' ? `
+                            <button class="adm-btn-action" onclick="approveSupplierAppPrompt('${app.id}')" style="color:#22c55e; border-color:rgba(34,197,94,0.4);" title="اعتماد المورد وإضافته لسجل الشركاء">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </button>
+                        ` : ''}
+                        <button class="adm-btn-action edit" onclick="openSupplierDocsModal('${app.id}')" title="فحص بيانات وأوراق الطلب">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                        <button class="adm-btn-action delete" onclick="deleteSupplierAppPrompt('${app.id}', '${escapeHtml(app.companyName)}')" title="حذف هذا الطلب">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function openSupplierDocsModal(id) {
+    const apps = SharksCloud.getSupplierApplications ? SharksCloud.getSupplierApplications() : [];
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+
+    const companyEl = document.getElementById('docsModalCompanyName');
+    const trackingEl = document.getElementById('docsModalTrackingCode');
+    const infoBanner = document.getElementById('docsModalInfoBanner');
+    const countEl = document.getElementById('docsModalFilesCount');
+    const listContainer = document.getElementById('docsModalListContainer');
+    const actionBtns = document.getElementById('docsModalActionButtons');
+
+    if (companyEl) companyEl.textContent = `مستندات: ${app.companyName}`;
+    if (trackingEl) trackingEl.textContent = app.trackingCode || '-';
+
+    if (infoBanner) {
+        infoBanner.innerHTML = `
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px; margin-bottom:8px;">
+                <div>🏢 <strong>المجال:</strong> ${escapeHtml(app.category || '-')} (${escapeHtml(app.governorate || '-')})</div>
+                <div>👤 <strong>المفوض:</strong> ${escapeHtml(app.contactPerson || '-')} - ${escapeHtml(app.contactTitle || '')}</div>
+                <div>📜 <strong>السجل التجاري:</strong> ${escapeHtml(app.commercialRegister || '-')}</div>
+                <div>💳 <strong>البطاقة الضريبية:</strong> ${escapeHtml(app.taxCard || '-')}</div>
+            </div>
+            ${app.notes ? `<div style="margin-top:6px; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.1); font-size:0.84rem;">📝 <strong>نبذة وسابقة الأعمال:</strong> ${escapeHtml(app.notes)}</div>` : ''}
+        `;
+    }
+
+    const docs = app.documents || [];
+    if (countEl) countEl.textContent = docs.length;
+
+    if (listContainer) {
+        if (docs.length === 0) {
+            listContainer.innerHTML = `
+                <div style="padding:20px; text-align:center; color:var(--adm-text-dim); background:rgba(255,255,255,0.02); border-radius:8px;">
+                    لم يقم المورد بإرفاق ملفات رقمية مع هذا الطلب.
+                </div>
+            `;
+        } else {
+            listContainer.innerHTML = docs.map((doc, idx) => `
+                <div class="adm-doc-item">
+                    <div style="display:flex; align-items:center; gap:10px; overflow:hidden;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--adm-gold)" stroke-width="2" style="flex-shrink:0;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        <div style="overflow:hidden;">
+                            <div style="font-size:0.88rem; font-weight:700; color:var(--adm-text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${escapeHtml(doc.name)}">${escapeHtml(doc.name)}</div>
+                            <div style="font-size:0.75rem; color:var(--adm-text-dim);">${escapeHtml(doc.size || '')}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px; flex-shrink:0;">
+                        ${doc.dataUrl ? `
+                            <button type="button" class="adm-btn-action" onclick="previewDocumentWindow('${doc.dataUrl}', '${escapeHtml(doc.name)}')" title="معاينة الملف">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                            <a href="${doc.dataUrl}" download="${escapeHtml(doc.name)}" class="adm-btn-action" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;" title="تنزيل الملف">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    if (actionBtns) {
+        const cleanWa = (app.whatsapp || app.phone || '').replace(/\\D/g, '');
+        const waMsg = encodeURIComponent(`مرحباً أستاذ/ة ${app.contactPerson || ''} - شركة ${app.companyName || ''}، بخصوص طلب اعتماد وتأهيل التوريد لشركة شاركس جروب.`);
+        const waLink = `https://wa.me/${cleanWa.startsWith('2') ? cleanWa : '2' + cleanWa}?text=${waMsg}`;
+
+        actionBtns.innerHTML = `
+            <a href="${waLink}" target="_blank" class="adm-btn-secondary" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:#25d366; border-color:rgba(37,211,102,0.4);">
+                <span>💬 مراسلة واتساب</span>
+            </a>
+            ${app.status !== 'معتمد' ? `
+                <button type="button" class="adm-btn-primary" onclick="approveSupplierAppFromModal('${app.id}')">
+                    <span>اعتماد المورد رسمياً</span>
+                </button>
+            ` : `
+                <span class="adm-badge success" style="padding:8px 14px; font-size:0.84rem;">✓ مورد معتمد</span>
+            `}
+        `;
+    }
+
+    openModal('modalViewSupplierDocs');
+}
+
+function previewDocumentWindow(dataUrl, title) {
+    const win = window.open();
+    if (win) {
+        win.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${title || 'معاينة المستند'}</title>
+                <style>
+                    body { margin:0; background:#0f172a; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family:sans-serif; }
+                    img { max-width:95vw; max-height:95vh; object-fit:contain; border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.5); }
+                    iframe { width:100vw; height:100vh; border:none; }
+                </style>
+            </head>
+            <body>
+                ${dataUrl.startsWith('data:image/') ? `<img src="${dataUrl}" alt="Document Preview">` : `<iframe src="${dataUrl}"></iframe>`}
+            </body>
+            </html>
+        `);
+    } else {
+        alert('يرجى السماح بالنوافذ المنبثقة لمعاينة الملف');
+    }
+}
+
+function formatWhatsAppUrl(rawPhone, messageText) {
+    if (!rawPhone) return null;
+    let clean = rawPhone.toString().replace(/\D/g, '');
+    if (clean.startsWith('01')) {
+        clean = '2' + clean; // Egyptian mobile: 010... -> 2010...
+    } else if (clean.startsWith('002')) {
+        clean = clean.substring(2);
+    }
+    return `https://wa.me/${clean}?text=${encodeURIComponent(messageText)}`;
+}
+
+function approveSupplierAppPrompt(id) {
+    const apps = SharksCloud.getSupplierApplications ? SharksCloud.getSupplierApplications() : [];
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+
+    if (confirm(`هل ترغب في اعتماد المورد "${app.companyName}" رسمياً وإرسال رسالة الاعتماد والتهنئة إليه عبر واتساب؟`)) {
+        approveSupplierAppLogic(id, true);
+    }
+}
+
+function approveSupplierAppFromModal(id) {
+    approveSupplierAppLogic(id, true);
+    closeModal('modalViewSupplierDocs');
+}
+
+function approveSupplierAppLogic(id, sendWhatsApp = true) {
+    if (SharksCloud.approveSupplierApplication) {
+        const result = SharksCloud.approveSupplierApplication(id);
+        if (result && result.application) {
+            const app = result.application;
+            const phone = app.whatsapp || app.phone;
+
+            if (sendWhatsApp && phone) {
+                const approvalMsg = `مرحباً أستاذ/ة ${app.contactPerson || ''} - شركة ${app.companyName || ''}،\nيسر إدارة شركة شاركس جروب (Sharks Group) إبلاغكم بأنه قد تمت الموافقة على طلبكم واعتمادكم رسمياً كمورد مؤهل ومعتمد لدينا في مجال (${app.category || 'التوريدات العامة'}).\nكود التسجيل المعتمد: ${app.trackingCode || ''}.\nنتطلع إلى تعاون مثمر وناجح في مشروعاتنا القادمة بإذن الله.\nمع أطيب التحيات،\nإدارة المشتريات والتوريدات - شاركس جروب`;
+                const waUrl = formatWhatsAppUrl(phone, approvalMsg);
+                if (waUrl) {
+                    window.open(waUrl, '_blank');
+                }
+            } else if (sendWhatsApp && !phone) {
+                alert('تم اعتماد المورد بنجاح، ولكن لم يتم العثور على رقم هاتف مسجل لإرسال رسالة واتساب.');
+            }
+
+            showToast(`تم اعتماد المورد "${app.companyName}" بنجاح وإرسال رسالة الواتساب!`);
+            renderSupplierApplicationsTable();
+            renderSuppliersTable();
+            renderDashboardOverview();
+        }
+    }
+}
+
+function changeSupplierAppStatus(id, newStatus) {
+    if (SharksCloud.updateSupplierApplication) {
+        SharksCloud.updateSupplierApplication(id, { status: newStatus });
+        showToast(`تم تحديث حالة الطلب إلى: (${newStatus})`);
+        renderSupplierApplicationsTable();
+        renderDashboardOverview();
+    }
+}
+
+function deleteSupplierAppPrompt(id, name) {
+    const apps = SharksCloud.getSupplierApplications ? SharksCloud.getSupplierApplications() : [];
+    const app = apps.find(a => a.id === id);
+    if (!app) return;
+
+    const phone = app.whatsapp || app.phone;
+
+    // If application is already rejected, offer permanent deletion
+    if (app.status === 'مرفوض') {
+        if (confirm(`طلب المورد "${name}" مسجل بالفعل كـ (مرفوض).\nهل ترغب في حذفه نهائياً من قاعدة البيانات؟`)) {
+            if (SharksCloud.deleteSupplierApplication) {
+                SharksCloud.deleteSupplierApplication(id);
+                showToast(`تم حذف طلب المورد "${name}" نهائياً`);
+                renderSupplierApplicationsTable();
+                renderDashboardOverview();
+            }
+        }
+        return;
+    }
+
+    if (confirm(`هل ترغب في إرسال رسالة اعتذار رسمية لشركة "${name}" عبر واتساب (بأن قدراتهم تفوق متطلباتنا) وتحديث حالة الطلب إلى (مرفوض)؟`)) {
+        if (phone) {
+            const apologyMsg = `مرحباً أستاذ/ة ${app.contactPerson || ''} - شركة ${app.companyName || name}،\nتتقدم شركة شاركس جروب (Sharks Group) بخالص الشكر والتقدير لاهتمامكم بالتسجيل في سجل الموردين لدينا.\nبعد دراسة ملفكم والمستندات المقدمة، نود أن نتقدم لكم باعتذار رسمي من الشركة، حيث تبين للجنة الفنية أن إمكانياتكم وقدراتكم تفوق متطلبات مشروعاتنا الحالية.\nسنحتفظ بملفكم في قاعدة بياناتنا للتواصل مستقبلاً فور توفر فرص ومشروعات تتناسب مع مستواكم وإمكانياتكم الكبيرة.\nمع أطيب التمنيات لكم بدوام التوفيق والنجاح.\nإدارة التوريدات والمشتريات - شاركس جروب`;
+            const waUrl = formatWhatsAppUrl(phone, apologyMsg);
+            if (waUrl) {
+                window.open(waUrl, '_blank');
+            }
+        } else {
+            alert('تم تحديث حالة الطلب إلى مرفوض، ولكن لم يتم العثور على رقم هاتف مسجل لإرسال رسالة الواتساب.');
+        }
+
+        if (SharksCloud.updateSupplierApplication) {
+            SharksCloud.updateSupplierApplication(id, { status: 'مرفوض' });
+        }
+        showToast(`تم إرسال رسالة الاعتذار وتحديث حالة طلب "${name}" إلى (مرفوض)`);
+        renderSupplierApplicationsTable();
+        renderDashboardOverview();
+    }
+}
+
+window.switchSupplierSubTab = switchSupplierSubTab;
+window.renderSupplierApplicationsTable = renderSupplierApplicationsTable;
+window.openSupplierDocsModal = openSupplierDocsModal;
+window.previewDocumentWindow = previewDocumentWindow;
+window.approveSupplierAppPrompt = approveSupplierAppPrompt;
+window.approveSupplierAppFromModal = approveSupplierAppFromModal;
+window.changeSupplierAppStatus = changeSupplierAppStatus;
+window.deleteSupplierAppPrompt = deleteSupplierAppPrompt;
+
+
+// -------------------------------------------------------------------
 // 5. PROJECTS MANAGEMENT (المشاريع)
 // -------------------------------------------------------------------
 function renderProjectsTable(filterQuery = '') {
@@ -940,7 +1482,7 @@ function renderProjectsTable(filterQuery = '') {
                             <img src="${p.image || 'assets/project_nile_foundation.jpg'}" alt="${escapeHtml(p.title)}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='assets/project_nile_foundation.jpg'">
                         </div>
                         <div>
-                            <strong style="color:#ffffff; font-size:0.95rem; display:block;">${escapeHtml(p.title)}</strong>
+                            <strong style="color:var(--adm-text-main); font-size:0.95rem; display:block;">${escapeHtml(p.title)}</strong>
                             <span style="color:var(--adm-text-dim); font-size:0.8rem;">${escapeHtml(p.location || 'القاهرة')}</span>
                         </div>
                     </div>
@@ -1130,7 +1672,7 @@ function renderTasksTable(filterQuery = '') {
         return `
         <tr>
             <td>
-                <strong style="color:#ffffff; font-size:0.95rem;">${escapeHtml(t.title)}</strong>
+                <strong style="color:var(--adm-text-main); font-size:0.95rem;">${escapeHtml(t.title)}</strong>
             </td>
             <td>
                 <span style="color:var(--adm-text-dim);">${escapeHtml(t.project || '-')}</span>
@@ -1327,7 +1869,7 @@ function renderEmployeesTable(filterQuery = '') {
                         ${e.name ? e.name.charAt(0) : 'م'}
                     </div>
                     <div>
-                        <strong style="color:#ffffff;">${escapeHtml(e.name)}</strong>
+                        <strong style="color:var(--adm-text-main);">${escapeHtml(e.name)}</strong>
                         <span style="display:block; font-size:0.78rem; color:var(--adm-text-dim);">${escapeHtml(e.email || '')}</span>
                     </div>
                 </div>
@@ -1457,7 +1999,7 @@ function renderCareersTable(filterQuery = '') {
             <tr>
                 <td>
                     <div>
-                        <strong style="color:#ffffff; font-size:0.95rem; display:block;">${escapeHtml(c.titleAr)}</strong>
+                        <strong style="color:var(--adm-text-main); font-size:0.95rem; display:block;">${escapeHtml(c.titleAr)}</strong>
                         <span style="color:var(--adm-gold); font-size:0.8rem; font-family:'JetBrains Mono',monospace;">${escapeHtml(c.titleEn || '')}</span>
                     </div>
                 </td>
@@ -1496,7 +2038,7 @@ function populateCareerCategorySelect(selectedId) {
     const categories = SharksCloud.getCareerCategories();
     select.innerHTML = categories.map(cat => `
         <option value="${escapeHtml(cat.id)}">${escapeHtml(cat.label)}</option>
-    `).join('') + `<option value="__NEW__" style="color:var(--adm-gold); font-weight:bold;">➕ إضافة قطاع مؤسسي جديد...</option>`;
+    `).join('');
     if (selectedId) {
         select.value = selectedId;
     }

@@ -297,6 +297,70 @@ const DEFAULT_ADMIN_USERS = {
     }
 };
 
+// Default Sample Supplier Applications for Realistic Demo
+const DEFAULT_SUPPLIER_APPLICATIONS = [
+    {
+        id: "sup_app_1",
+        trackingCode: "SHK-SUP-5921",
+        companyName: "شركة حديد الدلتا للصناعات المعدنية",
+        category: "حديد وتسليح",
+        contactPerson: "المهندس / سامح عبد الرؤوف",
+        contactTitle: "مدير مبيعات المشروعات الكبرى",
+        phone: "01099238472",
+        whatsapp: "01099238472",
+        email: "sales@delta-steel.eg",
+        commercialRegister: "148920",
+        taxCard: "482-910-332",
+        governorate: "العاشر من رمضان - الشرقية",
+        website: "https://delta-steel.eg",
+        notes: "توريد حديد تسليح عالي المقاومة B500DWR بكافة الأقطار من 10 مم حتى 32 مم، ومطابق للمواصفات القياسية المصرية والأمريكية ASTM A615 بطاقة يومية 500 طن للمواقع الإنشائية.",
+        documents: [
+            {
+                name: "السجل_التجاري_حديد_الدلتا.pdf",
+                size: "1.8 MB",
+                type: "application/pdf",
+                dataUrl: "data:application/pdf;base64,JVBERi0xLjQKJ..."
+            },
+            {
+                name: "البطاقة_الضريبية_وسابقة_الاعمال.pdf",
+                size: "2.4 MB",
+                type: "application/pdf",
+                dataUrl: "data:application/pdf;base64,JVBERi0xLjQKJ..."
+            }
+        ],
+        status: "جديد",
+        createdAt: "13 سبتمبر 2026",
+        timestamp: Date.now() - 3600000
+    },
+    {
+        id: "sup_app_2",
+        trackingCode: "SHK-SUP-3184",
+        companyName: "مجموعة لافارج والمهندس للخرسانة الجاهزة",
+        category: "أسمنت وخرسانة جاهزة",
+        contactPerson: "الأستاذ / ماجد الشناوي",
+        contactTitle: "مدير إدارة التعاقدات والتوريدات",
+        phone: "01288349210",
+        whatsapp: "01288349210",
+        email: "contracting@readymix-eg.com",
+        commercialRegister: "295810",
+        taxCard: "310-845-129",
+        governorate: "القاهرة الجديدة",
+        website: "https://readymix-eg.com",
+        notes: "محطة خرسانة مركزية ومتحركة بقدرة إنتاجية 120 م3/ساعة، مع أسطول مضخات وخلاطات حديثة لتغطية مشروعات العاصمة الإدارية والتجمع والساحل الشمالي.",
+        documents: [
+            {
+                name: "شهادة_الاعتماد_والفحص_المعملي.pdf",
+                size: "1.2 MB",
+                type: "application/pdf",
+                dataUrl: "data:application/pdf;base64,JVBERi0xLjQKJ..."
+            }
+        ],
+        status: "قيد المراجعة",
+        createdAt: "12 سبتمبر 2026",
+        timestamp: Date.now() - 86400000
+    }
+];
+
 class SharksCloudStoreManager {
     constructor() {
         this.STORAGE_KEY = 'sharks_group_cloud_store_v1';
@@ -335,6 +399,21 @@ class SharksCloudStoreManager {
                 this.auth = firebase.auth();
                 this.isFirebaseReady = true;
                 console.log("⚡ Sharks Cloud: Connected to Firebase Firestore & Auth successfully.");
+
+                // Real-time Firestore sync for Supplier Applications
+                try {
+                    this.db.collection('supplier_applications').onSnapshot((snapshot) => {
+                        if (snapshot && !snapshot.empty) {
+                            const apps = [];
+                            snapshot.forEach(doc => apps.push({ id: doc.id, ...doc.data() }));
+                            this.localData.supplier_applications = apps;
+                            this.saveLocalData();
+                            if (typeof window.renderSupplierApplicationsTable === 'function') {
+                                window.renderSupplierApplicationsTable();
+                            }
+                        }
+                    }, (err) => console.log("Firestore supplier_applications note:", err));
+                } catch (e) {}
             } else {
                 console.log("ℹ️ Sharks Cloud: Running on High-Speed Smart Local Store (Ready for Cloud Keys).");
             }
@@ -358,6 +437,10 @@ class SharksCloudStoreManager {
                     parsed.careers = JSON.parse(JSON.stringify(DEFAULT_CAREERS));
                     changed = true;
                 }
+                if (!parsed.supplier_applications || parsed.supplier_applications.length === 0) {
+                    parsed.supplier_applications = JSON.parse(JSON.stringify(DEFAULT_SUPPLIER_APPLICATIONS));
+                    changed = true;
+                }
                 if (changed) {
                     this.saveLocalData(parsed);
                 }
@@ -369,6 +452,7 @@ class SharksCloudStoreManager {
 
         const initial = {
             suppliers: JSON.parse(JSON.stringify(DEFAULT_SUPPLIERS)),
+            supplier_applications: JSON.parse(JSON.stringify(DEFAULT_SUPPLIER_APPLICATIONS)),
             careers: JSON.parse(JSON.stringify(DEFAULT_CAREERS)),
             projects: (typeof DEFAULT_DATA !== 'undefined' && DEFAULT_DATA.projects) ? DEFAULT_DATA.projects : [],
             tasks: (typeof DEFAULT_DATA !== 'undefined' && DEFAULT_DATA.tasks) ? DEFAULT_DATA.tasks : [],
@@ -422,7 +506,8 @@ class SharksCloudStoreManager {
                 token: "sharks_token_" + Date.now(),
                 lastActivity: Date.now()
             };
-            localStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(session));
+            sessionStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(session));
+            try { localStorage.removeItem(this.AUTH_SESSION_KEY); } catch(e) {}
             this.logActivity(`تسجيل دخول ناجح للمدير: ${matchedUser.displayName}`);
             return { success: true, session };
         } else {
@@ -431,7 +516,8 @@ class SharksCloudStoreManager {
     }
 
     logout() {
-        localStorage.removeItem(this.AUTH_SESSION_KEY);
+        sessionStorage.removeItem(this.AUTH_SESSION_KEY);
+        try { localStorage.removeItem(this.AUTH_SESSION_KEY); } catch(e) {}
         if (this.isFirebaseReady && this.auth) {
             this.auth.signOut().catch(console.error);
         }
@@ -439,16 +525,9 @@ class SharksCloudStoreManager {
 
     checkAuth() {
         try {
-            const raw = localStorage.getItem(this.AUTH_SESSION_KEY);
+            const raw = sessionStorage.getItem(this.AUTH_SESSION_KEY);
             if (!raw) return null;
             const parsed = JSON.parse(raw);
-
-            // Check 30 minutes inactivity timeout
-            const INACTIVITY_LIMIT_MS = 30 * 60 * 1000;
-            if (parsed.lastActivity && (Date.now() - parsed.lastActivity > INACTIVITY_LIMIT_MS)) {
-                this.logout();
-                return { timedOut: true };
-            }
 
             // Refresh avatar from store if user exists
             if (parsed && parsed.user && parsed.user.username) {
@@ -463,11 +542,11 @@ class SharksCloudStoreManager {
 
     updateSessionActivity() {
         try {
-            const raw = localStorage.getItem(this.AUTH_SESSION_KEY);
+            const raw = sessionStorage.getItem(this.AUTH_SESSION_KEY);
             if (!raw) return;
             const parsed = JSON.parse(raw);
             parsed.lastActivity = Date.now();
-            localStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(parsed));
+            sessionStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(parsed));
         } catch (e) {}
     }
 
@@ -483,7 +562,7 @@ class SharksCloudStoreManager {
         const session = this.checkAuth();
         if (session && session.user && session.user.username === username) {
             session.user.avatar = dataUrl;
-            localStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(session));
+            sessionStorage.setItem(this.AUTH_SESSION_KEY, JSON.stringify(session));
         }
         this.logActivity(`تم تحديث الصورة الشخصية للمدير: ${username}`);
     }
@@ -571,6 +650,7 @@ class SharksCloudStoreManager {
         if (!this.localData.suppliers) this.localData.suppliers = [];
         this.localData.suppliers.unshift(newSupplier);
         this.logActivity(`تم إضافة مورد جديد: ${newSupplier.name}`);
+        this.incrementUnreadBadge('suppliers');
         this.saveLocalData();
 
         if (this.isFirebaseReady) {
@@ -609,6 +689,110 @@ class SharksCloudStoreManager {
         return false;
     }
 
+    // --- Supplier Registration Applications (طلبات اعتماد وتسجيل الموردين الجدد) ---
+    getSupplierApplications() {
+        return this.localData.supplier_applications || [];
+    }
+
+    addSupplierApplication(appData) {
+        const id = 'sup_app_' + Date.now();
+        const randCode = Math.floor(1000 + Math.random() * 9000);
+        const trackingCode = appData.trackingCode || `SHK-SUP-${randCode}`;
+
+        const newApp = {
+            id: id,
+            trackingCode: trackingCode,
+            entityType: appData.entityType || 'مورد',
+            companyName: appData.companyName || '',
+            category: appData.category || 'توريدات عامة',
+            contactPerson: appData.contactPerson || '',
+            contactTitle: appData.contactTitle || 'مسؤول التوريدات',
+            phone: appData.phone || '',
+            whatsapp: appData.whatsapp || appData.phone || '',
+            email: appData.email || '',
+            commercialRegister: appData.commercialRegister || '',
+            taxCard: appData.taxCard || '',
+            governorate: appData.governorate || 'القاهرة',
+            website: appData.website || '',
+            notes: appData.notes || '',
+            documents: appData.documents || [], // Array of { name, size, type, dataUrl }
+            status: appData.status || 'جديد', // جديد, قيد المراجعة, معتمد, مرفوض
+            reviewNotes: appData.reviewNotes || '',
+            createdAt: new Date().toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+            timestamp: Date.now()
+        };
+
+        if (!this.localData.supplier_applications) {
+            this.localData.supplier_applications = [];
+        }
+        this.localData.supplier_applications.unshift(newApp);
+        this.logActivity(`تم استلام طلب انضمام وتأهيل ${newApp.entityType || 'مورد'} جديد: "${newApp.companyName}" (${newApp.category})`);
+        this.incrementUnreadBadge('suppliers');
+        this.saveLocalData();
+
+        if (this.isFirebaseReady) {
+            this.db.collection('supplier_applications').doc(newApp.id).set(newApp).catch(console.error);
+        }
+        return newApp;
+    }
+
+    updateSupplierApplication(id, updateData) {
+        const app = (this.localData.supplier_applications || []).find(a => a.id === id);
+        if (app) {
+            Object.assign(app, updateData);
+            this.logActivity(`تحديث طلب المورد: "${app.companyName}" - الحالة: ${app.status}`);
+            this.saveLocalData();
+
+            if (this.isFirebaseReady) {
+                this.db.collection('supplier_applications').doc(id).update(updateData).catch(console.error);
+            }
+            return app;
+        }
+        return null;
+    }
+
+    approveSupplierApplication(id) {
+        const app = (this.localData.supplier_applications || []).find(a => a.id === id);
+        if (!app) return null;
+
+        app.status = 'معتمد';
+        this.saveLocalData();
+
+        if (this.isFirebaseReady) {
+            this.db.collection('supplier_applications').doc(id).update({ status: 'معتمد' }).catch(console.error);
+        }
+
+        // Add to approved suppliers directory
+        const approvedSupplier = this.addSupplier({
+            name: app.companyName,
+            category: app.category,
+            contactPerson: app.contactPerson,
+            phone: app.phone,
+            email: app.email,
+            website: app.website,
+            description: app.notes || `مورد وموزع معتمد لشركة شاركس جروب في مجال ${app.category}.`,
+            visible: true
+        });
+
+        this.logActivity(`تم اعتماد المورد رسمياً وإضافته لقائمة الشركاء: "${app.companyName}"`);
+        return { application: app, supplier: approvedSupplier };
+    }
+
+    deleteSupplierApplication(id) {
+        const app = (this.localData.supplier_applications || []).find(a => a.id === id);
+        if (app) {
+            this.localData.supplier_applications = this.localData.supplier_applications.filter(a => a.id !== id);
+            this.logActivity(`حذف طلب تسجيل المورد: "${app.companyName}"`);
+            this.saveLocalData();
+
+            if (this.isFirebaseReady) {
+                this.db.collection('supplier_applications').doc(id).delete().catch(console.error);
+            }
+            return true;
+        }
+        return false;
+    }
+
     // --- Projects CRUD ---
     getProjects(onlyPublic = false) {
         let list = this.localData.projects || [];
@@ -634,6 +818,7 @@ class SharksCloudStoreManager {
         if (!this.localData.projects) this.localData.projects = [];
         this.localData.projects.unshift(newProj);
         this.logActivity(`تم إضافة مشروع جديد: ${newProj.title}`);
+        this.incrementUnreadBadge('projects');
         this.saveLocalData();
 
         if (this.isFirebaseReady) {
@@ -690,6 +875,7 @@ class SharksCloudStoreManager {
         if (!this.localData.tasks) this.localData.tasks = [];
         this.localData.tasks.unshift(newTask);
         this.logActivity(`تم إنشاء مهمة: ${newTask.title}`);
+        this.incrementUnreadBadge('tasks');
         this.saveLocalData();
 
         if (this.isFirebaseReady) {
@@ -745,6 +931,7 @@ class SharksCloudStoreManager {
         if (!this.localData.employees) this.localData.employees = [];
         this.localData.employees.unshift(newEmp);
         this.logActivity(`تم إضافة الموظف: ${newEmp.name}`);
+        this.incrementUnreadBadge('employees');
         this.saveLocalData();
 
         if (this.isFirebaseReady) {
@@ -881,6 +1068,7 @@ class SharksCloudStoreManager {
         if (!this.localData.careers) this.localData.careers = [];
         this.localData.careers.unshift(newCareer);
         this.logActivity(`تم إضافة قسم وظيفي جديد: ${newCareer.titleAr}`);
+        this.incrementUnreadBadge('careers');
         this.saveLocalData();
 
         if (this.isFirebaseReady) {
@@ -955,10 +1143,13 @@ class SharksCloudStoreManager {
         const tasks = this.getTasks();
         const employees = this.getEmployees();
         const careers = this.getCareers(false);
+        const apps = this.getSupplierApplications ? this.getSupplierApplications() : [];
 
         return {
             suppliersCount: suppliers.length,
             publicSuppliersCount: suppliers.filter(s => s.visible !== false).length,
+            supplierApplicationsCount: apps.length,
+            newSupplierApplicationsCount: apps.filter(a => a.status === 'جديد').length,
             projectsCount: projects.length,
             tasksCount: tasks.length,
             completedTasksCount: tasks.filter(t => t.status === 'مكتمل').length,
@@ -987,6 +1178,39 @@ class SharksCloudStoreManager {
 
     getActivities() {
         return this.localData.activities || [];
+    }
+
+    // --- Unread Badges & Red Notification System ---
+    getUnreadBadges() {
+        try {
+            const raw = localStorage.getItem('sharks_admin_unread_counts');
+            if (raw) return JSON.parse(raw);
+        } catch(e) {}
+        return { suppliers: 0, projects: 0, tasks: 0, employees: 0, careers: 0 };
+    }
+
+    setUnreadBadges(counts) {
+        try {
+            localStorage.setItem('sharks_admin_unread_counts', JSON.stringify(counts));
+        } catch(e) {}
+    }
+
+    incrementUnreadBadge(tabKey, amount = 1) {
+        const counts = this.getUnreadBadges();
+        counts[tabKey] = (counts[tabKey] || 0) + amount;
+        this.setUnreadBadges(counts);
+        if (typeof window !== 'undefined' && typeof window.updateAdminTabBadges === 'function') {
+            window.updateAdminTabBadges();
+        }
+    }
+
+    clearUnreadBadge(tabKey) {
+        const counts = this.getUnreadBadges();
+        counts[tabKey] = 0;
+        this.setUnreadBadges(counts);
+        if (typeof window !== 'undefined' && typeof window.updateAdminTabBadges === 'function') {
+            window.updateAdminTabBadges();
+        }
     }
 }
 

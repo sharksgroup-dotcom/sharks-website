@@ -24,12 +24,20 @@ function initApp() {
     renderEmployees();
     populateTaskModalSelects();
     renderPublicCareers();
+    initSupplierPortal();
 
-    // Check for deep-link hash or cross-page stored view
-    const hash = window.location.hash.replace('#', '');
-    const storedView = localStorage.getItem('sharks_active_view');
-    const initialView = hash || storedView || 'home';
-    localStorage.removeItem('sharks_active_view');
+    // Ensure any stale localStorage view is wiped clean
+    try {
+        localStorage.removeItem('sharks_active_view');
+        localStorage.removeItem('sharks_last_view');
+    } catch(e) {}
+
+    // Check for reload session view (survives F5 reload; resets to home when closing/reopening website)
+    const validViews = ['home', 'services', 'founders', 'contact', 'projects', 'suppliers', 'careers', 'dashboard', 'tasks', 'employees'];
+    const sessionView = sessionStorage.getItem('sharks_active_view');
+    const initialView = (sessionView && validViews.includes(sessionView)) ? sessionView : 'home';
+    
+    document.documentElement.classList.add('app-initialized');
     switchMainView(initialView);
 
     // Close modal when clicking outside modal box
@@ -103,10 +111,10 @@ function dismissSplashScreen() {
 window.dismissSplashScreen = dismissSplashScreen;
 
 // -------------------------------------------------------------
-// THEME SWITCHER ENGINE (LIGHT & DARK MODE - REQUEST 5)
+// THEME SWITCHER ENGINE (LIGHT & DARK MODE - DEFAULT IS LIGHT)
 // -------------------------------------------------------------
 function initTheme() {
-    const savedTheme = localStorage.getItem('sharks_theme') || 'dark';
+    const savedTheme = localStorage.getItem('sharks_theme_v2') || localStorage.getItem('sharks_admin_theme_v2') || 'light';
     applyTheme(savedTheme);
 }
 
@@ -114,7 +122,10 @@ function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
     const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
     applyTheme(nextTheme);
+    localStorage.setItem('sharks_theme_v2', nextTheme);
+    localStorage.setItem('sharks_admin_theme_v2', nextTheme);
     localStorage.setItem('sharks_theme', nextTheme);
+    localStorage.setItem('sharks_admin_theme', nextTheme);
 
     // Dynamic shockwave pulse animation on button
     const themeBtn = document.getElementById('themeToggleBtn');
@@ -184,13 +195,15 @@ function initServicesSliderApp() {
 // UNIFIED MASTER VIEW SWITCHER (REQUESTS 1, 2, 3, 4, CAREERS)
 // -------------------------------------------------------------
 function switchMainView(viewName) {
-    // Hide all platform views
+    const validViews = ['home', 'services', 'founders', 'contact', 'projects', 'suppliers', 'careers', 'dashboard', 'tasks', 'employees'];
+    if (!validViews.includes(viewName)) viewName = 'home';
+
+    // 1. Hide all platform views and display target
     const views = document.querySelectorAll('.platform-view');
     views.forEach(v => {
         v.classList.remove('active');
     });
 
-    // View Mapping
     const viewMap = {
         'home': 'view-home',
         'services': 'view-services',
@@ -208,14 +221,14 @@ function switchMainView(viewName) {
     const targetView = document.getElementById(targetViewId);
     if (targetView) {
         targetView.classList.add('active');
-        // Ensure all elements are immediately visible and never hidden
+        // Ensure child elements are revealed immediately
         targetView.querySelectorAll('.scroll-reveal').forEach(el => {
             el.classList.add('revealed');
             el.classList.add('visible');
         });
     }
 
-    // Update active state in top navbar
+    // 2. Update active state in top navbar
     const tabNavMap = {
         'home': 'tabNavHome',
         'services': 'tabNavServices',
@@ -235,7 +248,6 @@ function switchMainView(viewName) {
         const activeNavBtn = document.getElementById(activeNavBtnId);
         if (activeNavBtn) {
             activeNavBtn.classList.add('active');
-            // Auto scroll active tab into view on mobile capsule bar only
             if (window.innerWidth <= 860) {
                 try {
                     activeNavBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -244,27 +256,20 @@ function switchMainView(viewName) {
         }
     }
 
-    // Close dropdown menu if open
+    // 3. Close dropdown menu if open
     const dropdown = document.querySelector('.nav-dropdown');
     if (dropdown) dropdown.classList.remove('show');
 
-    // Dynamic data refresh when opening specific views
-    if (viewName === 'projects') {
-        renderProjects();
-    } else if (viewName === 'suppliers') {
-        renderPublicSuppliers();
-    } else if (viewName === 'careers') {
-        renderPublicCareers();
-    } else if (viewName === 'dashboard' && typeof renderDashboard === 'function') {
-        renderDashboard();
-    } else if (viewName === 'tasks' && typeof renderTasks === 'function') {
-        renderTasks();
-    } else if (viewName === 'employees' && typeof renderEmployees === 'function') {
-        renderEmployees();
-    }
+    // 4. Update data-active-view attribute on html for synchronized styling
+    document.documentElement.setAttribute('data-active-view', viewName);
 
-    // Restored smooth scrolling to top when switching views as originally designed
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 5. Persist active view in sessionStorage ONLY (survives reload; resets to home when closing/reopening website)
+    try {
+        sessionStorage.setItem('sharks_active_view', viewName);
+    } catch(e) {}
+
+    // 6. Instant scroll to top (0ms delay - ultra-fast, smooth, and seamless)
+    window.scrollTo(0, 0);
 }
 
 // Sub-navigation from dropdown under الرئيسية (Request 1)
@@ -788,90 +793,216 @@ function showProjectDetails(projId) {
 }
 
 // -------------------------------------------------------------
-// 2.1 PUBLIC SUPPLIERS VIEW (الموردين وشركاء التوريد)
+// 2.1 SUPPLIER ONBOARDING & REGISTRATION PORTAL (بوابة تسجيل الموردين)
 // -------------------------------------------------------------
-let currentPublicSupplierCategory = 'all';
+let supplierUploadedFiles = []; // Array of { name, size, type, dataUrl }
 
-function filterPublicSuppliers(category) {
-    currentPublicSupplierCategory = category;
+function initSupplierPortal() {
+    const dropzone = document.getElementById('supplierDropzone');
+    if (!dropzone) return;
 
-    // Update filter buttons active state
-    document.querySelectorAll('.supplier-filter-btn').forEach(btn => {
-        const txt = btn.textContent.trim();
-        if (txt === 'جميع الموردين' && category === 'all') {
-            btn.classList.add('active');
-        } else if (txt === category) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        }, false);
     });
 
-    renderPublicSuppliers(category);
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, () => dropzone.classList.add('drag-over'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, () => dropzone.classList.remove('drag-over'), false);
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        if (dt && dt.files && dt.files.length) {
+            handleSupplierFiles(dt.files);
+        }
+    }, false);
 }
 
-function renderPublicSuppliers(category = 'all') {
-    const grid = document.getElementById('publicSuppliersGrid');
-    if (!grid) return;
-
-    let suppliers = (typeof SharksCloud !== 'undefined') ? SharksCloud.getSuppliers(true) : [];
-
-    if (category !== 'all') {
-        suppliers = suppliers.filter(s => s.category === category);
+function handleSupplierFilesSelect(event) {
+    if (event.target && event.target.files) {
+        handleSupplierFiles(event.target.files);
     }
+}
 
-    if (suppliers.length === 0) {
-        grid.innerHTML = `
-            <div class="supplier-empty-state">
-                <p>لا توجد شركات مسجلة في هذا التخصص حالياً.</p>
-            </div>
-        `;
+function handleSupplierFiles(fileList) {
+    const listContainer = document.getElementById('supplierFilesList');
+    if (!listContainer) return;
+
+    const files = Array.from(fileList);
+    const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
+
+    files.forEach(file => {
+        if (file.size > MAX_FILE_SIZE) {
+            showToast(`الملف "${file.name}" أكبر من الحد المسموح (15MB)`);
+            return;
+        }
+
+        // Avoid exact duplicates
+        if (supplierUploadedFiles.some(f => f.name === file.name && f.size === file.size)) {
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            supplierUploadedFiles.push({
+                name: file.name,
+                size: formatFileSize(file.size),
+                rawSize: file.size,
+                type: file.type || 'application/octet-stream',
+                dataUrl: e.target.result
+            });
+            renderSupplierFilesList();
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    else return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+function removeSupplierDoc(index) {
+    supplierUploadedFiles.splice(index, 1);
+    renderSupplierFilesList();
+}
+
+function renderSupplierFilesList() {
+    const container = document.getElementById('supplierFilesList');
+    if (!container) return;
+
+    if (supplierUploadedFiles.length === 0) {
+        container.innerHTML = '';
         return;
     }
 
-    grid.innerHTML = suppliers.map(s => `
-        <div class="supplier-public-card">
-            <div class="supplier-card-accent"></div>
-            <div>
-                <div class="supplier-card-top">
-                    <div class="supplier-logo-box">
-                        <img src="${s.logo || 'assets/logo.jpg'}" alt="${s.name}" onerror="this.src='assets/logo.jpg'">
-                    </div>
-                    <span class="supplier-verified-badge">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>مورد معتمد</span>
-                    </span>
-                </div>
-
-                <h3 class="supplier-card-name">${s.name}</h3>
-                <div class="supplier-card-badge-wrap">
-                    <span class="supplier-category-pill">
-                        ${s.category}
-                    </span>
-                </div>
-
-                <p class="supplier-card-desc">
-                    ${s.description || 'توريد خامات ومواد هندسية مطابقة لأعلى معايير الجودة العالمية لمشروعات شاركس جروب.'}
-                </p>
+    container.innerHTML = supplierUploadedFiles.map((doc, idx) => `
+        <div class="supplier-file-chip">
+            <div class="file-chip-info">
+                <svg class="file-chip-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <span class="file-chip-name" title="${doc.name}">${doc.name}</span>
+                <span class="file-chip-size">${doc.size}</span>
             </div>
-
-            <div class="supplier-card-footer">
-                <span class="supplier-contact-label">
-                    ${s.contactPerson ? 'جهة الاعتماد: ' + s.contactPerson : 'شريك معتمد'}
-                </span>
-                ${s.website ? `
-                    <a href="${s.website}" target="_blank" rel="noopener noreferrer" class="supplier-link-btn">
-                        <span>زيارة الموقع</span>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                ` : ''}
-            </div>
+            <button type="button" class="file-chip-remove" onclick="removeSupplierDoc(${idx})" title="إزالة الملف">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
         </div>
     `).join('');
 }
 
-window.filterPublicSuppliers = filterPublicSuppliers;
-window.renderPublicSuppliers = renderPublicSuppliers;
+function handleSupplierPortalSubmit(event) {
+    event.preventDefault();
+
+    const companyName = document.getElementById('supplierCompanyName').value.trim();
+    const category = document.getElementById('supplierCategory').value;
+    const governorate = document.getElementById('supplierGovernorate').value.trim();
+    const contactPerson = document.getElementById('supplierContactPerson').value.trim();
+    const contactTitle = (document.getElementById('supplierContactTitle').value || '').trim();
+    const phone = document.getElementById('supplierPhone').value.trim();
+    const whatsapp = document.getElementById('supplierWhatsapp').value.trim();
+    const email = document.getElementById('supplierEmail').value.trim();
+    const commercialReg = document.getElementById('supplierCommercialReg').value.trim();
+    const taxCard = document.getElementById('supplierTaxCard').value.trim();
+    const website = (document.getElementById('supplierWebsite').value || '').trim();
+    const notes = (document.getElementById('supplierNotes').value || '').trim();
+
+    if (!companyName || !category || !contactPerson || !phone || !commercialReg || !taxCard) {
+        showToast('يرجى استيفاء جميع الحقول الإلزامية المطلوبة.');
+        return;
+    }
+
+    const submitBtn = document.getElementById('btnSubmitSupplierPortal');
+    const originalText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <svg class="spinner-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 0.8s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+            <span>جاري حفظ البيانات ورفع المستندات...</span>
+        `;
+    }
+
+    setTimeout(() => {
+        const randNum = Math.floor(1000 + Math.random() * 9000);
+        const trackingCode = `SHK-SUP-${randNum}`;
+
+        const entityTypeRadio = document.querySelector('input[name="supplierEntityType"]:checked');
+        const entityType = entityTypeRadio ? entityTypeRadio.value : 'مورد';
+
+        const applicationData = {
+            trackingCode: trackingCode,
+            entityType: entityType,
+            companyName: companyName,
+            category: category,
+            contactPerson: contactPerson,
+            contactTitle: contactTitle,
+            phone: phone,
+            whatsapp: whatsapp,
+            email: email,
+            commercialRegister: commercialReg,
+            taxCard: taxCard,
+            governorate: governorate,
+            website: website,
+            notes: notes,
+            documents: [...supplierUploadedFiles],
+            status: 'جديد'
+        };
+
+        if (window.SharksCloud && SharksCloud.addSupplierApplication) {
+            SharksCloud.addSupplierApplication(applicationData);
+        } else if (window.tracker) {
+            tracker.logActivity(`تم استلام طلب اعتماد ${entityType} جديد: ${companyName}`);
+        }
+
+        // Show Success Modal
+        const trackingElem = document.getElementById('supplierSuccessTrackingCode');
+        if (trackingElem) trackingElem.textContent = trackingCode;
+
+        const msgElem = document.getElementById('supplierSuccessMessage');
+        if (msgElem) {
+            msgElem.textContent = `تم تسجيل طلبكم لشركة (${companyName}) في مجال (${category}) برقم تتبع (${trackingCode}) بنجاح. تم حفظ كافة المستندات وعددها (${supplierUploadedFiles.length}) ملف، وجاري فحصها من لجنة المشتريات والتوريدات وسيتم التواصل معكم قريباً.`;
+        }
+
+        const whatsappDirect = document.getElementById('supplierWhatsappDirectBtn');
+        if (whatsappDirect) {
+            const waText = encodeURIComponent(`مرحباً إدارة المشتريات بشركة شاركس جروب، تم تقديم طلب اعتماد وتأهيل مورد رسمي لشركة: ${companyName}، كود الطلب: ${trackingCode}.`);
+            whatsappDirect.href = `https://wa.me/201111994425?text=${waText}`;
+        }
+
+        openModal('modalSupplierPortalSuccess');
+
+        // Reset form & state
+        document.getElementById('formSupplierPortal').reset();
+        supplierUploadedFiles = [];
+        renderSupplierFilesList();
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+
+        showToast(`تم إرسال طلب اعتماد "${companyName}" بنجاح!`);
+    }, 600);
+}
+
+function closeSupplierSuccessModal() {
+    closeModal('modalSupplierPortalSuccess');
+}
+
+window.handleSupplierPortalSubmit = handleSupplierPortalSubmit;
+window.handleSupplierFilesSelect = handleSupplierFilesSelect;
+window.removeSupplierDoc = removeSupplierDoc;
+window.closeSupplierSuccessModal = closeSupplierSuccessModal;
+window.initSupplierPortal = initSupplierPortal;
 
 
 // -------------------------------------------------------------
@@ -1662,6 +1793,21 @@ function handleJobApplicationSubmit(event) {
 }
 
 // Expose all handlers globally for inline HTML event triggers
+function handleSupplierWhatsappClick() {
+    closeModal('modalSupplierPortalSuccess');
+    switchMainView('home');
+    window.scrollTo(0, 0);
+}
+
+function deleteProjectItem(id) {
+    if (window.SharksCloud && SharksCloud.deleteProject) {
+        SharksCloud.deleteProject(id);
+    }
+}
+function renderPublicSuppliers() {}
+function filterPublicSuppliers() {}
+
+window.handleSupplierWhatsappClick = handleSupplierWhatsappClick;
 window.switchMainView = switchMainView;
 window.goToHomeSection = goToHomeSection;
 window.handleDedicatedContact = handleDedicatedContact;

@@ -47,6 +47,27 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.35s ease;
+}
+
+.adm-dashboard-wrapper,
+.adm-navbar,
+.adm-subnav,
+.adm-kpi-card,
+.adm-table-card,
+.adm-modal,
+.adm-login-card,
+.dash-spaces-card,
+.adm-stat-card,
+.adm-user-profile,
+.adm-nav-client-link {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease,
+                color 0.35s ease,
+                box-shadow 0.4s ease;
 }
 
 /* Background Ambient Glows */
@@ -375,22 +396,43 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid var(--adm-border-subtle);
     color: var(--adm-text-main);
     cursor: pointer;
     font-size: 1.15rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
 .adm-theme-toggle:hover {
-    background: rgba(245, 158, 11, 0.15);
+    background: rgba(245, 158, 11, 0.16);
     border-color: var(--adm-gold);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px var(--adm-gold-glow);
+    transform: translateY(-2px) rotate(35deg) scale(1.08);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+}
+
+.adm-theme-toggle.pulse-active {
+    animation: themeSwitchPulse 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes themeSwitchPulse {
+    0% {
+        transform: scale(0.9) rotate(0deg);
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.85);
+    }
+    40% {
+        transform: scale(1.22) rotate(180deg);
+        box-shadow: 0 0 0 16px rgba(245, 158, 11, 0.25);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
 }
 
 .adm-theme-toggle .sun-icon,
@@ -568,12 +610,38 @@ body {
 }
 
 .adm-tab-badge {
-    background: rgba(245, 158, 11, 0.18);
-    color: var(--adm-gold-light);
-    font-size: 0.75rem;
-    padding: 2px 8px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
     border-radius: 9999px;
+    font-size: 0.72rem;
     font-weight: 800;
+    line-height: 1;
+    background: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    transition: all 0.2s ease;
+}
+
+.adm-tab-badge.active-alert {
+    display: inline-flex;
+    background: #ef4444;
+    color: #ffffff;
+    animation: badgePulseRed 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes badgePulseRed {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+    }
 }
 
 /* Main Content Area */
@@ -956,6 +1024,46 @@ body {
 .legend-dot.purple {
     background: #a78bfa;
     box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+}
+
+/* Spaces Pillars for Suppliers (Cyan, Green, Red) */
+.spaces-bar-pillar.cyan {
+    background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);
+}
+.legend-dot.cyan {
+    background: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.spaces-bar-pillar.green {
+    background: linear-gradient(180deg, #4ade80 0%, #15803d 100%);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.35);
+}
+.legend-dot.green {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+.spaces-bar-pillar.red {
+    background: linear-gradient(180deg, #f87171 0%, #b91c1c 100%);
+    box-shadow: 0 0 15px rgba(248, 113, 113, 0.35);
+}
+.legend-dot.red {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+.spaces-bars-container {
+    gap: 14px;
+}
+.spaces-bar-col {
+    min-width: 48px;
+    max-width: 80px;
+    flex: 1;
+}
+.spaces-bar-label {
+    font-size: 0.72rem;
 }
 
 /* Interactive Clickable Task Priority & Status Toggles (Request 5) */
@@ -1527,11 +1635,12 @@ html, body {
     }
     .dash-banner-actions {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         gap: 8px;
         width: 100%;
     }
-    .btn-dash-quick {
+    .btn-dash-quick,
+    .btn-dash-action {
         justify-content: center;
         width: 100%;
         padding: 8px 10px;
@@ -2113,6 +2222,272 @@ html, body {
     color: #d97706;
 }
 
+/* Base Stat Card & Spaces Card Rules */
+.adm-stat-card {
+    background: var(--adm-bg-card);
+    border: 1px solid var(--adm-border-subtle);
+    border-radius: var(--adm-radius);
+    transition: all 0.2s ease;
+}
+
+.spaces-bar-divider {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.adm-subtabs-nav {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 1.5px solid var(--adm-border-subtle);
+    padding-bottom: 12px;
+}
+
+.adm-subtab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid var(--adm-border-subtle);
+    color: var(--adm-text-dim);
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.adm-subtab-btn:hover {
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--adm-text-main);
+}
+
+.adm-subtab-btn.active {
+    background: rgba(235, 199, 96, 0.15) !important;
+    border-color: rgba(235, 199, 96, 0.4) !important;
+    color: var(--adm-gold) !important;
+}
+
+.adm-table-select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: var(--adm-bg-input);
+    border: 1px solid var(--adm-border-subtle);
+    color: var(--adm-text-main);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.adm-doc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--adm-bg-input);
+    border: 1px solid var(--adm-border-subtle);
+    border-radius: 8px;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+/* ===================================================================
+   LIGHT MODE COMPONENT EXTENSIONS
+   =================================================================== */
+[data-theme="light"] .adm-table-card {
+    background: #ffffff;
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .adm-stat-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .dash-spaces-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .spaces-title {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .spaces-legend {
+    color: #475569 !important;
+}
+
+[data-theme="light"] .spaces-bar-val {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .spaces-bar-label {
+    color: #475569 !important;
+    font-weight: 700;
+}
+
+[data-theme="light"] .spaces-bar-divider {
+    background: rgba(15, 23, 42, 0.12) !important;
+}
+
+[data-theme="light"] .spaces-side-stats {
+    background: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .side-stat-title {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .side-stat-item {
+    color: #475569 !important;
+    border-top-color: #e2e8f0 !important;
+}
+
+[data-theme="light"] .spaces-ruler {
+    opacity: 0.55;
+}
+
+[data-theme="light"] .spaces-ruler span {
+    border-top-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+[data-theme="light"] .pillar-tag {
+    background: rgba(15, 23, 42, 0.8) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .adm-subtabs-nav {
+    border-bottom-color: #e2e8f0;
+}
+
+[data-theme="light"] .adm-subtab-btn {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+[data-theme="light"] .adm-subtab-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-subtab-btn.active {
+    background: rgba(217, 119, 6, 0.12) !important;
+    border-color: var(--adm-gold) !important;
+    color: var(--adm-gold) !important;
+}
+
+[data-theme="light"] .adm-table-select {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-table-select option {
+    background: #ffffff;
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-doc-item {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+[data-theme="light"] #docsModalInfoBanner {
+    background: rgba(217, 119, 6, 0.08) !important;
+    border-color: rgba(217, 119, 6, 0.25) !important;
+    color: #334155 !important;
+}
+
+[data-theme="light"] .adm-nav-client-link {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+}
+
+[data-theme="light"] .adm-nav-client-link:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .adm-user-name {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .adm-user-role {
+    color: #64748b !important;
+}
+
+[data-theme="light"] .adm-tab-header h2 {
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-tab-header p {
+    color: #64748b;
+}
+
+[data-theme="light"] .adm-visibility-toggle.visible {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #059669;
+}
+
+[data-theme="light"] .adm-visibility-toggle.hidden {
+    background: rgba(100, 116, 139, 0.12);
+    border-color: rgba(100, 116, 139, 0.3);
+    color: #475569;
+}
+
+[data-theme="light"] .adm-prog-bar {
+    background: #e2e8f0;
+}
+
+[data-theme="light"] .adm-search-box svg {
+    color: #64748b;
+}
+
+[data-theme="light"] .adm-modal-title {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .adm-modal-close {
+    color: #64748b;
+}
+
+[data-theme="light"] .adm-modal-close:hover {
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-form-field label {
+    color: #334155 !important;
+}
+
+[data-theme="light"] .adm-cat-item {
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .adm-cat-item:hover {
+    border-color: var(--adm-gold);
+    background: #f8fafc;
+}
+
+[data-theme="light"] .adm-cat-label {
+    color: #0f172a;
+}
+
+[data-theme="light"] .adm-cat-count {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
 /* Dynamic Operations Activity Heatmap Squares (Tied to Projects - Request 1) */
 .equalizer-strip {
     display: flex;
@@ -2183,9 +2558,10 @@ html, body {
    CAREERS TABLE SCROLL, COMPACT SEARCH & CATEGORIES MANAGEMENT (REQUEST 1 & 2)
    =================================================================== */
 
-/* 1. Internal Scroll inside the table container rectangle */
-.careers-table-scroll {
-    max-height: 420px;
+/* 1. Internal Scroll inside the table container rectangle (Careers, Suppliers, Tasks, Employees, Projects) */
+.careers-table-scroll,
+.adm-table-scroll {
+    max-height: 440px;
     overflow-y: auto;
     overflow-x: auto;
     scrollbar-width: thin;
@@ -2194,42 +2570,97 @@ html, body {
     border-radius: 0 0 var(--adm-radius) var(--adm-radius);
 }
 
-.careers-table-scroll::-webkit-scrollbar {
+.careers-table-scroll::-webkit-scrollbar,
+.adm-table-scroll::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 
-.careers-table-scroll::-webkit-scrollbar-track {
+.careers-table-scroll::-webkit-scrollbar-track,
+.adm-table-scroll::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.15);
 }
 
-.careers-table-scroll::-webkit-scrollbar-thumb {
+.careers-table-scroll::-webkit-scrollbar-thumb,
+.adm-table-scroll::-webkit-scrollbar-thumb {
     background: rgba(245, 158, 11, 0.35);
     border-radius: 4px;
 }
 
-.careers-table-scroll::-webkit-scrollbar-thumb:hover {
+.careers-table-scroll::-webkit-scrollbar-thumb:hover,
+.adm-table-scroll::-webkit-scrollbar-thumb:hover {
     background: var(--adm-gold);
 }
 
-.careers-table-scroll table {
+.careers-table-scroll table,
+.adm-table-scroll table {
     position: relative;
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
 }
 
-.careers-table-scroll thead th {
+.careers-table-scroll thead th,
+.adm-table-scroll thead th {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: #0b1528; /* Solid opaque background to prevent bleed-through during scroll */
+    background: #08111e; /* Solid opaque background to prevent bleed-through during scroll */
     box-shadow: 0 1px 0 var(--adm-border);
 }
 
-[data-theme="light"] .careers-table-scroll thead th {
+[data-theme="light"] .careers-table-scroll thead th,
+[data-theme="light"] .adm-table-scroll thead th {
     background: #f1f5f9;
     box-shadow: 0 1px 0 #cbd5e1;
+}
+
+/* 1.1 Action Buttons in Dashboard Top Banner (إضافة مورد, إضافة مشروع, مهمة جديدة, إضافة موظف, إضافة قسم) */
+.btn-dash-action {
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--adm-gold-light, #fbbf24);
+    padding: 8px 14px;
+    border-radius: var(--adm-radius, 10px);
+    font-family: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.btn-dash-action:hover {
+    background: var(--adm-gold, #f59e0b);
+    color: #0b1528;
+    border-color: var(--adm-gold, #f59e0b);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.btn-dash-action svg {
+    stroke: currentColor;
+    transition: transform 0.25s ease;
+}
+
+.btn-dash-action:hover svg {
+    transform: rotate(90deg);
+}
+
+[data-theme="light"] .btn-dash-action {
+    background: rgba(217, 119, 6, 0.1);
+    border-color: rgba(217, 119, 6, 0.35);
+    color: #b45309;
+}
+
+[data-theme="light"] .btn-dash-action:hover {
+    background: #d97706;
+    color: #ffffff;
+    border-color: #d97706;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
 }
 
 /* 2. Compact and Professional Search Input for Careers Table */
